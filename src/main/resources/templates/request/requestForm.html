@@ -21,7 +21,6 @@
             <label class="form-label" th:for="*{userId}">User ID:</label>
             <input class="form-control" placeholder="User ID" th:field="*{userId}" type="text"/>
             <div class="alert alert-warning" th:errors="*{userId}" th:if="${#fields.hasErrors('userId')}">User ID Error</div>
-
         </div>
 
         <div class="mb-3">
@@ -30,7 +29,7 @@
             <div class="alert alert-warning" th:errors="*{locationId}" th:if="${#fields.hasErrors('locationId')}">Location Error</div>
         </div>
 
-        <input th:field="*{requestDate}" th:value="localDate.now()" type="hidden"/>
+        <input th:field="*{requestDate}" th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" type="hidden"/>
 
         <div class="mb-3">
             <label class="form-label" th:for="*{visitDate}">Visit Date:</label>
@@ -39,12 +38,6 @@
 
         <div class="mb-3">
             <button class="btn btn-primary">Submit</button>
-        </div>
-
-        <div>
-            <div class="mb-3">
-                <a class="btn btn-primary" href="/">Cancel</a>
-            </div>
         </div>
 
     </form>

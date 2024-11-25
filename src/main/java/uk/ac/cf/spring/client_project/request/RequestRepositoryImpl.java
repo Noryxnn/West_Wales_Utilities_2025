@@ -11,9 +11,9 @@ public class RequestRepositoryImpl implements RequestRepository {
     private JdbcTemplate jdbc;
     private RowMapper<Request> requestMapper;
 
-    public RequestRepositoryImpl(JdbcTemplate jdbc, RowMapper<Request> requestMapper) {
+    public RequestRepositoryImpl(JdbcTemplate jdbc) {
         this.jdbc = jdbc;
-        this.requestMapper = requestMapper;
+        setRequestMapper();
     }
 
     private void setRequestMapper() {
@@ -45,9 +45,8 @@ public class RequestRepositoryImpl implements RequestRepository {
     }
 
     private void update(Request aRequest) {
-        String menuInsertSql =
-                "update requests set user_id = ?, location_id = ?, request_date = ?, visit_date = ? where request_id = ?";
-        jdbc.update(menuInsertSql,
+        String updateSql = "update requests set user_id = ?, location_id = ?, request_date = ?, visit_date = ? where request_id = ?";
+        jdbc.update(updateSql,
                 aRequest.getUserId(),
                 aRequest.getLocationId(),
                 aRequest.getRequestDate(),
@@ -56,9 +55,8 @@ public class RequestRepositoryImpl implements RequestRepository {
     }
 
     private void insert(Request aRequest) {
-        String menuInsertSql =
-                "insert into requests(user_id, location_id, request_date, visit_date) values (?,?,?,?)";
-        jdbc.update(menuInsertSql,
+        String insertSql = "insert into requests(user_id, location_id, request_date, visit_date) values (?,?,?,?)";
+        jdbc.update(insertSql,
                 aRequest.getUserId(),
                 aRequest.getLocationId(),
                 aRequest.getRequestDate(),

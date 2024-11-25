@@ -19,7 +19,7 @@ public class RequestController {
 
     @GetMapping("/request")
     public ModelAndView request() {
-        ModelAndView modelAndView = new ModelAndView("menu/menuItemFormTh");
+        ModelAndView modelAndView = new ModelAndView("request/requestForm");
         RequestForm request = new RequestForm();
         modelAndView.addObject("request", request);
         return modelAndView;
@@ -27,20 +27,20 @@ public class RequestController {
 
     @PostMapping("/request")
     public ModelAndView request(@Valid @ModelAttribute("request") RequestForm request, BindingResult bindingResult, Model model) {
+        ModelAndView modelAndView;
         if (bindingResult.hasErrors()) {
-            return new ModelAndView("request/requestForm", model.asMap());
+            modelAndView = new ModelAndView("request/requestForm", model.asMap());
         } else {
-            ModelAndView modelAndView;
             Request newRequest = new Request(
                     request.getRequestId(),
                     request.getUserId(),
                     request.getLocationId(),
                     request.getRequestDate(),
-                    request.getVisitDate());
+                    request.getVisitDate()
+            );
             requestService.save(newRequest);
-            modelAndView = new ModelAndView("requestForm");
-            modelAndView.addObject("request", request);
-            return modelAndView;
+            modelAndView = new ModelAndView("redirect:/request");
         }
+        return modelAndView;
     }
 }
