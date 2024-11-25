@@ -3,13 +3,15 @@ CREATE TABLE `Users` (
                          `first_name` VARCHAR(255) NOT NULL,
                          `last_name` VARCHAR(255),
                          `email` VARCHAR(255) NOT NULL,
-                         `company_name` VARCHAR(255) NOT NULL
+                         `company_name` VARCHAR(255) NOT NULL,
+                         CONSTRAINT UC_User_Email UNIQUE (`email`) -- Ensures email addresses are unique
 );
 
 
 CREATE TABLE `Roles` (
                          `role_id` INT AUTO_INCREMENT PRIMARY KEY,
-                         `role_name` VARCHAR(255) NOT NULL
+                         `role_name` VARCHAR(255) NOT NULL,
+                         CONSTRAINT UC_Role_Name UNIQUE (`role_name`)
 );
 
 
@@ -19,7 +21,8 @@ CREATE TABLE `User_roles`
                         `user_id`      INT,
                         `role_id`      INT,
                          FOREIGN KEY (`user_id`) REFERENCES `Users` (`user_id`),
-                         FOREIGN KEY (`role_id`) REFERENCES `Roles` (`role_id`)
+                         FOREIGN KEY (`role_id`) REFERENCES `Roles` (`role_id`),
+                        CONSTRAINT UC_User_roles UNIQUE (`user_id`, `role_id`) -- Prevents duplicate user-role combinations
 );
 
 CREATE TABLE `Visit` (
@@ -28,7 +31,8 @@ CREATE TABLE `Visit` (
                          `user_id` INT,
                          `check_in` TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
                          FOREIGN KEY (`location_id`) REFERENCES `Locations` (`location_id`),
-                         FOREIGN KEY (`user_id`) REFERENCES `Users` (`user_id`)
+                         FOREIGN KEY (`user_id`) REFERENCES `Users` (`user_id`),
+                         CONSTRAINT UC_Visit UNIQUE (`user_id`, `location_id`, `check_in`) -- Prevents duplicate visits
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
@@ -41,5 +45,7 @@ CREATE TABLE `visit_archive` (
                                  `check_out` DATETIME NOT NULL,
                                  FOREIGN KEY (`visit_id`) REFERENCES `Visit` (`visit_id`),
                                  FOREIGN KEY (`location_id`) REFERENCES `Locations` (`location_id`),
-                                 FOREIGN KEY (`user_id`) REFERENCES `Users` (`user_id`)
+                                 FOREIGN KEY (`user_id`) REFERENCES `Users` (`user_id`),
+                                 CONSTRAINT UC_VisitArchive UNIQUE (`visit_id`) -- Prevents duplicate archiving of the same visit
+
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
