@@ -8,11 +8,10 @@ import static org.mockito.Mockito.*;
 
 @SpringBootTest
 class LocationRepositoryTests {
-
     @Test
     void shouldSaveLocationToDatabase() {
         JdbcTemplate jdbcTemplate = mock(JdbcTemplate.class);
-        LocationRepository locationRepository = new LocationRepository(jdbcTemplate);
+        LocationRepositoryImpl locationRepository = new LocationRepositoryImpl(jdbcTemplate);
 
         Location location = new Location();
         location.setName("Test Location");
