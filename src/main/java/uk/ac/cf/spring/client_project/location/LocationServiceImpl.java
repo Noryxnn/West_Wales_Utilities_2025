@@ -23,4 +23,8 @@ public class LocationServiceImpl implements LocationService {
     public void addLocation(Location location) {
         locationRepository.save(location);
     }
+
+    public List<LocationType> getLocationTypes() {
+        return locationRepository.getLocationTypes();
+    }
 }

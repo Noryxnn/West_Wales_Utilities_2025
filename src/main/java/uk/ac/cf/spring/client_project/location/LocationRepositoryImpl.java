@@ -40,4 +40,8 @@ public class LocationRepositoryImpl implements LocationRepository {
         jdbcTemplate.update("INSERT INTO location (name, address_line_1, address_line_2, city, postcode, type_id) VALUES (?, ?, ?, ?, ?, ?)",
                 location.getName(), location.getAddressLine1(), location.getAddressLine2(), location.getCity(), location.getPostcode(), location.getTypeId());
     }
+
+    public List<LocationType> getLocationTypes() {
+        return jdbcTemplate.query("SELECT * FROM location_type", (rs, i) -> new LocationType(rs.getLong("id"), rs.getString("type")));
+    }
 }

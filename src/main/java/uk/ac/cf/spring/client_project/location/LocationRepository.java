@@ -8,4 +8,6 @@ public interface LocationRepository {
     List<Location> getLocations();
 
     Location getLocationById(Long id);
+
+    List<LocationType> getLocationTypes();
 }

@@ -7,6 +7,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/admin/locations")
 public class LocationController {
@@ -38,6 +40,9 @@ public class LocationController {
         LocationForm emptyLocation = new LocationForm();
         modelAndView.addObject("locationForm", emptyLocation);
 
+        List<LocationType> locationTypes = locationService.getLocationTypes();
+        modelAndView.addObject("locationTypes", locationTypes);
+
         return modelAndView;
     }
 
@@ -47,6 +52,9 @@ public class LocationController {
 
         if (bindingResult.hasErrors()) {
             modelAndView = new ModelAndView("location/location-form", model.asMap());
+
+            List<LocationType> locationTypes = locationService.getLocationTypes();
+            modelAndView.addObject("locationTypes", locationTypes);
         } else {
             Location newLocation = new Location(
                     location.getId(),

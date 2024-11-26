@@ -52,15 +52,13 @@
          th:if="${#fields.hasErrors('postcode')}">Postcode Error
     </div>
 
-    <label for="typeId">Type ID:
-        <input type="text" th:field="*{typeId}" id="typeId"/>
+    <label for="typeId">Location Type:
+    <select th:field="*{typeId}" id="typeId">
+        <option th:each="type : ${locationTypes}" th:value="${type.id}" th:text="${type.type}">Location Type</option>
+    </select>
     </label>
-    <div class="alert alert-warning" th:errors="*{typeId}"
-         th:if="${#fields.hasErrors('typeId')}">Type ID Error
-    </div>
 
     <input type="submit" value="Submit"/>
-    <input type="reset" value="Reset"/>
     <button><a th:href="@{/admin/locations}">Cancel</a></button>
 </form>
 </body>
