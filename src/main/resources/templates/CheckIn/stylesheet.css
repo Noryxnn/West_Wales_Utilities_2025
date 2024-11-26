@@ -1,5 +1,6 @@
 body {
     background-color: #efeeee;
+    font-family: Helvetica;
 }
 
 h1 {
@@ -11,7 +12,7 @@ p {
     font-size: 15px;
 }
 
-input[type=button], input[type=submit], input[type=verification], input[type=reset] {
+input[type=button], input[type=submit], input[type=verification], input[type=reset],button[type=submit] {
     background-color: #61c5b9;
     border: none;
     color: black;
@@ -21,7 +22,7 @@ input[type=button], input[type=submit], input[type=verification], input[type=res
     cursor: pointer;
 }
 
-input[type=text] {
+input[type=text],input[type=email] {
     border: 2px #ffffff;
     border-radius: 4px;
     width: 100%;
@@ -29,13 +30,16 @@ input[type=text] {
     margin: 8px 0;
     box-sizing: border-box;
     background-color: #ffffff;
-    color: white;
+    color: black;
 }
 
 input[type=text]:focus {
     background-color: #d1d7e3;
 }
 
+input[type=email]:focus {
+    background-color: #d1d7e3;
+}
 
 input[type=submit]:focus {
     background-color: #86c9b6;

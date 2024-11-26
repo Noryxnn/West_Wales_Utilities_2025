@@ -1,25 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <link rel="stylesheet" href="stylesheet.css">
     <meta charset="UTF-8">
-    <title>Check In Form</title>
+    <title>Check-In Form</title>
+    <link th:replace="~{fragments/header :: bootstrap-css}"/>
 </head>
 <body>
-<h1>Check-in Form</h1>
-<p>Users must complete this form to check in and record on-site attendance</p>
-<form>
-    <label for="userID">User ID:</label><br>
-    <input type ="text" id="userID" name="userID"><br>
-    <label for="firstname">First name:</label><br>
-    <input type="text" id="firstname" name="firstname"><br>
-    <label for="lastname">Last name:</label><br>
-    <input type="text" id="lastname" name="lastname"><br>
-    <label for="email">Email address:</label><br>
-    <input type="text" id="email" name="email"><br>
-    <label for="companyName">Company name:</label><br>
-    <input type="text" id="companyName" name="companyName"><br><br>
-    <input type="submit" value="Submit">
-</form>
+<!--<header th:replace="~{fragments/header :: header}"></header>  Include Header Fragment -->
+
+<main class="container mt-5"> <!-- Added container and margin for proper alignment -->
+    <h1 class="text-center">Check-in Form</h1> <!-- Centered the heading -->
+    <p class="text-center">Users must complete this form to check in and record on-site attendance.</p>
+
+    <form th:action="@{/check-in}" method="post" class="needs-validation" novalidate> <!-- Enabled backend submission -->
+        <div class="mb-3">
+            <label for="userID" class="form-label">User ID:</label>
+            <input type="text" id="userID" name="userID" class="form-control" placeholder="Enter your User ID" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="firstname" class="form-label">First Name:</label>
+            <input type="text" id="firstname" name="firstname" class="form-control" placeholder="Enter your first name" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="lastname" class="form-label">Last Name:</label>
+            <input type="text" id="lastname" name="lastname" class="form-control" placeholder="Enter your last name" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Email Address:</label>
+            <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email address" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="companyName" class="form-label">Company Name:</label>
+            <input type="text" id="companyName" name="companyName" class="form-control" placeholder="Enter your company name" required>
+        </div>
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</main>
+
+<footer>
+    <div th:replace="~{fragments/footer :: footer-links}"></div>
+    <div th:replace="~{fragments/footer :: bootstrap-js}"></div>
+</footer>
 </body>
 </html>
