@@ -2,7 +2,6 @@ package uk.ac.cf.spring.client_project.request;
 
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,7 +25,7 @@ public class RequestForm {
     @Future (message = "Visit date must be in the future.")
     private LocalDate visitDate;
 
-    public RequestForm() { this(0L, 0L, 0L, null, null);
+    public RequestForm() { this(0L, 0L, 0L, LocalDate.now(), null);
     }
 
 }
