@@ -28,6 +28,16 @@ public class RequestController {
     @PostMapping("/request")
     public ModelAndView request(@Valid @ModelAttribute("request") RequestForm request, BindingResult bindingResult, Model model) {
         ModelAndView modelAndView;
+        // Check if userId exists in the database
+        if (!requestService.validateUserId(request.getUserId())) {
+            bindingResult.rejectValue("userId", "userId.invalid", "User ID does not exist.");
+        }
+
+        // Check if locationId exists in the database
+        if (!requestService.validateLocationId(request.getLocationId())) {
+            bindingResult.rejectValue("locationId", "locationId.invalid", "Location ID does not exist.");
+        }
+
         if (bindingResult.hasErrors()) {
             modelAndView = new ModelAndView("request/requestForm", model.asMap());
         } else {
@@ -43,4 +53,6 @@ public class RequestController {
         }
         return modelAndView;
     }
+
+
 }

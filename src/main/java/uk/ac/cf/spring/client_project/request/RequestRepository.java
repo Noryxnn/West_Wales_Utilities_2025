@@ -6,4 +6,6 @@ public interface RequestRepository {
     List<Request> getOpenRequests();
     Request getRequest(Long id);
     void save (Request request);
+    boolean userExists(Long userId);
+    boolean locationExists(Long locationId);
 }

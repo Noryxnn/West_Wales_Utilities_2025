@@ -63,4 +63,16 @@ public class RequestRepositoryImpl implements RequestRepository {
                 aRequest.getVisitDate()
         );
     }
+
+    public boolean userExists(Long userId) {
+        String sql = "select count(*) from users where user_id = ?";
+        Integer count = jdbc.queryForObject(sql, Integer.class, userId);
+        return count > 0 && count != null;
+    }
+
+    public boolean locationExists(Long locationId) {
+        String sql = "select count(*) from locations where location_id = ?";
+        Integer count = jdbc.queryForObject(sql, Integer.class, locationId);
+        return count > 0 && count != null;
+    }
 }
