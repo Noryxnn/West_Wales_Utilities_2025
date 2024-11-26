@@ -7,6 +7,8 @@
 <body>
 <h1>Locations</h1>
 
+<button><a th:href="@{/admin/locations/add-location}">Add Location</a></button>
+
 <table>
     <thead>
     <tr>
@@ -15,8 +17,7 @@
     </thead>
     <tbody>
     <tr th:each="location : ${locations}">
-        <td th:text="${location.name}"></td>
-    </tr>
+        <td><a th:href="@{/admin/locations/{id} (id=${location.id})}" th:text="${location.name}"></a></td>
     </tbody>
 </table>
 

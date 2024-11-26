@@ -38,8 +38,9 @@ class LocationControllerTests {
 
         String content = result.getResponse().getContentAsString();
 
-        assertTrue(content.contains("<td>Test Location 1</td>"));
-        assertTrue(content.contains("<td>Test Location 2</td>"));
+        // test will only pass if dummy locations stay the same
+        assertTrue(content.contains("<td><a href=\"/admin/locations/1\">Test Location 1</a></td>"));
+        assertTrue(content.contains("<td><a href=\"/admin/locations/2\">Test Location 2</a></td>"));
     }
 
     @Test

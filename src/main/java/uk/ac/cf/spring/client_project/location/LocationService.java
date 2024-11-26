@@ -6,4 +6,6 @@ public interface LocationService {
     void addLocation(Location location);
 
     List<Location> getLocations();
+
+    Location getLocation(Long id);
 }

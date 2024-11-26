@@ -16,6 +16,10 @@ public class LocationServiceImpl implements LocationService {
         return locationRepository.getLocations();
     }
 
+    public Location getLocation(Long id) {
+        return locationRepository.getLocation(id);
+    }
+
     public void addLocation(Location location) {
         locationRepository.save(location);
     }

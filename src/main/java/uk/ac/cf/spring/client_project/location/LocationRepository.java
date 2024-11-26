@@ -6,4 +6,6 @@ public interface LocationRepository {
     void save(Location location);
 
     List<Location> getLocations();
+
+    Location getLocation(Long id);
 }

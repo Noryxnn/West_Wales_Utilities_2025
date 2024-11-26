@@ -32,6 +32,10 @@ public class LocationRepositoryImpl implements LocationRepository {
         return jdbcTemplate.query("SELECT * FROM location", locationRowMapper);
     }
 
+    public Location getLocation(Long id) {
+        return jdbcTemplate.queryForObject("SELECT * FROM location WHERE id = ?", locationRowMapper, id);
+    }
+
     public void save(Location location) {
         jdbcTemplate.update("INSERT INTO location (name, address_line_1, address_line_2, city, postcode, type_id) VALUES (?, ?, ?, ?, ?, ?)",
                 location.getName(), location.getAddressLine1(), location.getAddressLine2(), location.getCity(), location.getPostcode(), location.getTypeId());
