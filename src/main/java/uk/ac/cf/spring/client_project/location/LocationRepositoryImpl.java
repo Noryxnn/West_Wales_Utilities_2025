@@ -32,7 +32,7 @@ public class LocationRepositoryImpl implements LocationRepository {
         return jdbcTemplate.query("SELECT * FROM location", locationRowMapper);
     }
 
-    public Location getLocation(Long id) {
+    public Location getLocationById(Long id) {
         return jdbcTemplate.queryForObject("SELECT * FROM location WHERE id = ?", locationRowMapper, id);
     }
 

@@ -26,7 +26,7 @@ public class LocationController {
     @GetMapping("/{id}")
     public ModelAndView getLocation(@PathVariable Long id) {
         ModelAndView modelAndView = new ModelAndView("location/location-details");
-        Location location = locationService.getLocation(id);
+        Location location = locationService.getLocationById(id);
         modelAndView.addObject("location", location);
 
         return modelAndView;

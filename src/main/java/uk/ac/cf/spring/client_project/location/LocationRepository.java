@@ -7,5 +7,5 @@ public interface LocationRepository {
 
     List<Location> getLocations();
 
-    Location getLocation(Long id);
+    Location getLocationById(Long id);
 }
