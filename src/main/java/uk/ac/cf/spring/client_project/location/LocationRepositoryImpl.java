@@ -39,23 +39,23 @@ public class LocationRepositoryImpl implements LocationRepository {
     }
 
     public List<Location> getLocations() {
-        return jdbcTemplate.query("SELECT * FROM location", locationRowMapper);
+        return jdbcTemplate.query("SELECT * FROM locations", locationRowMapper);
     }
 
     public Location getLocationById(Long id) {
-        return jdbcTemplate.queryForObject("SELECT * FROM location WHERE location_id = ?", locationRowMapper, id);
+        return jdbcTemplate.queryForObject("SELECT * FROM locations WHERE location_id = ?", locationRowMapper, id);
     }
 
     public void save(Location location) {
-        jdbcTemplate.update("INSERT INTO location (name, address_line_1, address_line_2, city, postcode, type_id) VALUES (?, ?, ?, ?, ?, ?)",
+        jdbcTemplate.update("INSERT INTO locations (name, address_line_1, address_line_2, city, postcode, type_id) VALUES (?, ?, ?, ?, ?, ?)",
                 location.getName(), location.getAddressLine1(), location.getAddressLine2(), location.getCity(), location.getPostcode(), location.getTypeId());
     }
 
     public List<LocationType> getLocationTypes() {
-        return jdbcTemplate.query("SELECT * FROM location_type", locationTypeRowMapper);
+        return jdbcTemplate.query("SELECT * FROM location_types", locationTypeRowMapper);
     }
 
     public LocationType getLocationTypeById(Long id) {
-        return jdbcTemplate.queryForObject("SELECT * FROM location_type WHERE type_id = ?", locationTypeRowMapper, id);
+        return jdbcTemplate.queryForObject("SELECT * FROM location_types WHERE type_id = ?", locationTypeRowMapper, id);
     }
 }

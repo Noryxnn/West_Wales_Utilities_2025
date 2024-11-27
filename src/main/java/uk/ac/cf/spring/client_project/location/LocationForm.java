@@ -18,7 +18,6 @@ public class LocationForm {
     @NotEmpty(message = "Address Line 1 is required")
     @Size (max = 50, message = "Address Line 1 must be less than 100 characters")
     private String addressLine1;
-    @NotEmpty(message = "Address Line 2 is required")
     @Size (max = 50, message = "Address Line 2 must be less than 100 characters")
     private String addressLine2;
     @NotEmpty(message = "City is required")

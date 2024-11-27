@@ -31,7 +31,7 @@ class LocationRepositoryTests {
 
         locationRepository.save(location);
 
-        verify(jdbcTemplate).update("INSERT INTO location (name, address_line_1, address_line_2, city, postcode, type_id) VALUES (?, ?, ?, ?, ?, ?)",
+        verify(jdbcTemplate).update("INSERT INTO locations (name, address_line_1, address_line_2, city, postcode, type_id) VALUES (?, ?, ?, ?, ?, ?)",
                 location.getName(), location.getAddressLine1(), location.getAddressLine2(), location.getCity(), location.getPostcode(), location.getTypeId());
     }
 
