@@ -1,4 +1,4 @@
-CREATE TABLE `Users` (
+CREATE TABLE `users` (
                          `user_id` INT AUTO_INCREMENT PRIMARY KEY,
                          `first_name` VARCHAR(255) NOT NULL,
                          `last_name` VARCHAR(255),
@@ -7,13 +7,13 @@ CREATE TABLE `Users` (
 )ENGINE=InnoDB;
 
 
-CREATE TABLE `Roles` (
+CREATE TABLE `roles` (
                          `role_id` INT AUTO_INCREMENT PRIMARY KEY,
                          `role_name` VARCHAR(255) NOT NULL
 )ENGINE=InnoDB;
 
 
-CREATE TABLE `User_roles`
+CREATE TABLE `user_roles`
 (
     `user_role_id` INT AUTO_INCREMENT PRIMARY KEY,
     `user_id`      INT,
@@ -23,13 +23,13 @@ CREATE TABLE `User_roles`
 )ENGINE=InnoDB;
 
 
-CREATE TABLE `Location_types` (
+CREATE TABLE `location_types` (
                                   `type_id` INT AUTO_INCREMENT PRIMARY KEY,
                                   `name` VARCHAR(255)
 )ENGINE=InnoDB;
 
 
-CREATE TABLE `Locations` (
+CREATE TABLE `locations` (
                              `location_id` INT AUTO_INCREMENT PRIMARY KEY,
                              `name` VARCHAR(255) NOT NULL,
                              `address_line_1` VARCHAR(255) NOT NULL,
@@ -41,7 +41,7 @@ CREATE TABLE `Locations` (
 )ENGINE=InnoDB;
 
 
-CREATE TABLE `Visit` (
+CREATE TABLE `visits` (
                          `visit_id` INT AUTO_INCREMENT PRIMARY KEY,
                          `location_id` INT,
                          `user_id` INT,
@@ -51,7 +51,7 @@ CREATE TABLE `Visit` (
 ) ENGINE=InnoDB;
 
 
-CREATE TABLE `visit_archive` (
+CREATE TABLE `visits_archive` (
                                  `visit_archive_id` INT AUTO_INCREMENT PRIMARY KEY,
                                  `visit_id` INT,
                                  `location_id` INT,
@@ -64,7 +64,7 @@ CREATE TABLE `visit_archive` (
 ) ENGINE=InnoDB;
 
 
-CREATE TABLE `Requests` (
+CREATE TABLE `requests` (
                             `request_id` INT AUTO_INCREMENT PRIMARY KEY,
                             `user_id` INT,
                             `location_id` INT,
