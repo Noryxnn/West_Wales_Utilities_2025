@@ -27,4 +27,8 @@ public class LocationServiceImpl implements LocationService {
     public List<LocationType> getLocationTypes() {
         return locationRepository.getLocationTypes();
     }
+
+    public LocationType getLocationTypeById(Long id) {
+        return locationRepository.getLocationTypeById(id);
+    }
 }

@@ -7,5 +7,5 @@ import lombok.Data;
 @AllArgsConstructor
 public class LocationType {
     private Long id;
-    private String type;
+    private String name;
 }

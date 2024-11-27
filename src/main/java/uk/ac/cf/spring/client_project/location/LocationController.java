@@ -13,7 +13,6 @@ import java.util.List;
 @RequestMapping("/admin/locations")
 public class LocationController {
     private final LocationService locationService;
-
     public LocationController(LocationService aLocationService) {
         this.locationService = aLocationService;
     }
@@ -30,6 +29,9 @@ public class LocationController {
         ModelAndView modelAndView = new ModelAndView("location/location-details");
         Location location = locationService.getLocationById(id);
         modelAndView.addObject("location", location);
+
+        LocationType locationType = locationService.getLocationTypeById(location.getTypeId());
+        modelAndView.addObject("locationType", locationType);
 
         return modelAndView;
     }

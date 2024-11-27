@@ -51,8 +51,10 @@ class LocationControllerTests {
     @Test
     void shouldGetLocationDetailsById() throws Exception {
         Location location = new Location(1L, "Test Location 1", "Address 1", "Address 2", "City", "AB12 3CD", 1L);
+        LocationType locationType = new LocationType(1L, "Other");
 
         when(locationService.getLocationById(1L)).thenReturn(location);
+        when(locationService.getLocationTypeById(location.getTypeId())).thenReturn(locationType);
 
         MvcResult result = mvc
                 .perform(get("/admin/locations/1"))
@@ -67,6 +69,7 @@ class LocationControllerTests {
         assertTrue(content.contains("Address 2"));
         assertTrue(content.contains("City"));
         assertTrue(content.contains("AB12 3CD"));
+        assertTrue(content.contains("Other"));
     }
 
     @Test

@@ -10,15 +10,18 @@ import java.util.List;
 public class LocationRepositoryImpl implements LocationRepository {
     private final JdbcTemplate jdbcTemplate;
     private RowMapper<Location> locationRowMapper;
+    private RowMapper<LocationType> locationTypeRowMapper;
 
     public  LocationRepositoryImpl(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
         setLocationRowMapper();
+        setLocationTypeRowMapper();
     }
+
 
     private void setLocationRowMapper() {
         locationRowMapper = (rs, i) -> new Location(
-                rs.getLong("id"),
+                rs.getLong("location_id"),
                 rs.getString("name"),
                 rs.getString("address_line_1"),
                 rs.getString("address_line_2"),
@@ -28,12 +31,19 @@ public class LocationRepositoryImpl implements LocationRepository {
         );
     }
 
+    private void setLocationTypeRowMapper() {
+        locationTypeRowMapper = (rs, i) -> new LocationType(
+                rs.getLong("type_id"),
+                rs.getString("name")
+        );
+    }
+
     public List<Location> getLocations() {
         return jdbcTemplate.query("SELECT * FROM location", locationRowMapper);
     }
 
     public Location getLocationById(Long id) {
-        return jdbcTemplate.queryForObject("SELECT * FROM location WHERE id = ?", locationRowMapper, id);
+        return jdbcTemplate.queryForObject("SELECT * FROM location WHERE location_id = ?", locationRowMapper, id);
     }
 
     public void save(Location location) {
@@ -42,6 +52,10 @@ public class LocationRepositoryImpl implements LocationRepository {
     }
 
     public List<LocationType> getLocationTypes() {
-        return jdbcTemplate.query("SELECT * FROM location_type", (rs, i) -> new LocationType(rs.getLong("id"), rs.getString("type")));
+        return jdbcTemplate.query("SELECT * FROM location_type", locationTypeRowMapper);
+    }
+
+    public LocationType getLocationTypeById(Long id) {
+        return jdbcTemplate.queryForObject("SELECT * FROM location_type WHERE type_id = ?", locationTypeRowMapper, id);
     }
 }

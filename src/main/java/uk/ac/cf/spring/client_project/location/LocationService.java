@@ -10,4 +10,6 @@ public interface LocationService {
     Location getLocationById(Long id);
 
     List<LocationType> getLocationTypes();
+
+    LocationType getLocationTypeById(Long id);
 }

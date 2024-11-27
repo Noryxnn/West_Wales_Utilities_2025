@@ -13,16 +13,16 @@ public class LocationForm {
 
     private Long id;
     @NotEmpty(message = "Name is required")
-    @Size (min = 2, max = 50, message = "Name must be between 2 and 50 characters")
+    @Size (max = 50, message = "Name must be less than 100 characters")
     private String name;
     @NotEmpty(message = "Address Line 1 is required")
-    @Size (max = 50, message = "Address Line 1 must be less than 50 characters")
+    @Size (max = 50, message = "Address Line 1 must be less than 100 characters")
     private String addressLine1;
     @NotEmpty(message = "Address Line 2 is required")
-    @Size (max = 50, message = "Address Line 2 must be less than 50 characters")
+    @Size (max = 50, message = "Address Line 2 must be less than 100 characters")
     private String addressLine2;
     @NotEmpty(message = "City is required")
-    @Size (max = 50, message = "City must be less than 50 characters")
+    @Size (max = 50, message = "City must be less than 75 characters")
     private String city;
     @NotEmpty(message = "Postcode is required")
     @Pattern(regexp = "^([A-Za-z]{2}\\d{1,2}[A-Za-z]?)\\s+(\\d[A-Za-z]{2})$", message = "Invalid postcode format") // regex from https://docs.linnworks.com/articles/#!documentation/rules-engine-example-regex-uk-postcodes
