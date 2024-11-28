@@ -1,6 +1,3 @@
-create schema if not exists client_project_db;
-
-
 CREATE TABLE `users` (
                          `user_id` INT AUTO_INCREMENT PRIMARY KEY,
                          `first_name` VARCHAR(255) NOT NULL,

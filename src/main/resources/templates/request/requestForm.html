@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Request a Visit</title>
+
+<!--    Placeholder for fragments.-->
+<!--    <link th:replace="~{fragments/header :: bootstrap-css}"/>-->
+
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Please enter your request details: </h1>
+
+    <form th:action="@{/request}" th:method="post" th:object="${request}">
+
+        <input th:field="*{requestId}" th:value="0" type="hidden"/>
+
+        <div class="mb-3">
+            <label class="form-label" th:for="*{userId}">User ID:</label>
+            <input class="form-control" placeholder="User ID" th:field="*{userId}" type="text"/>
+            <div class="alert alert-warning" th:errors="*{userId}" th:if="${#fields.hasErrors('userId')}">User ID Error</div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" th:for="*{locationId}">Location ID:</label>
+            <input class="form-control" placeholder="Location" th:field="*{locationId}" type="text"/>
+            <div class="alert alert-warning" th:errors="*{locationId}" th:if="${#fields.hasErrors('locationId')}">Location Error</div>
+        </div>
+
+        <input th:field="*{requestDate}" th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" type="hidden"/>
+
+        <div class="mb-3">
+            <label class="form-label" th:for="*{visitDate}">Visit Date:</label>
+            <input class="form-control" placeholder="Date of Visit" th:field="*{visitDate}" type="date"/>
+            <div class="alert alert-warning" th:errors="*{visitDate}" th:if="${#fields.hasErrors('visitDate')}">Visit Date Error</div>
+        </div>
+
+        <div class="mb-3">
+            <button class="btn btn-primary">Submit</button>
+        </div>
+
+    </form>
+
+
+</div>
+
+<!--Placeholder for fragments.-->
+<!--<div th:replace="~{fragments/footer :: footer-links}"></div>-->
+<!--<div th:replace="~{fragments/footer :: bootstrap-js}"></div>-->
+
+</body>
+</html>

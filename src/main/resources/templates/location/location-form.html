@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Location Form</title>
+</head>
+<body>
+<h1>Location Form</h1>
+
+<form th:method="post" th:object="${locationForm}">
+    <input th:field="*{id}" type="hidden" th:value="0"/>
+
+    <div>
+        <label for="name">Name:
+            <input type="text" th:field="*{name}" id="name"/>
+        </label>
+        <div class="alert alert-warning" th:errors="*{name}"
+             th:if="${#fields.hasErrors('name')}">Name Error
+        </div>
+    </div>
+
+    <div>
+        <label for="addressLine1">Address Line 1:
+            <input type="text" th:field="*{addressLine1}" id="addressLine1"/>
+        </label>
+        <div class="alert alert-warning" th:errors="*{addressLine1}"
+             th:if="${#fields.hasErrors('addressLine1')}">Address Line 1 Error
+        </div>
+    </div>
+
+    <div>
+        <label for="addressLine2">Address Line 2:
+            <input type="text" th:field="*{addressLine2}" id="addressLine2"/>
+        </label>
+        <div class="alert alert-warning" th:errors="*{addressLine2}"
+             th:if="${#fields.hasErrors('addressLine2')}">Address Line 2 Error
+        </div>
+    </div>
+
+    <div>
+        <label for="city">City:
+            <input type="text" th:field="*{city}" id="city"/>
+        </label>
+        <div class="alert alert-warning" th:errors="*{city}"
+             th:if="${#fields.hasErrors('city')}">City Error
+        </div>
+    </div>
+
+    <div>
+        <label for="postcode">Postcode:
+            <input type="text" th:field="*{postcode}" id="postcode"/>
+        </label>
+        <div class="alert alert-warning" th:errors="*{postcode}"
+             th:if="${#fields.hasErrors('postcode')}">Postcode Error
+        </div>
+    </div>
+
+    <div>
+        <label for="typeId">Location Type:
+            <select th:field="*{typeId}" id="typeId">
+                <option th:each="type : ${locationTypes}" th:value="${type.id}" th:text="${type.name}">Location Type
+                </option>
+            </select>
+        </label>
+    </div>
+
+    <div>
+        <input type="submit" value="Submit"/>
+        <button><a th:href="@{/admin/locations}">Cancel</a></button>
+    </div>
+</form>
+</body>
+</html>
