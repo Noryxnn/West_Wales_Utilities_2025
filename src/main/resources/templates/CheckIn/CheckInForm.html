@@ -3,25 +3,27 @@
 <head>
     <link rel="stylesheet" href="stylesheet.css">
     <meta charset="UTF-8">
-    <title>Check In Form</title>
+    <title>Register to Check in</title>
+    <script src="FormValidation.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
 </head>
 <body>
-<h1>Check-in Form</h1>
+<h1>Register to Check in</h1>
 <p>Users must complete this form to check in and record on-site attendance</p>
-<form>
-    <label for="userID">User ID:</label><br>
-    <input type ="text" id="userID" name="userID"><br>
-    <label for="firstname">First name:</label><br>
-    <input type="text" id="firstname" name="firstname"><br>
-    <label for="lastname">Last name:</label><br>
-    <input type="text" id="lastname" name="lastname"><br>
-    <label for="email">Email address:</label><br>
-    <input type="text" id="email" name="email"><br>
-    <label for="companyName">Company name:</label><br>
-    <input type="text" id="companyName" name="companyName"><br><br>
-    <input type="submit" value="Submit">
-    <button type="button">Verify Your Identity</button>
-
+<form id="checkinForm">
+    <label for="userID">User ID: <span class="required">*</span></label>
+    <input type="text" id="userID" name="userID">
+    <label for="firstname">First Name: <span class="required">*</span></label>
+    <input type="text" id="firstname" name="firstname">
+    <label for="lastname">Last Name: <span class="required">*</span></label>
+    <input type="text" id="lastname" name="lastname">
+    <label for="email">Email Address: <span class="required">*</span></label>
+    <input type="text" id="email" name="email">
+    <label for="companyName">Company Name: <span class="required">*</span></label>
+    <input type="text" id="companyName" name="companyName">
+    <input type="submit" class="button" value="Submit">
 </form>
+
 </body>
 </html>
