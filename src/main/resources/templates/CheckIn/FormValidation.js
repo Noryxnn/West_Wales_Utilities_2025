@@ -34,9 +34,8 @@ document.addEventListener("DOMContentLoaded", function () {
             return false;
         }
 
-        // Success message
-        alert("Check-in successful. Welcome!");
-        return true;
+        // Redirect to confirmation page if successful
+        window.location.href = "FormConfirmation.html";
     });
 });
 
