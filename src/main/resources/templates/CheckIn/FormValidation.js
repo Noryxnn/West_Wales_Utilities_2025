@@ -7,10 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Collect form fields
         const fields = [
             { id: "userID", name: "User ID" },
-            { id: "firstname", name: "First Name" },
-            { id: "lastname", name: "Last Name" },
-            { id: "email", name: "Email Address" },
-            { id: "companyName", name: "Company Name" },
+            { id: "password", name: "Password" },
         ];
 
         let isValid = true;
@@ -38,4 +35,6 @@ document.addEventListener("DOMContentLoaded", function () {
         window.location.href = "FormConfirmation.html";
     });
 });
+
+
 
