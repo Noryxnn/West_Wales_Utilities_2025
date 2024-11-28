@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Locations</title>
+</head>
+<body>
+<h1>Locations</h1>
+
+<button><a th:href="@{/admin/locations/add-location}">Add Location</a></button>
+
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="location : ${locations}">
+        <td><a th:href="@{/admin/locations/{id} (id=${location.id})}" th:text="${location.name}"></a></td>
+    </tbody>
+</table>
+
+</body>
+</html>
