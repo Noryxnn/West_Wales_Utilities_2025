@@ -22,6 +22,9 @@ insert into requests (user_id, location_id, request_date, visit_date) values (1,
 insert into requests (user_id, location_id, request_date, visit_date) values (2, 1, '2024-11-25', '2025-01-27');
 
 delete from users;
-insert into users (first_name, last_name, email, company_name) values ('John', 'Doe', 'john@doe.gmail.com', 'Dor Ltd');
-insert into users (first_name, last_name, email, company_name) values ('Jane', 'Doe', 'jane@doe.com', 'Doe Ltd');
-insert into users (first_name, last_name, email, company_name) values ('John', 'Smith', 'jsmith@gmail.com', 'Smith Ltd');
+insert into users (first_name, last_name, email, company_name)
+values ('John', 'Doe', 'john@doe.gmail.com', 'Dor Ltd');
+insert into users (first_name, last_name, email, company_name)
+values ('Jane', 'Doe', 'jane@doe.com', 'Doe Ltd');
+insert into users (first_name, last_name, email, company_name)
+values ('John', 'Smith', 'jsmith@gmail.com', 'Smith Ltd');
