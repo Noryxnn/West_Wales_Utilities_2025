@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Visit Request Confirmation</title>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="alert alert-success" role="alert">
+        <h4 class="alert-heading">Thank you for your request!</h4>
+        <h1>Request Confirmation</h1>
+
+        <p><strong>Request ID:</strong> <span th:text="${request.requestId}"></span></p>
+        <p><strong>Request Date:</strong> <span th:text="${request.requestDate}"></span></p>
+        <p><strong>Visit Start Date:</strong> <span th:text="${request.visitStartDate}"></span></p>
+        <p><strong>Visit End Date:</strong> <span th:text="${request.visitEndDate}"></span></p>
+
+        <p>Your request has been successfully submitted!</p>
+    </div>
+
+    <div class="container">
+        <a class="btn btn-info" href="/dashboard" role="button">Back to Dashboard</a>
+        <a class="btn btn-info" href="/requests/new" role="button">Make Another Request</a>
+    </div>
+</div>
+
+</body>
+</html>

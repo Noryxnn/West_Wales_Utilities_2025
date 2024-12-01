@@ -13,7 +13,7 @@ DROP TABLE IF EXISTS `requests`;
 
 
 CREATE TABLE IF NOT EXISTS `users` (
-    `user_id` INT AUTO_INCREMENT PRIMARY KEY,
+    `user_id` BIGINT AUTO_INCREMENT PRIMARY KEY,
     `first_name` VARCHAR(255) NOT NULL,
     `last_name` VARCHAR(255),
     `email` VARCHAR(255) NOT NULL,
@@ -72,8 +72,8 @@ CREATE TABLE IF NOT EXISTS `visits_archive` (
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `requests` (
-    `request_id` INT AUTO_INCREMENT PRIMARY KEY,
-    `user_id` INT,
+    `request_id` BIGINT AUTO_INCREMENT PRIMARY KEY,
+    `user_id` BIGINT,
     `request_date` DATETIME NOT NULL,
     `visit_start_date` DATE NOT NULL,
     `visit_end_date` DATE NOT NULL,
