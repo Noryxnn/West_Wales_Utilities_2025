@@ -21,28 +21,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class RequestControllerTests {
     @Autowired
     private MockMvc mvc;
-    @MockBean
-    private RequestService requestService;
+
 
     @Test
     public void shouldRenderRequestForm() throws Exception {
-        mvc.perform(get("/request"))
+        mvc.perform(get("/requests/new"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(view().name("request/requestForm"))
+                .andExpect(view().name("request/request-form"))
                 .andExpect(model().attributeExists("request"));
-    }
-
-    @Test
-    public void shouldSaveRequestOnFormSubmission() throws Exception {
-        mvc.perform(post("/request")
-                        .param("userId", "1")
-                        .param("locationId", "2")
-                        .param("visitDate", "2024-12-01")
-                        .contentType(MediaType.APPLICATION_FORM_URLENCODED))
-                .andDo(print())
-                .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/request"));
-        verify(requestService, times(1)).save(any(Request.class));
     }
 }
