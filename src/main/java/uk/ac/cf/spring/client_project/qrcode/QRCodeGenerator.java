@@ -2,6 +2,9 @@ package uk.ac.cf.spring.client_project.qrcode;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.time.Instant;
 import java.util.Base64;
 import java.util.HashMap;
@@ -12,10 +15,18 @@ import com.google.zxing.client.j2se.MatrixToImageConfig;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
+import lombok.experimental.UtilityClass;
+import uk.ac.cf.spring.client_project.security.EncryptionUtils;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+
+@UtilityClass
 public class QRCodeGenerator {
     /**
-     * Generate a QR code for the given text. Adapted from https://medium.com/nerd-for-tech/how-to-generate-qr-code-in-java-spring-boot-134adb81f10d
+     * Generate a QR code for the given text.
+     * Adapted from https://medium.com/nerd-for-tech/how-to-generate-qr-code-in-java-spring-boot-134adb81f10d
      *
      * @param text   Text to encode in the QR code.
      * @param width  Width of the QR code in pixels.
@@ -36,7 +47,10 @@ public class QRCodeGenerator {
         return pngOutputStream.toByteArray();
     }
 
-    public static String getQRCode(int width, int height){
+    public static String getQRCode(int width, int height)
+            throws InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException,
+            NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
+
         // TODO: get user id from session
         // temp data until login system is implemented
         long tempUserID = 1L;
@@ -44,14 +58,18 @@ public class QRCodeGenerator {
         HashMap<String, String> payload = new HashMap<>();
         payload.put("userId", String.valueOf(tempUserID));
         payload.put("timestamp", Instant.now().toString());
+        payload.put("secretKey", System.getenv("QR_ENCRYPTION_KEY"));
 
-        byte[] image = new byte[0];
+        String encryptedPayload = EncryptionUtils.encrypt(String.valueOf(payload), System.getenv("QR_ENCRYPTION_KEY"));
+
+        byte[] image;
         try {
             // Generate QR code as byte array
-            image = generateQRCode(String.valueOf(payload), width, height);
+            image = generateQRCode(encryptedPayload, width, height);
 
         } catch (WriterException | IOException e) {
             e.printStackTrace();
+            return "Error in generating QR code";
         }
         // Convert byte array into base64 encode String
         return Base64.getEncoder().encodeToString(image);

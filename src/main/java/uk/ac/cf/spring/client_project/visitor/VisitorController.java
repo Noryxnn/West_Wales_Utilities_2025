@@ -12,9 +12,12 @@ public class VisitorController {
     public ModelAndView getDashboard() {
         ModelAndView modelAndView = new ModelAndView("visitor/visitor-dashboard");
 
-        String qrcode = QRCodeGenerator.getQRCode(250, 250);
-
-        modelAndView.addObject("qrcode", qrcode);
+        try {
+            String qrcode = QRCodeGenerator.getQRCode(250, 250);
+            modelAndView.addObject("qrcode", qrcode);
+        } catch (Exception e) {
+            modelAndView.addObject("error", "Failed to generate QR code");
+        }
 
         return modelAndView;
     }
