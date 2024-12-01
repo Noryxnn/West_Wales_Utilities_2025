@@ -4,8 +4,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
 public class RequestRepositoryImpl implements RequestRepository {
     private final JdbcTemplate jdbc;
@@ -26,32 +24,10 @@ public class RequestRepositoryImpl implements RequestRepository {
         );
     }
 
-    public Request getRequest(Long id) {
-        String sql = "select * from requests where request_id = ?";
-        return jdbc.queryForObject(sql, requestMapper, id);
-    }
-
-    public List<Request> getOpenRequests() {
-        String sql = "select * from requests";
-        return jdbc.query(sql, requestMapper);
-    }
-
     public void save(Request aRequest) {
-            if (aRequest.isNew()) {
-                insert(aRequest);
-            } else {
-                update(aRequest);
-            }
-    }
-
-    private void update(Request aRequest) {
-        String updateSql = "update requests set user_id = ?, request_date = ?, visit_start_date = ?, visit_end_date = ? where request_id = ?";
-        jdbc.update(updateSql,
-                aRequest.getUserId(),
-                aRequest.getRequestDate(),
-                aRequest.getVisitStartDate(),
-                aRequest.getVisitEndDate()
-        );
+        if (aRequest.isNew()) {
+            insert(aRequest);
+        }
     }
 
     private void insert(Request aRequest) {
