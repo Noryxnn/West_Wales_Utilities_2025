@@ -6,6 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.mockito.Mockito.verify;
@@ -23,7 +24,7 @@ public class RequestServiceTests {
     @Test
     public void shouldSaveNewRequest() {
         // Create a new request
-        Request request = new Request(0L, 1L, 2L, LocalDate.now(), LocalDate.of(2024, 12, 1));
+        Request request = new Request(0L, 1L, LocalDateTime.now(), LocalDate.of(2024, 12, 1), LocalDate.of(2024, 12, 11));
         requestService.save(request);
         // Verify that the save method was called exactly once with the request object.
         // sourced from https://www.baeldung.com/mockito-verify
@@ -33,7 +34,7 @@ public class RequestServiceTests {
     @Test
     public void shouldFetchOpenRequests() {
         List<Request> mockRequests = List.of(
-                new Request(1L, 1L, 2L, LocalDate.now(), LocalDate.of(2024, 12, 1))
+                new Request(1L, 1L, LocalDateTime.now(), LocalDate.of(2024, 12, 1), LocalDate.of(2024, 12, 11))
         );
         when(requestRepository.getOpenRequests()).thenReturn(mockRequests);
         List<Request> requests = requestService.getOpenRequests();

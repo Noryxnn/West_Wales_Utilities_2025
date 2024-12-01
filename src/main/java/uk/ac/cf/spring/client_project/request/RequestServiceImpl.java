@@ -6,7 +6,7 @@ import java.util.List;
 
 @Service
 public class RequestServiceImpl implements RequestService {
-    private RequestRepository requestRepository;
+    private final RequestRepository requestRepository;
     public RequestServiceImpl(RequestRepository aRequestRepository) {
         this.requestRepository = aRequestRepository;
     }
@@ -21,9 +21,6 @@ public class RequestServiceImpl implements RequestService {
     }
     public boolean validateUserId(Long userId) {
         return requestRepository.userExists(userId);
-    };
-    public boolean validateLocationId(Long locationId) {
-        return requestRepository.locationExists(locationId);
-    };
+    }
 
 }
