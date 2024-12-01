@@ -58,19 +58,26 @@ public class QRCodeGenerator {
         HashMap<String, String> payload = new HashMap<>();
         payload.put("userId", String.valueOf(tempUserID));
         payload.put("timestamp", Instant.now().toString());
-        payload.put("secretKey", System.getenv("QR_ENCRYPTION_KEY"));
 
-        String encryptedPayload = EncryptionUtils.encrypt(String.valueOf(payload), System.getenv("QR_ENCRYPTION_KEY"));
+        String secretKey = System.getenv("QR_ENCRYPTION_KEY");
+        if (secretKey == null) {
+            throw new IllegalStateException("Secret key not found");
+        }
+        payload.put("secretKey", secretKey);
+
+        String encryptedPayload = EncryptionUtils.encrypt(String.valueOf(payload), secretKey);
 
         byte[] image;
         try {
             // Generate QR code as byte array
             image = generateQRCode(encryptedPayload, width, height);
 
-        } catch (WriterException | IOException e) {
-            e.printStackTrace();
-            return "Error in generating QR code";
+        } catch (WriterException e) {
+            return "failed to generate QR code: " + e.getMessage();
+        } catch (IOException e) {
+            return "Unexpected error in generating QR code: " + e.getMessage();
         }
+
         // Convert byte array into base64 encode String
         return Base64.getEncoder().encodeToString(image);
     }
