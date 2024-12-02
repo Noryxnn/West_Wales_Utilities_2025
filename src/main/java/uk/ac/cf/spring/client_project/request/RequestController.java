@@ -66,7 +66,7 @@ public class RequestController {
         Request request = (Request) session.getAttribute("request");
         if (request != null) {
             modelAndView.addObject("request", request);
-            session.removeAttribute("request");
+//            session.removeAttribute("request");
         } else {
             modelAndView.setViewName("error");
         }

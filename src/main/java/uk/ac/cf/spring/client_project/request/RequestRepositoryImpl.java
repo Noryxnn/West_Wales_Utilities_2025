@@ -28,12 +28,6 @@ public class RequestRepositoryImpl implements RequestRepository {
         );
     }
 
-//    public void save(Request aRequest) {
-//        if (aRequest.isNew()) {
-//            insert(aRequest);
-//        }
-//    }
-
     public Request save(Request request) {
         SimpleJdbcInsert simpleJdbcInsert = new SimpleJdbcInsert(jdbc)
                 .withTableName("requests")
