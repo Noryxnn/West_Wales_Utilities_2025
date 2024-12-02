@@ -36,6 +36,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
     implementation 'org.mariadb.jdbc:mariadb-java-client:3.4.1'
+    implementation 'com.google.zxing:javase:3.5.2' // Library for generating QR codes
 }
 
 
