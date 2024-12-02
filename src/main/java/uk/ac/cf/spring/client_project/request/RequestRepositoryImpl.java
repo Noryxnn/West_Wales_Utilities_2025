@@ -40,6 +40,8 @@ public class RequestRepositoryImpl implements RequestRepository {
 
         Number requestId = simpleJdbcInsert.executeAndReturnKey(columns);
         request.setRequestId(requestId.longValue());
+        Request savedRequest = findById(requestId.longValue());
+        System.out.println("Order saved: " + savedRequest);
 
         return request;
     }
