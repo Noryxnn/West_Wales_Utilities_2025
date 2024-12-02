@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `locations` (
 CREATE TABLE IF NOT EXISTS `visits` (
                                         `visit_id` INT AUTO_INCREMENT PRIMARY KEY,
                                         `location_id` INT,
-                                        `user_id` INT,
+                                        `user_id` BIGINT,
                                         `check_in` TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
                                         FOREIGN KEY (`location_id`) REFERENCES `locations` (`location_id`),
                                         FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `visits_archive` (
                                                 `visit_archive_id` INT AUTO_INCREMENT PRIMARY KEY,
                                                 `visit_id` INT,
                                                 `location_id` INT,
-                                                `user_id` INT,
+                                                `user_id` BIGINT,
                                                 `check_in` DATETIME NOT NULL,
                                                 `check_out` DATETIME NOT NULL,
                                                 FOREIGN KEY (`visit_id`) REFERENCES `visits` (`visit_id`),
