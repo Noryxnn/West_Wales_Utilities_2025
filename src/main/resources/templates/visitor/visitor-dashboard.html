@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <title>Visitor Dashboard</title>
 </head>
+
 <body>
-<div class="card" style="width: 18rem;">
-    <img th:if="${qrcode}" th:src="'data:image/png;base64,' + ${qrcode}" alt="QR Code">
-    <p th:if="${error}" th:text="${error}"></p>
+<h1>Visitor Dashboard</h1>
+<div>
+    <button><a th:href="@{/check-in}">Check In</a></button>
 </div>
+
 </body>
 </html>
