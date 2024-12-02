@@ -1,3 +1,7 @@
+# Temporarily disable foreign key checks to avoid errors
+# Sourced from: https://www.sqlines.com/mysql/set_foreign_key_checks#:~:text=When%20to%20Use,in%20any%20parent%2Dchild%20order.
+SET FOREIGN_KEY_CHECKS = 0;
+
 # Location Data
 delete from locations;
 insert into locations (name, address_line_1, address_line_2, city, postcode, type_id)
@@ -18,13 +22,11 @@ insert into location_types (name)
 values ('Construction Site');
 
 delete from requests;
-insert into requests (user_id, location_id, request_date, visit_date) values (1, 1, '2024-11-25', '2025-01-27');
-insert into requests (user_id, location_id, request_date, visit_date) values (2, 1, '2024-11-25', '2025-01-27');
+insert into requests (user_id, request_date, visit_start_date, visit_end_date) values (1, '2020-01-01 09:00:00', '2020-01-01', '2020-01-01');
+insert into requests (user_id, request_date, visit_start_date, visit_end_date) values (2, '2020-01-01 09:00:00', '2020-01-01', '2020-01-01');
+insert into requests (user_id, request_date, visit_start_date, visit_end_date) values (3, '2020-01-01 09:00:00', '2020-01-01', '2020-01-01');
 
 delete from users;
-insert into users (first_name, last_name, email, company_name)
-values ('John', 'Doe', 'john@doe.gmail.com', 'Dor Ltd');
-insert into users (first_name, last_name, email, company_name)
-values ('Jane', 'Doe', 'jane@doe.com', 'Doe Ltd');
-insert into users (first_name, last_name, email, company_name)
-values ('John', 'Smith', 'jsmith@gmail.com', 'Smith Ltd');
+insert into users (first_name, last_name, email, company_name) values ('John', 'Doe', 'john@doe.gmail.com', 'Doe Ltd');
+insert into users (first_name, last_name, email, company_name) values ('Jane', 'Doe', 'jane@doe.com', 'Doe Ltd');
+insert into users (first_name, last_name, email, company_name) values ('John', 'Smith', 'jsmith@gmail.com', 'Smith Ltd');

@@ -11,45 +11,47 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class RequestController {
-    private RequestService requestService;
+    private final RequestService requestService;
 
     public RequestController(RequestService aRequestService) {
         this.requestService = aRequestService;
     }
 
-    @GetMapping("/request")
+    @GetMapping("/requests/new")
     public ModelAndView request() {
-        ModelAndView modelAndView = new ModelAndView("request/requestForm");
+        ModelAndView modelAndView = new ModelAndView("request/request-form");
         RequestForm request = new RequestForm();
         modelAndView.addObject("request", request);
         return modelAndView;
     }
 
-    @PostMapping("/request")
+    @PostMapping("/requests/new")
     public ModelAndView request(@Valid @ModelAttribute("request") RequestForm request, BindingResult bindingResult, Model model) {
         ModelAndView modelAndView;
+
         // Check if userId exists in the database
-        if (!requestService.validateUserId(request.getUserId())) {
+        if (request.getUserId() != null && !requestService.validateUserId(request.getUserId())) {
             bindingResult.rejectValue("userId", "userId.invalid", "User ID does not exist.");
         }
 
-        // Check if locationId exists in the database
-        if (!requestService.validateLocationId(request.getLocationId())) {
-            bindingResult.rejectValue("locationId", "locationId.invalid", "Location ID does not exist.");
+        // Check if visitEndDate is before visitStartDate
+        if (request.getVisitDateValidationMessage() != null) {
+            bindingResult.rejectValue("visitEndDate", "error.visitEndDate", request.getVisitDateValidationMessage());
         }
 
+
         if (bindingResult.hasErrors()) {
-            modelAndView = new ModelAndView("request/requestForm", model.asMap());
+            modelAndView = new ModelAndView("request/request-form", model.asMap());
         } else {
             Request newRequest = new Request(
                     request.getRequestId(),
                     request.getUserId(),
-                    request.getLocationId(),
                     request.getRequestDate(),
-                    request.getVisitDate()
+                    request.getVisitStartDate(),
+                    request.getVisitEndDate()
             );
             requestService.save(newRequest);
-            modelAndView = new ModelAndView("redirect:/request");
+            modelAndView = new ModelAndView("redirect:/requests/new");
         }
         return modelAndView;
     }

@@ -4,17 +4,18 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
 public class Request {
     private Long requestId;
     private Long userId;
-    private Long locationId;
-    private LocalDate requestDate;
-    private LocalDate visitDate;
+    private LocalDateTime requestDate;
+    private LocalDate visitStartDate;
+    private LocalDate visitEndDate;
 
-    public Request() { this(0L, 0L, 0L, null, null);
+    public Request() { this(0L, 0L, LocalDateTime.now(), null, null);
     }
 
     public boolean isNew() {
