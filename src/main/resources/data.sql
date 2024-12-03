@@ -1,11 +1,11 @@
 # Location Data
 delete from locations;
 insert into locations (name, address_line_1, address_line_2, city, postcode, type_id)
-values ('Cardiff Office', '1', 'Greyfriars Road', 'Cardiff', 'CF10 3AG', 2);
+values ('Cardiff Office', '1 Greyfriars Road', '', 'Cardiff', 'CF10 3AG', 2);
 insert into locations (name, address_line_1, address_line_2, city, postcode, type_id)
-values ('Penarth Office', '2', 'Penarth Road', 'Penarth', 'CF10 3AG', 2);
+values ('Penarth Office', '2 Penarth Road', 'Suite 4', 'Penarth', 'CF10 3AG', 2);
 insert into locations (name, address_line_1, address_line_2, city, postcode, type_id)
-values ('Swansea Office', '3', 'Swansea Road', 'Swansea', 'SA1 1SA', 2);
+values ('Swansea Office', '3 Swansea Road', '', 'Swansea', 'SA1 1SA', 2);
 
 delete from location_types;
 insert into location_types (name)

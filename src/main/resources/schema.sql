@@ -3,6 +3,7 @@ DROP TABLE IF EXISTS `roles`;
 DROP TABLE IF EXISTS `user_roles`;
 DROP TABLE IF EXISTS `location_types`;
 DROP TABLE IF EXISTS `locations`;
+DROP TABLE IF EXISTS `locations_archive`;
 DROP TABLE IF EXISTS `visits`;
 DROP TABLE IF EXISTS `visits_archive`;
 DROP TABLE IF EXISTS `requests`;
@@ -38,7 +39,19 @@ CREATE TABLE IF NOT EXISTS `locations` (
     `address_line_2` VARCHAR(255),
     `city` VARCHAR(20) NOT NULL,
     `postcode` VARCHAR(255) NOT NULL,
-    `type_id` INT
+    `type_id` INT,
+    `deleted` BOOLEAN DEFAULT FALSE
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS locations_archive (
+    `location_id` INT AUTO_INCREMENT PRIMARY KEY,
+    `name` VARCHAR(255) NOT NULL,
+    `address_line_1` VARCHAR(255) NOT NULL,
+    `address_line_2` VARCHAR(255),
+    `city` VARCHAR(20) NOT NULL,
+    `postcode` VARCHAR(255) NOT NULL,
+    `type_id` INT,
+    deleted_at timestamp
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `visits` (

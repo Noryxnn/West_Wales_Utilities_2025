@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirm Delete</title>
+</head>
+
+<body>
+<h1>Confirm Delete</h1>
+
+<p>Are you sure you want to delete this location?</p>
+
+<p>Location Name: <span th:text="${location.name}"></span></p>
+<p>Address Line 1: <span th:text="${location.addressLine1}"></span></p>
+<p>Address Line 2: <span th:text="${location.addressLine2}"></span></p>
+<p>City: <span th:text="${location.city}"></span></p>
+<p>Postcode: <span th:text="${location.postcode}"></span></p>
+<p>Type: <span th:text="${locationType.name}"></span></p>
+
+<div>
+    <form th:action="@{/admin/locations/delete/confirm/{id}(id=${location.id})}" method="post" style="display: inline;">
+        <button type="submit">Delete</button>
+    </form>
+    <button type="button" style="display: inline;">
+        <a th:href="@{/admin/locations}" style="text-decoration: none;">Cancel</a>
+    </button>
+</div>
+
+</body>
+</html>
