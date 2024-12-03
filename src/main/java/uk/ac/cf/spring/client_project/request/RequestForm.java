@@ -14,8 +14,6 @@ public class RequestForm {
     private Long requestId;
     @NotNull(message = "User ID is required.")
     private Long userId;
-    @NotNull(message = "Location ID is required.")
-    private Long locationId;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate requestDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -25,7 +23,7 @@ public class RequestForm {
     @NotNull(message = "Visit end date is required.")
     private LocalDate visitEndDate;
 
-    public RequestForm() { this(0L, 0L, 0L, LocalDate.now(), null,null);
+    public RequestForm() { this(0L, 0L,  LocalDate.now(), null,null);
     }
 
 }
