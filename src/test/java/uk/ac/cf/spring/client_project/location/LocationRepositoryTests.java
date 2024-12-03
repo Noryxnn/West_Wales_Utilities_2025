@@ -9,6 +9,8 @@ import org.springframework.jdbc.core.RowMapper;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
+
+import java.sql.Timestamp;
 import java.util.List;
 
 @SpringBootTest
@@ -47,5 +49,64 @@ class LocationRepositoryTests {
         List<Location> locations = locationRepository.getLocations();
 
         assertEquals(2, locations.size());
+    }
+
+    // Tests adapted from Wiliam's Location tests, thank you Wiliam
+    @Test
+    void shouldDeleteLocation() {
+        Location location = new Location();
+        location.setId(1L);
+        location.setName("Test Location");
+        location.setAddressLine1("Test Address Line 1");
+        location.setAddressLine2("Test Address Line 2");
+        location.setCity("Test City");
+        location.setPostcode("AB12 3CD");
+        location.setTypeId(1L);
+
+        locationRepository.delete(location);
+
+        verify(jdbcTemplate).update("UPDATE locations SET deleted = true WHERE location_id = ?", location.getId());
+    }
+
+    @Test
+    void shouldDeleteLocationPermanently() {
+        Location location = new Location();
+        location.setId(1L);
+        location.setName("Test Location");
+        location.setAddressLine1("Test Address Line 1");
+        location.setAddressLine2("Test Address Line 2");
+        location.setCity("Test City");
+        location.setPostcode("AB12 3CD");
+        location.setTypeId(1L);
+
+        locationRepository.deletePermanently(location);
+
+        verify(jdbcTemplate).update("DELETE FROM locations WHERE location_id = ?", location.getId());
+    }
+
+    @Test
+    void shouldArchiveLocation() {
+        Location location = new Location();
+        location.setId(1L);
+        location.setName("Test Location");
+        location.setAddressLine1("Test Address Line 1");
+        location.setAddressLine2("Test Address Line 2");
+        location.setCity("Test City");
+        location.setPostcode("AB12 3CD");
+        location.setTypeId(1L);
+
+        locationRepository.archive(location);
+
+        verify(jdbcTemplate).update(eq("INSERT INTO locations_archive (location_id, name, address_line_1, address_line_2, city, postcode, type_id, deleted_at) values (?,?,?,?,?,?,?,?)"),
+                eq(location.getId()),
+                eq(location.getName()),
+                eq(location.getAddressLine1()),
+                eq(location.getAddressLine2()),
+                eq(location.getCity()),
+                eq(location.getPostcode()),
+                eq(location.getTypeId()),
+
+                any(Timestamp.class)
+        );
     }
 }

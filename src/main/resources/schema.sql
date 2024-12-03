@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS locations_archive (
     `city` VARCHAR(20) NOT NULL,
     `postcode` VARCHAR(255) NOT NULL,
     `type_id` INT,
-    deleted_at timestamp
+    `deleted_at` timestamp
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `visits` (
