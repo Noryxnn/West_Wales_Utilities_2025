@@ -32,7 +32,7 @@ public class LocationRepositoryImpl implements LocationRepository {
                 rs.getString("address_line_2"),
                 rs.getString("city"),
                 rs.getString("postcode"),
-                rs.getLong("type_id")
+                rs.getObject("type_id") != null ? rs.getLong("type_id") : null
         );
     }
 

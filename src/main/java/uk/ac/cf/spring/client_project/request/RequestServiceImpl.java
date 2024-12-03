@@ -22,8 +22,6 @@ public class RequestServiceImpl implements RequestService {
     public boolean validateUserId(Long userId) {
         return requestRepository.userExists(userId);
     };
-    public boolean validateLocationId(Long locationId) {
-        return requestRepository.locationExists(locationId);
-    };
+
 
 }

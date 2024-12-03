@@ -33,26 +33,23 @@ public class RequestController {
             bindingResult.rejectValue("userId", "userId.invalid", "User ID does not exist.");
         }
 
-        // Check if locationId exists in the database
-        if (!requestService.validateLocationId(request.getLocationId())) {
-            bindingResult.rejectValue("locationId", "locationId.invalid", "Location ID does not exist.");
-        }
-
         if (bindingResult.hasErrors()) {
             modelAndView = new ModelAndView("request/requestForm", model.asMap());
         } else {
             Request newRequest = new Request(
                     request.getRequestId(),
                     request.getUserId(),
-                    request.getLocationId(),
                     request.getRequestDate(),
-                    request.getVisitDate()
+                    request.getVisitStartDate(),
+                    request.getVisitEndDate()
             );
             requestService.save(newRequest);
             modelAndView = new ModelAndView("redirect:/request");
         }
         return modelAndView;
     }
+
+
 
 
 }

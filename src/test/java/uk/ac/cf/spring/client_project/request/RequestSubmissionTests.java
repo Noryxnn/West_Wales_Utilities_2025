@@ -47,7 +47,8 @@ public class RequestSubmissionTests {
         assertTrue(requests.stream().anyMatch(r ->
                 r.getUserId().equals(userId) &&
                         r.getLocationId().equals(locationId) &&
-                        r.getVisitDate().equals(visitDate)
+                        r.getVisitStartDate().equals(visitDate) &&
+                        r.getVisitEndDate().equals(visitDate)
         ));
     }
 }

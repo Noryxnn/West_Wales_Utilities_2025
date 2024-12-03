@@ -20,10 +20,12 @@ public class RequestForm {
     private LocalDate requestDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Future (message = "Visit date must be in the future.")
-    @NotNull(message = "Visit date is required.")
-    private LocalDate visitDate;
+    @NotNull(message = "Visit start date is required.")
+    private LocalDate visitStartDate;
+    @NotNull(message = "Visit end date is required.")
+    private LocalDate visitEndDate;
 
-    public RequestForm() { this(0L, 0L, 0L, LocalDate.now(), null);
+    public RequestForm() { this(0L, 0L, 0L, LocalDate.now(), null,null);
     }
 
 }

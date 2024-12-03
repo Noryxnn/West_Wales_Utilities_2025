@@ -43,9 +43,7 @@ CREATE TABLE IF NOT EXISTS `roles` (
 CREATE TABLE IF NOT EXISTS `user_roles` (
                                             `user_role_id` INT AUTO_INCREMENT PRIMARY KEY,
                                             `user_id` BIGINT,
-                                            `role_id` INT,
-                                            FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
-                                            FOREIGN KEY (`role_id`) REFERENCES `roles` (`role_id`)
+                                            `role_id` INT
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `location_types` (
@@ -60,17 +58,15 @@ CREATE TABLE IF NOT EXISTS `locations` (
                                            `address_line_2` VARCHAR(255),
                                            `city` VARCHAR(20) NOT NULL,
                                            `postcode` VARCHAR(255) NOT NULL,
-                                           `type_id` INT,
-                                           FOREIGN KEY (`type_id`) REFERENCES `location_types` (`type_id`)
-) ENGINE=InnoDB;
+                                           `type_id` INT
+                                       ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `visits` (
                                         `visit_id` INT AUTO_INCREMENT PRIMARY KEY,
                                         `location_id` INT,
                                         `user_id` BIGINT,
-                                        `check_in` TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-                                        FOREIGN KEY (`location_id`) REFERENCES `locations` (`location_id`),
-                                        FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
+                                        `check_in` TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
+
 
 ) ENGINE=InnoDB;
 
@@ -80,10 +76,8 @@ CREATE TABLE IF NOT EXISTS `visits_archive` (
                                                 `location_id` INT,
                                                 `user_id` BIGINT,
                                                 `check_in` DATETIME NOT NULL,
-                                                `check_out` DATETIME NOT NULL,
-                                                FOREIGN KEY (`visit_id`) REFERENCES `visits` (`visit_id`),
-                                                FOREIGN KEY (`location_id`) REFERENCES `locations` (`location_id`),
-                                                FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
+                                                `check_out` DATETIME NOT NULL
+
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `requests` (
@@ -92,6 +86,5 @@ CREATE TABLE IF NOT EXISTS `requests` (
                                           `request_date` DATETIME NOT NULL,
                                           `visit_start_date` DATE NOT NULL,
                                           `visit_end_date` DATE NOT NULL,
-                                          `approved` BOOLEAN,
-                                          FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
+                                          `approved` BOOLEAN
 ) ENGINE=InnoDB;
