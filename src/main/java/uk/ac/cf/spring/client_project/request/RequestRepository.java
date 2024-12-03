@@ -8,4 +8,6 @@ public interface RequestRepository {
     void save (Request request);
     boolean userExists(Long userId);
     boolean locationExists(Long locationId);
+
+
 }

@@ -1,6 +1,7 @@
 package uk.ac.cf.spring.client_project.location;
 
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,8 +14,9 @@ import java.util.List;
 @RequestMapping("/admin/locations")
 public class LocationController {
     private final LocationService locationService;
-    public LocationController(LocationService aLocationService) {
-        this.locationService = aLocationService;
+    @Autowired
+    public LocationController(LocationService locationService) {
+        this.locationService = locationService;
     }
 
     @GetMapping

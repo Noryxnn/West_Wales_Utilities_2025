@@ -8,4 +8,6 @@ public interface RequestService {
     void save(Request request);
     boolean validateUserId(Long userId);
     boolean validateLocationId(Long locationId);
+
+
 }

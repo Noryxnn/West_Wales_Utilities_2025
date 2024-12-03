@@ -31,9 +31,21 @@ public class RequestRepositoryImpl implements RequestRepository {
         return jdbc.queryForObject(sql, requestMapper, id);
     }
 
-    public List<Request> getOpenRequests() {
+
+    /*public List<Request> getOpenRequests() {
         String sql = "select * from requests";
         return jdbc.query(sql, requestMapper);
+    } //to fetch pending data*/
+
+    public List<Request> getOpenRequests() {
+        String sql = "select * from requests";
+        return jdbc.query(sql, (rs, rowNum) -> new Request(
+                rs.getLong("request_id"),
+                rs.getLong("user_id"),
+                rs.getLong("location_id"),
+                rs.getDate("request_date") != null ? rs.getDate("request_date").toLocalDate() : null,
+                rs.getDate("visit_date") != null ? rs.getDate("visit_date").toLocalDate() : null
+        ));
     }
 
     public void save(Request aRequest) {

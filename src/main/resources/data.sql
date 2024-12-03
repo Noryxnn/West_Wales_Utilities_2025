@@ -2,15 +2,6 @@
 # Sourced from: https://www.sqlines.com/mysql/set_foreign_key_checks#:~:text=When%20to%20Use,in%20any%20parent%2Dchild%20order.
 SET FOREIGN_KEY_CHECKS = 0;
 
-# Location Data
-delete from locations;
-insert into locations (name, address_line_1, address_line_2, city, postcode, type_id)
-values ('Cardiff Office', '1 Capital Tower', 'Greyfriars Road', 'Cardiff', 'CF10 3AG', 2);
-insert into locations (name, address_line_1, address_line_2, city, postcode, type_id)
-values ('Penarth Office', '2', 'Penarth Road', 'Penarth', 'CF10 3AG', 2);
-insert into locations (name, address_line_1, address_line_2, city, postcode, type_id)
-values ('Swansea Office', '3', 'Swansea Road', 'Swansea', 'SA1 1SA', 2);
-
 delete from location_types;
 insert into location_types (name)
 values ('Other');
@@ -20,6 +11,18 @@ insert into location_types (name)
 values ('Warehouse');
 insert into location_types (name)
 values ('Construction Site');
+
+
+# Location Data
+delete from locations;
+insert into locations (name, address_line_1, address_line_2, city, postcode, type_id)
+values ('Cardiff Office', '1 Capital Tower', 'Greyfriars Road', 'Cardiff', 'CF10 3AG', 2);
+insert into locations (name, address_line_1, address_line_2, city, postcode, type_id)
+values ('Penarth Office', '2', 'Penarth Road', 'Penarth', 'CF10 3AG', 2);
+insert into locations (name, address_line_1, address_line_2, city, postcode, type_id)
+values ('Swansea Office', '3', 'Swansea Road', 'Swansea', 'SA1 1SA', 2);
+
+
 
 delete from requests;
 insert into requests (user_id, request_date, visit_start_date, visit_end_date) values (1, '2020-01-01 09:00:00', '2020-01-01', '2020-01-01');

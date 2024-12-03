@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        table, th, td {
+            border:1px solid black;
+        }
+    </style>
+    <title>Pending Requests</title>
+</head>
+<body>
+
+<div>
+
+    <!-- Header -->
+    <div>
+        <!-- Include your header here -->
+    </div>
+
+    <div>
+        <h1>Pending Requests</h1>
+        <table>
+            <thead>
+            <tr>
+                <th>Request ID</th>
+                <th>User ID</th>
+                <th>Request Date</th>
+                <th>Visit Start Date</th>
+                <th>Visit End Date</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Iterate over pendingRequests and display each request dynamically -->
+            <tr th:each="request : ${pendingRequests}">
+                <td th:text="${request.requestId}"></td>
+                <td th:text="${request.userId}"></td>
+                <td th:text="${#dates.format(request.requestDate, 'yyyy-MM-dd')}"></td>
+                <td th:text="${#dates.format(request.visitStartDate, 'yyyy-MM-dd')}"></td> <!-- Fixed variable name -->
+                <td th:text="${#dates.format(request.visitEndDate, 'yyyy-MM-dd')}"></td> <!-- Fixed variable name -->
+                <td>
+                    <form th:action="@{/request/confirm/{id}(id=${request.requestId})}" method="post">
+                        <button type="submit">Confirm Request</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Footer -->
+<div>
+    <!-- Include your footer links here -->
+</div>
+
+</body>
+</html>

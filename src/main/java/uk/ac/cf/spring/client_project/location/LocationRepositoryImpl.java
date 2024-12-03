@@ -1,5 +1,6 @@
 package uk.ac.cf.spring.client_project.location;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -8,10 +9,13 @@ import java.util.List;
 
 @Repository
 public class LocationRepositoryImpl implements LocationRepository {
+
+
     private final JdbcTemplate jdbcTemplate;
     private RowMapper<Location> locationRowMapper;
     private RowMapper<LocationType> locationTypeRowMapper;
 
+    @Autowired
     public  LocationRepositoryImpl(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
         setLocationRowMapper();
