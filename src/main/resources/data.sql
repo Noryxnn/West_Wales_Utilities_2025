@@ -1,7 +1,3 @@
-# Temporarily disable foreign key checks to avoid errors
-# Sourced from: https://www.sqlines.com/mysql/set_foreign_key_checks#:~:text=When%20to%20Use,in%20any%20parent%2Dchild%20order.
-SET FOREIGN_KEY_CHECKS = 0;
-
 # Location Data
 delete from locations;
 insert into locations (name, address_line_1, address_line_2, city, postcode, type_id)
