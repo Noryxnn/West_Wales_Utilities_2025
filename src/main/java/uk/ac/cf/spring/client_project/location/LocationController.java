@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @Controller
+
 @RequestMapping("/admin/locations")
 public class LocationController {
     private final LocationService locationService;
