@@ -58,7 +58,7 @@ CREATE TABLE `visits_archive` (
                                  `user_id` INT,
                                  `check_in` DATETIME NOT NULL,
                                  `check_out` DATETIME NOT NULL,
-                                 FOREIGN KEY (`visit_id`) REFERENCES `Visit` (`visit_id`),
+                                 FOREIGN KEY (`visit_id`) REFERENCES `visits` (`visit_id`),
                                  FOREIGN KEY (`location_id`) REFERENCES `Locations` (`location_id`),
                                  FOREIGN KEY (`user_id`) REFERENCES `Users` (`user_id`)
 ) ENGINE=InnoDB;
@@ -85,3 +85,5 @@ CREATE TABLE `request_status` (
                                   FOREIGN KEY (`user_id`) REFERENCES `Users` (`user_id`),
                                   FOREIGN KEY (`location_id`) REFERENCES `Locations` (`location_id`)
 ) ENGINE=InnoDB;
+
+ALTER TABLE visits ADD COLUMN check_out TIMESTAMP NULL DEFAULT NULL;

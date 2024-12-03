@@ -18,8 +18,8 @@ insert into location_types (name)
 values ('Construction Site');
 
 delete from requests;
-insert into requests (user_id, location_id, request_date, visit_date) values (1, 1, '2024-11-25', '2025-01-27');
-insert into requests (user_id, location_id, request_date, visit_date) values (2, 1, '2024-11-25', '2025-01-27');
+insert into requests (user_id, request_date, visit_date) values (1, '2024-11-25', '2025-01-27');
+insert into requests (user_id, request_date, visit_date) values (2, '2024-11-25', '2025-01-27');
 
 delete from users;
 insert into users (first_name, last_name, email, company_name)

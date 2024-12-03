@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visit Tracking System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        .loading {
+            text-align: center;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+    </style>
+    <script>
+        async function fetchVisits() {
+            const response = await fetch('/admin/visits');
+            const data = await response.json();
+            const visitTable = document.getElementById('visit-data');
+            const loading = document.getElementById('loading');
+            visitTable.innerHTML = '';
+            if (data.length) {
+                data.forEach(visit => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${visit.userName}</td>
+                        <td>${visit.locationName}</td>
+                        <td>${visit.checkInTime}</td>
+                    `;
+                    visitTable.appendChild(row);
+                });
+                loading.style.display = 'none';
+            } else {
+                loading.textContent = 'No visitors currently on site.';
+            }
+        }
+
+        window.onload = fetchVisits;
+    </script>
+</head>
+<body>
+<div class="container">
+    <h1>Visit Tracking System</h1>
+
+    <section id="dashboard">
+        <h2>Currently On-Site</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>User</th>
+                <th>Location</th>
+                <th>Check-In Time</th>
+            </tr>
+            </thead>
+            <tbody id="visit-data">
+            </tbody>
+        </table>
+        <div class="loading" id="loading">Loading...</div>
+    </section>
+</div>
+</body>
+</html>
