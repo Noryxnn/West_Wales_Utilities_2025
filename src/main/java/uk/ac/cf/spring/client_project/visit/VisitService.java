@@ -1,7 +1,5 @@
 package uk.ac.cf.spring.client_project.visit;
 
-import uk.ac.cf.spring.client_project.visit.VisitDTO;
-import uk.ac.cf.spring.client_project.visit.VisitRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,5 +14,10 @@ public class VisitService {
 
     public List<VisitDTO> getCurrentlyOnSiteVisits() {
         return visitRepository.findCurrentlyOnSiteVisits();
+    }
+
+    public void addVisit(VisitDTO visitDTO) {
+        // Logic to map VisitDTO to an entity or direct insertion
+        visitRepository.saveVisit(visitDTO);
     }
 }

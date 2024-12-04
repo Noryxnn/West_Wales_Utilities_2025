@@ -14,20 +14,28 @@ public class VisitRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    private final RowMapper<VisitDTO> rowMapper = (rs, rowNum) -> new VisitDTO(
-            rs.getString("first_name"),
-            rs.getString("location_name"),
-            rs.getString("check_in")
-    );
-
     public List<VisitDTO> findCurrentlyOnSiteVisits() {
         String sql = """
-            SELECT f.first_name AS first_name, l.name AS location_name, v.check_in
+            SELECT f.first_name AS userName, l.name AS locationName, v.check_in AS checkInTime
             FROM visits v
             JOIN users f ON v.user_id = f.user_id
             JOIN locations l ON v.location_id = l.location_id
             WHERE v.check_out IS NULL
         """;
-        return jdbcTemplate.query(sql, rowMapper);
+        return jdbcTemplate.query(sql, (rs, rowNum) -> new VisitDTO(
+                rs.getString("userName"),
+                rs.getString("locationName"),
+                rs.getString("checkInTime")
+        ));
+    }
+
+    public void saveVisit(VisitDTO visitDTO) {
+        String sql = """
+            INSERT INTO visits (user_id, location_id, check_in)
+            VALUES ((SELECT user_id FROM users WHERE first_name = ?), 
+                    (SELECT location_id FROM locations WHERE name = ?), 
+                    ?)
+        """;
+        jdbcTemplate.update(sql, visitDTO.getUserName(), visitDTO.getLocationName(), visitDTO.getCheckInTime());
     }
 }

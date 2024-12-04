@@ -18,8 +18,8 @@ CREATE TABLE `user_roles`
     `user_role_id` INT AUTO_INCREMENT PRIMARY KEY,
     `user_id`      INT,
     `role_id`      INT,
-    FOREIGN KEY (`user_id`) REFERENCES `Users` (`user_id`),
-    FOREIGN KEY (`role_id`) REFERENCES `Roles` (`role_id`)
+    FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
+    FOREIGN KEY (`role_id`) REFERENCES `roles` (`role_id`)
 )ENGINE=InnoDB;
 
 
@@ -37,7 +37,7 @@ CREATE TABLE `locations` (
                              `city` VARCHAR(20) NOT NULL,
                              `postcode` VARCHAR(255) NOT NULL,
                              `type_id` INT,
-                             FOREIGN KEY (`type_id`) REFERENCES `Location_types` (`type_id`)
+                             FOREIGN KEY (`type_id`) REFERENCES `location_types` (`type_id`)
 )ENGINE=InnoDB;
 
 
@@ -46,8 +46,8 @@ CREATE TABLE `visits` (
                          `location_id` INT,
                          `user_id` INT,
                          `check_in` TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-                         FOREIGN KEY (`location_id`) REFERENCES `Locations` (`location_id`),
-                         FOREIGN KEY (`user_id`) REFERENCES `Users` (`user_id`)
+                         FOREIGN KEY (`location_id`) REFERENCES `locations` (`location_id`),
+                         FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
 ) ENGINE=InnoDB;
 
 
@@ -59,8 +59,8 @@ CREATE TABLE `visits_archive` (
                                  `check_in` DATETIME NOT NULL,
                                  `check_out` DATETIME NOT NULL,
                                  FOREIGN KEY (`visit_id`) REFERENCES `visits` (`visit_id`),
-                                 FOREIGN KEY (`location_id`) REFERENCES `Locations` (`location_id`),
-                                 FOREIGN KEY (`user_id`) REFERENCES `Users` (`user_id`)
+                                 FOREIGN KEY (`location_id`) REFERENCES `locations` (`location_id`),
+                                 FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
 ) ENGINE=InnoDB;
 
 
@@ -70,8 +70,8 @@ CREATE TABLE `requests` (
                             `location_id` INT,
                             `request_date` DATETIME NOT NULL,
                             `visit_date` DATETIME NOT NULL,
-                            FOREIGN KEY (`user_id`) REFERENCES `Users` (`user_id`),
-                            FOREIGN KEY (`location_id`) REFERENCES `Locations` (`location_id`)
+                            FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
+                            FOREIGN KEY (`location_id`) REFERENCES `locations` (`location_id`)
 ) ENGINE=InnoDB;
 
 
@@ -82,8 +82,16 @@ CREATE TABLE `request_status` (
                                   `request_date` DATETIME NOT NULL,
                                   `visit_date` DATETIME NOT NULL,
                                   `approved` TINYINT NOT NULL,
-                                  FOREIGN KEY (`user_id`) REFERENCES `Users` (`user_id`),
-                                  FOREIGN KEY (`location_id`) REFERENCES `Locations` (`location_id`)
+                                  FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
+                                  FOREIGN KEY (`location_id`) REFERENCES `locations` (`location_id`)
 ) ENGINE=InnoDB;
 
+#Edits that had to be done for the tables
 ALTER TABLE visits ADD COLUMN check_out TIMESTAMP NULL DEFAULT NULL;
+ALTER TABLE users MODIFY email VARCHAR(255) DEFAULT NULL;
+ALTER TABLE users MODIFY company_name VARCHAR(255) DEFAULT NULL;
+ALTER TABLE locations MODIFY address_line_1 VARCHAR(255) DEFAULT NULL;
+ALTER TABLE locations MODIFY city VARCHAR(255) DEFAULT NULL;
+ALTER TABLE locations MODIFY postcode VARCHAR(255) DEFAULT NULL;
+ALTER TABLE visits MODIFY check_out DATETIME DEFAULT NULL;
+

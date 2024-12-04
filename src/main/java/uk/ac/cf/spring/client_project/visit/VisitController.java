@@ -1,14 +1,13 @@
 package uk.ac.cf.spring.client_project.visit;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
+import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/admin")
+@RequestMapping("/admin/visits")
 public class VisitController {
     private final VisitService visitService;
 
@@ -16,16 +15,10 @@ public class VisitController {
         this.visitService = visitService;
     }
 
-    @GetMapping("/visits")
-    public List<VisitDTO> getCurrentVisits() {
-        return visitService.getCurrentlyOnSiteVisits();
-    }
-
-    @Controller
-    public static class RootController {
-        @GetMapping("/")
-        public String redirectToVisitTracking() {
-            return "redirect:visit/visittracking"; // For static files
-        }
+    @GetMapping
+    public ModelAndView getAllVisits() {
+        ModelAndView modelAndView = new ModelAndView("visit/visittracking"); // Include subdirectory
+        modelAndView.addObject("visits", visitService.getCurrentlyOnSiteVisits());
+        return modelAndView;
     }
 }
