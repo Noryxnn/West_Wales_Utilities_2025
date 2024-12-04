@@ -1,5 +1,6 @@
 package uk.ac.cf.spring.client_project.staff;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,9 +9,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import uk.ac.cf.spring.client_project.security.QREncryptionUtils;
 
+import java.util.HashMap;
+
 @Controller
 @RequestMapping("/staff")
 public class StaffController {
+    @Autowired
+    StaffService staffService;
+
     @GetMapping("/dashboard")
     public String getStaffDashboard() {
         return "staff/staff-dashboard";
@@ -35,6 +41,9 @@ public class StaffController {
 
         System.out.println("QR Code Data Received: " + qrData);
         System.out.println("Decrypted Data: " + decryptedData);
+
+        HashMap<String, Object> decryptedDataMap = staffService.stringToHashMap(decryptedData);
+        System.out.println(decryptedDataMap);
 
         return ResponseEntity.ok("QR code processed successfully!");
     }
