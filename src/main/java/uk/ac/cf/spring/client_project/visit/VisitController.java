@@ -17,7 +17,7 @@ public class VisitController {
 
     @GetMapping
     public ModelAndView getAllVisits() {
-        ModelAndView modelAndView = new ModelAndView("visit/visittracking"); // Include subdirectory
+        ModelAndView modelAndView = new ModelAndView("visit/visittracking");
         modelAndView.addObject("visits", visitService.getCurrentlyOnSiteVisits());
         return modelAndView;
     }

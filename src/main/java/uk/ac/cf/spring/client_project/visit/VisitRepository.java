@@ -28,14 +28,4 @@ public class VisitRepository {
                 rs.getString("checkInTime")
         ));
     }
-
-    public void saveVisit(VisitDTO visitDTO) {
-        String sql = """
-            INSERT INTO visits (user_id, location_id, check_in)
-            VALUES ((SELECT user_id FROM users WHERE first_name = ?), 
-                    (SELECT location_id FROM locations WHERE name = ?), 
-                    ?)
-        """;
-        jdbcTemplate.update(sql, visitDTO.getUserName(), visitDTO.getLocationName(), visitDTO.getCheckInTime());
-    }
 }

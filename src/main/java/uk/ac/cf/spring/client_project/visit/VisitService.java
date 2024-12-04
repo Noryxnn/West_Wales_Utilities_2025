@@ -15,9 +15,4 @@ public class VisitService {
     public List<VisitDTO> getCurrentlyOnSiteVisits() {
         return visitRepository.findCurrentlyOnSiteVisits();
     }
-
-    public void addVisit(VisitDTO visitDTO) {
-        // Logic to map VisitDTO to an entity or direct insertion
-        visitRepository.saveVisit(visitDTO);
-    }
 }
