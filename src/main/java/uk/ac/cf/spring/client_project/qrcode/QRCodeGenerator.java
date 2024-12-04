@@ -65,7 +65,7 @@ public class QRCodeGenerator {
         }
         payload.put("secretKey", secretKey);
 
-        String encryptedPayload = EncryptionUtils.encrypt(String.valueOf(payload), secretKey);
+        String encryptedPayload = EncryptionUtils.encrypt(String.valueOf(payload));
 
         byte[] image;
         try {

@@ -16,6 +16,7 @@ import java.util.Base64;
 @UtilityClass
 public class EncryptionUtils {
     private static final String ALGORITHM = "AES/CBC/PKCS5Padding";
+    private final SecretKeySpec secretKey = decodeSecretKey(System.getenv("QR_ENCRYPTION_KEY"));
 
     // Generate a random initialization vector to add unpredictability to the encryption process
     // Prevents patterns from being detected
@@ -25,14 +26,14 @@ public class EncryptionUtils {
         return new IvParameterSpec(iv);
     }
 
-    public static String encrypt(String input, String secretKey)
+    public static String encrypt(String input)
             throws NoSuchPaddingException, NoSuchAlgorithmException,
             InvalidAlgorithmParameterException, InvalidKeyException,
             BadPaddingException, IllegalBlockSizeException {
 
         Cipher cipher = Cipher.getInstance(ALGORITHM);
         IvParameterSpec iv = generateIv();
-        cipher.init(Cipher.ENCRYPT_MODE, decodeSecretKey(secretKey), iv);
+        cipher.init(Cipher.ENCRYPT_MODE, secretKey, iv);
         byte[] cipherText = cipher.doFinal(input.getBytes());
 
         // Combine the IV and the encrypted data
@@ -45,7 +46,7 @@ public class EncryptionUtils {
                 .encodeToString(combinedOutput);
     }
 
-    public static String decrypt(String cipherText, String secretKey)
+    public static String decrypt(String cipherText)
             throws NoSuchPaddingException, NoSuchAlgorithmException,
             InvalidAlgorithmParameterException, InvalidKeyException,
             BadPaddingException, IllegalBlockSizeException {
@@ -62,19 +63,19 @@ public class EncryptionUtils {
         System.arraycopy(encryptedData, ivBytes.length, cipherBytes, 0, cipherBytes.length);
 
         Cipher cipher = Cipher.getInstance(ALGORITHM);
-        cipher.init(Cipher.DECRYPT_MODE, decodeSecretKey(secretKey), iv);
+        cipher.init(Cipher.DECRYPT_MODE, secretKey, iv);
         byte[] plainText = cipher.doFinal(cipherBytes);
 
         return new String(plainText);
     }
 
-    private static SecretKeySpec decodeSecretKey(String base64EncodedKey) {
-        if (base64EncodedKey == null) {
+    private static SecretKeySpec decodeSecretKey(String secretKey) {
+        if (secretKey == null) {
             throw new IllegalStateException("Environment variable QR_ENCRYPTION_KEY not found");
         }
 
         // Convert to SecretKey
-        byte[] decodedKeyBytes = Base64.getDecoder().decode(base64EncodedKey);
+        byte[] decodedKeyBytes = Base64.getDecoder().decode(secretKey);
         return new SecretKeySpec(decodedKeyBytes, "AES");
     }
 }
