@@ -40,7 +40,10 @@ border:1px solid black;
     <td th:text="${#temporals.format(request.visitStartDate, 'yyyy-MM-dd')}"></td>
     <td th:text="${#temporals.format(request.visitEndDate, 'yyyy-MM-dd')}"></td>
     <td><form th:action="@{/request/confirm/{id}(id=${request.requestId})}" method="post">
-        <button type="submit">Confirm Request</button> </form> </td>
+        <button type="submit" th:disabled="${request.approved}"
+                th:text="${request.approved ? 'Confirmed' : 'Confirm Request'}">
+        </button>
+    </form> </td>
 </tr>
 </tbody>
         </table>

@@ -7,4 +7,6 @@ public interface RequestService {
     Request getRequest(Long requestId);
     void save(Request request);
     boolean validateUserId(Long userId);
+
+    boolean confirmRequest(Long id);
 }

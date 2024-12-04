@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -41,7 +42,8 @@ public class RequestController {
                     request.getUserId(),
                     request.getRequestDate(),
                     request.getVisitStartDate(),
-                    request.getVisitEndDate()
+                    request.getVisitEndDate(),
+                    false
             );
             requestService.save(newRequest);
             modelAndView = new ModelAndView("redirect:/request");
@@ -49,7 +51,13 @@ public class RequestController {
         return modelAndView;
     }
 
+    @PostMapping("request/confirm/{id}")
+    public ModelAndView confirmString(@PathVariable Long id) {
+        requestService.confirmRequest(id);
+        return new ModelAndView("redirect:/pending-requests");
+    }
 
+    //reference to the CM6213 tutorial featuring how to confirm an order
 
 
 }

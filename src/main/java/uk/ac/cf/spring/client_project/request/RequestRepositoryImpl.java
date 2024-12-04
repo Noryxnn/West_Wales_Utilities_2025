@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class RequestRepositoryImpl implements RequestRepository {
@@ -22,7 +23,8 @@ public class RequestRepositoryImpl implements RequestRepository {
                 rs.getLong("user_id"),
                 rs.getDate("request_date").toLocalDate(),
                 rs.getDate("visit_start_date") != null ? rs.getDate("visit_start_date").toLocalDate() : null,
-                rs.getDate("visit_end_date") != null ? rs.getDate("visit_end_date").toLocalDate() : null
+                rs.getDate("visit_end_date") != null ? rs.getDate("visit_end_date").toLocalDate() : null,
+                rs.getBoolean("approved")
         );
     }
 
@@ -38,14 +40,17 @@ public class RequestRepositoryImpl implements RequestRepository {
     } //to fetch pending data*/
 
     public List<Request> getOpenRequests() {
-        String sql = "select * from requests";
+        String sql = "SELECT * FROM requests WHERE approved = FALSE";
         return jdbc.query(sql, (rs, rowNum) -> new Request(
                 rs.getLong("request_id"),
                 rs.getLong("user_id"),
                 rs.getDate("request_date") != null ? rs.getDate("request_date").toLocalDate() : null,
                 rs.getDate("visit_start_date") != null ? rs.getDate("visit_start_date").toLocalDate() : null,
-                rs.getDate("visit_end_date") != null ? rs.getDate("visit_end_date").toLocalDate() : null
+                rs.getDate("visit_end_date") != null ? rs.getDate("visit_end_date").toLocalDate() : null,
+                rs.getBoolean("approved")
         ));
+
+
     }
 
     public void save(Request aRequest) {
@@ -57,22 +62,25 @@ public class RequestRepositoryImpl implements RequestRepository {
     }
 
     private void update(Request aRequest) {
-        String updateSql = "update requests set user_id = ?, request_date = ?, visit_start_date = ?,visit_end_date = ? where request_id = ?";
+        String updateSql = "UPDATE requests SET user_id = ?, request_date = ?, visit_start_date = ?, visit_end_date = ?, approved = ? WHERE request_id = ?";
         jdbc.update(updateSql,
                 aRequest.getUserId(),
                 aRequest.getRequestDate(),
                 aRequest.getVisitStartDate(),
-                aRequest.getVisitEndDate()
-        );
+                aRequest.getVisitEndDate(),
+                aRequest.isApproved(), // Ensure this gets the approved value
+                aRequest.getRequestId());
     }
 
+
     private void insert(Request aRequest) {
-        String insertSql = "insert into requests(user_id, request_date, visit_start_date, visit_end_date) values (?,?,?,?)";
+        String insertSql = "insert into requests(user_id, request_date, visit_start_date, visit_end_date,approved) values (?,?,?,?,false)";
         jdbc.update(insertSql,
                 aRequest.getUserId(),
                 aRequest.getRequestDate(),
                 aRequest.getVisitStartDate(),
-                aRequest.getVisitEndDate()
+                aRequest.getVisitEndDate(),
+                aRequest.getApproved()
         );
     }
 
@@ -81,4 +89,13 @@ public class RequestRepositoryImpl implements RequestRepository {
         Integer count = jdbc.queryForObject(sql, Integer.class, userId);
         return count > 0 && count != null;
     }
+
+    @Override
+    public Optional<Request> findById(Long requestId) {
+        return Optional.empty();
+    }
+
+//reference: "https://www.geeksforgeeks.org/optional-empty-method-in-java-with-examples/"
+
+
 }
