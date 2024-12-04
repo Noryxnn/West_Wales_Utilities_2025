@@ -10,7 +10,7 @@ import java.security.NoSuchAlgorithmException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class EncryptionUtilsTests {
+class QREncryptionUtilsTests {
 
     @Test
     void shouldSuccessfullyEncryptAndDecrypt()
@@ -18,8 +18,8 @@ class EncryptionUtilsTests {
             BadPaddingException, InvalidAlgorithmParameterException, NoSuchPaddingException {
 
         String input = "Hello World";
-        String cipherText = EncryptionUtils.encrypt(input);
-        String plainText = EncryptionUtils.decrypt(cipherText);
+        String cipherText = QREncryptionUtils.encrypt(input);
+        String plainText = QREncryptionUtils.decrypt(cipherText);
         assertEquals(input, plainText);
     }
 }

@@ -1,5 +1,6 @@
 package uk.ac.cf.spring.client_project.security;
 
+import lombok.Getter;
 import lombok.experimental.UtilityClass;
 
 import javax.crypto.*;
@@ -14,9 +15,10 @@ import java.util.Base64;
 // Encryption/decryption adapted from
 // https://www.baeldung.com/java-aes-encryption-decryption
 @UtilityClass
-public class EncryptionUtils {
+public class QREncryptionUtils {
     private static final String ALGORITHM = "AES/CBC/PKCS5Padding";
-    private final SecretKeySpec secretKey = decodeSecretKey(System.getenv("QR_ENCRYPTION_KEY"));
+    @Getter
+    private final String secretKey = System.getenv("QR_ENCRYPTION_KEY");
 
     // Generate a random initialization vector to add unpredictability to the encryption process
     // Prevents patterns from being detected
@@ -33,7 +35,7 @@ public class EncryptionUtils {
 
         Cipher cipher = Cipher.getInstance(ALGORITHM);
         IvParameterSpec iv = generateIv();
-        cipher.init(Cipher.ENCRYPT_MODE, secretKey, iv);
+        cipher.init(Cipher.ENCRYPT_MODE, decodeSecretKey(), iv);
         byte[] cipherText = cipher.doFinal(input.getBytes());
 
         // Combine the IV and the encrypted data
@@ -63,13 +65,13 @@ public class EncryptionUtils {
         System.arraycopy(encryptedData, ivBytes.length, cipherBytes, 0, cipherBytes.length);
 
         Cipher cipher = Cipher.getInstance(ALGORITHM);
-        cipher.init(Cipher.DECRYPT_MODE, secretKey, iv);
+        cipher.init(Cipher.DECRYPT_MODE, decodeSecretKey(), iv);
         byte[] plainText = cipher.doFinal(cipherBytes);
 
         return new String(plainText);
     }
 
-    private static SecretKeySpec decodeSecretKey(String secretKey) {
+    private static SecretKeySpec decodeSecretKey() {
         if (secretKey == null) {
             throw new IllegalStateException("Environment variable QR_ENCRYPTION_KEY not found");
         }
@@ -77,5 +79,10 @@ public class EncryptionUtils {
         // Convert to SecretKey
         byte[] decodedKeyBytes = Base64.getDecoder().decode(secretKey);
         return new SecretKeySpec(decodedKeyBytes, "AES");
+    }
+
+    public static boolean validateDecryptedData(String decryptedData) {
+        String secretKey = getSecretKey();
+        return decryptedData.contains(secretKey) && decryptedData.contains("userId") && decryptedData.contains("timestamp");
     }
 }

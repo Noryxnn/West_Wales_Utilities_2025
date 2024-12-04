@@ -6,7 +6,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import uk.ac.cf.spring.client_project.security.EncryptionUtils;
+import uk.ac.cf.spring.client_project.security.QREncryptionUtils;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -20,7 +20,7 @@ class QRScannerTests {
 
     @Test
     void shouldDecryptValidQrCode() throws Exception {
-        String encryptedData = EncryptionUtils.encrypt("testData");
+        String encryptedData = QREncryptionUtils.encrypt("testData");
 
         mockMvc.perform(post("/staff/scan").
                         contentType(MediaType.TEXT_PLAIN).
