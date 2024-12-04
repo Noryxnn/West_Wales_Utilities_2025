@@ -1,11 +1,8 @@
 package uk.ac.cf.spring.client_project.request;
 
-import java.util.List;
 
 public interface RequestRepository {
-    List<Request> getOpenRequests();
-    Request getRequest(Long id);
-    void save (Request request);
+    Request save (Request request);
     boolean userExists(Long userId);
-    boolean locationExists(Long locationId);
+    Request findById(Long requestId);
 }
