@@ -1,0 +1,19 @@
+.qrcode-card {
+    display: inline-block;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #2a63b7;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin-bottom: 20px;
+    max-width: 250px;
+}
+
+.qrcode-card img {
+    border-radius: 10px;
+}
+
+.qrcode-card p {
+    color: white;
+
+}
