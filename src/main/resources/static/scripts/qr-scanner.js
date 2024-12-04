@@ -3,11 +3,15 @@
 // https://scanapp.org/html5-qrcode-docs/docs/apis/classes/Html5Qrcode
 async function startQrScanner() {
     const html5QrCode = new Html5Qrcode("qr-reader");
-
     const qrReaderResults = document.getElementById("qr-reader-results");
     qrReaderResults.innerHTML = "";
 
+    let isProcessing = false;
+
     function onScanSuccess(decodedText) {
+        if (isProcessing) {return;}
+        isProcessing = true;
+
         console.log(`Code scanned: ${decodedText}`);
 
         // Send encrypted data to the server
@@ -28,18 +32,19 @@ async function startQrScanner() {
                 } else {
                     qrReaderResults.innerHTML = `<p>Invalid QR code</p>`;
                 }
-                html5QrCode.stop();
-
             })
             .catch(error => {
                 console.error('Error sending data:', error);
                 qrReaderResults.innerHTML = `<p style="color: red;">Error sending data: ${error}</p>`;
+            })
+            .finally(() => {
+                html5QrCode.stop();
+                isProcessing = false;
             });
     }
 
     function onScanFailure(error) {
         console.warn(`QR scan failed: ${error}`);
-        html5QrCode.stop();
     }
 
     try {
