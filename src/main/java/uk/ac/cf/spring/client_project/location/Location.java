@@ -18,3 +18,4 @@ public class Location {
         this(0L, "", "", "", "", "", 0L);
     }
 }
+ //location class

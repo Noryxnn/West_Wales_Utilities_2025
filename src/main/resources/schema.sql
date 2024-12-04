@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `locations` (
                                            `city` VARCHAR(20) NOT NULL,
                                            `postcode` VARCHAR(255) NOT NULL,
                                            `type_id` INT
-                                       ) ENGINE=InnoDB;
+) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `visits` (
                                         `visit_id` INT AUTO_INCREMENT PRIMARY KEY,
