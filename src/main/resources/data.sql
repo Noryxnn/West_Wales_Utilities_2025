@@ -26,3 +26,9 @@ delete from users;
 insert into users (first_name, last_name, email, company_name) values ('John', 'Doe', 'john@doe.gmail.com', 'Doe Ltd');
 insert into users (first_name, last_name, email, company_name) values ('Jane', 'Doe', 'jane@doe.com', 'Doe Ltd');
 insert into users (first_name, last_name, email, company_name) values ('John', 'Smith', 'jsmith@gmail.com', 'Smith Ltd');
+
+DELETE FROM visits;
+INSERT INTO visits (location_id, user_id, check_in) VALUES (1, 1, NOW());
+INSERT INTO visits (location_id, user_id, check_in) VALUES (2, 2, NOW());
+INSERT INTO visits (location_id, user_id, check_in) VALUES (3, 3, NOW());
+

@@ -16,11 +16,16 @@ public class VisitRepository {
 
     public List<VisitDTO> findCurrentlyOnSiteVisits() {
         String sql = """
-            SELECT f.first_name AS userName, l.name AS locationName, v.check_in AS checkInTime
-            FROM visits v
-            JOIN users f ON v.user_id = f.user_id
-            JOIN locations l ON v.location_id = l.location_id
-            WHERE v.check_out IS NULL
+            SELECT
+                u.first_name AS userName,
+                l.name AS locationName,
+                v.check_in AS checkInTime
+            FROM
+                visits v
+            JOIN
+                users u ON v.user_id = u.user_id
+            JOIN
+                locations l ON v.location_id = l.location_id
         """;
         return jdbcTemplate.query(sql, (rs, rowNum) -> new VisitDTO(
                 rs.getString("userName"),
