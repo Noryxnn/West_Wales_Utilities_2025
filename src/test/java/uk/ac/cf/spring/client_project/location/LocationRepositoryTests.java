@@ -105,7 +105,6 @@ class LocationRepositoryTests {
                 eq(location.getCity()),
                 eq(location.getPostcode()),
                 eq(location.getTypeId()),
-
                 any(Timestamp.class)
         );
     }
