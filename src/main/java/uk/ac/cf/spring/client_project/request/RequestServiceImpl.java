@@ -11,11 +11,13 @@ public class RequestServiceImpl implements RequestService {
         this.requestRepository = aRequestRepository;
     }
 
-    public void save(Request request) {
-        requestRepository.save(request);
+    public Request save(Request request) {
+        return requestRepository.save(request);
     }
     public boolean validateUserId(Long userId) {
         return requestRepository.userExists(userId);
     }
-
+    public Request findById(Long requestId) {
+        return requestRepository.findById(requestId);
+    }
 }
