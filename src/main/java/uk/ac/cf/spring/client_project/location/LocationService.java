@@ -13,4 +13,13 @@ public interface LocationService {
     List<LocationType> getLocationTypes();
 
     LocationType getLocationTypeById(Long id);
+
+    void delete(Location location);
+
+    void archive(Location location);
+
+    void deletePermanently(Location location);
+
+    void archiveScheduler();
+
 }

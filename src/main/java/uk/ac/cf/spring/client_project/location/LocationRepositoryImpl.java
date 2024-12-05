@@ -5,6 +5,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -75,6 +77,35 @@ public class LocationRepositoryImpl implements LocationRepository {
 
     public LocationType getLocationTypeById(Long id) {
         return jdbcTemplate.queryForObject("SELECT * FROM location_types WHERE type_id = ?", locationTypeRowMapper, id);
+    }
+
+    public void delete(Location location) {
+        String deleteSql = "UPDATE locations SET deleted = true WHERE location_id = ?";
+        jdbcTemplate.update(deleteSql, location.getId());
+    }
+
+    public void archive(Location location) {
+        String sql = "INSERT INTO locations_archive (location_id, name, address_line_1, address_line_2, city, postcode, type_id, deleted_at) values (?,?,?,?,?,?,?,?)";
+        jdbcTemplate.update(sql,
+                location.getId(),
+                location.getName(),
+                location.getAddressLine1(),
+                location.getAddressLine2(),
+                location.getCity(),
+                location.getPostcode(),
+                location.getTypeId(),
+                Timestamp.valueOf(LocalDateTime.now())
+        );
+    }
+
+    public void deletePermanently(Location location) {
+        String deleteSql = "DELETE FROM locations WHERE location_id = ?";
+        jdbcTemplate.update(deleteSql, location.getId());
+    }
+
+    public List<Location> findDeletedLocations() {
+        String sql = "SELECT * FROM locations WHERE deleted = true";
+        return jdbcTemplate.query(sql, locationRowMapper);
     }
 
 }

@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -94,6 +95,26 @@ public class LocationController {
             modelAndView = new ModelAndView("redirect:/admin/locations");
         }
         return modelAndView;
+    }
+
+    @GetMapping("/delete/{id}")
+    public ModelAndView deleteLocation(@PathVariable("id") Long id) {
+        ModelAndView modelAndView = new ModelAndView("location/location-delete");
+        Location locationToDelete = locationService.getLocationById(id);
+        modelAndView.addObject("location", locationToDelete);
+        LocationType locationType = locationService.getLocationTypeById(locationToDelete.getTypeId());
+        modelAndView.addObject("locationType", locationType);
+        return modelAndView;
+    }
+
+    @PostMapping("/delete/confirm/{id}")
+    public String deleteConfirmedMenuItem(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
+        ModelAndView modelAndView = new ModelAndView("location/location-form");
+        Location location = locationService.getLocationById(id);
+        locationService.delete(location);
+        redirectAttributes.addFlashAttribute("message", "Location successfully marked as deleted. Will be moved to archive at midnight.");
+        System.out.println("Deleted Location: " + location.getName());
+        return "redirect:/admin/locations";
     }
 
 }

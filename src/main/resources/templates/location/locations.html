@@ -19,6 +19,7 @@
     <tr th:each="location : ${locations}">
         <td><a th:href="@{/admin/locations/{id} (id=${location.id})}" th:text="${location.name}"></a></td>
         <td><button><a th:href="@{/admin/locations/edit/{id} (id=${location.id})}">Edit</a></button></td>
+        <td><button><a th:href="@{/admin/locations/delete/{id} (id=${location.id})}">Delete</a></button></td>
     </tbody>
 </table>
 
