@@ -15,7 +15,6 @@ public class User {
 
     private String lastName;
 
-    private String username;
 
     private String password;
 
@@ -31,7 +30,6 @@ public class User {
         this.userId = 0;
         this.firstName = "";
         this.lastName = "";
-        this.username = "";
         this.password = "";
         this.email = "";
         this.companyName = "";
