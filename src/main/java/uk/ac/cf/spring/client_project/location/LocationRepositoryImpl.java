@@ -47,8 +47,21 @@ public class LocationRepositoryImpl implements LocationRepository {
     }
 
     public void save(Location location) {
+        if (location.isNew()) {
+            insert(location);
+        } else {
+            update(location);
+        }
+    }
+
+    private void insert(Location location) {
         jdbcTemplate.update("INSERT INTO locations (name, address_line_1, address_line_2, city, postcode, type_id) VALUES (?, ?, ?, ?, ?, ?)",
                 location.getName(), location.getAddressLine1(), location.getAddressLine2(), location.getCity(), location.getPostcode(), location.getTypeId());
+    }
+
+    private void update(Location location) {
+        jdbcTemplate.update("UPDATE locations SET name = ?, address_line_1 = ?, address_line_2 = ?, city = ?, postcode = ?, type_id = ? WHERE location_id = ?",
+                location.getName(), location.getAddressLine1(), location.getAddressLine2(), location.getCity(), location.getPostcode(), location.getTypeId(), location.getId());
     }
 
     public List<LocationType> getLocationTypes() {
@@ -58,4 +71,5 @@ public class LocationRepositoryImpl implements LocationRepository {
     public LocationType getLocationTypeById(Long id) {
         return jdbcTemplate.queryForObject("SELECT * FROM location_types WHERE type_id = ?", locationTypeRowMapper, id);
     }
+
 }

@@ -36,7 +36,7 @@ public class LocationController {
         return modelAndView;
     }
 
-    @GetMapping("/add-location")
+    @GetMapping("/add")
     public ModelAndView getLocationForm() {
         ModelAndView modelAndView = new ModelAndView("location/location-form");
         LocationForm emptyLocation = new LocationForm();
@@ -48,7 +48,28 @@ public class LocationController {
         return modelAndView;
     }
 
-    @PostMapping("/add-location")
+    @GetMapping("/edit/{id}")
+    public ModelAndView editLocation(@PathVariable("id") Long id) {
+        ModelAndView modelAndView = new ModelAndView("location/location-form");
+        Location locationToUpdate = locationService.getLocationById(id);
+
+        LocationForm location = new LocationForm(
+                locationToUpdate.getId(),
+                locationToUpdate.getName(),
+                locationToUpdate.getAddressLine1(),
+                locationToUpdate.getAddressLine2(),
+                locationToUpdate.getCity(),
+                locationToUpdate.getPostcode(),
+                locationToUpdate.getTypeId());
+
+        List<LocationType> locationTypes = locationService.getLocationTypes();
+        modelAndView.addObject("locationTypes", locationTypes);
+
+        modelAndView.addObject("locationForm", locationToUpdate);
+        return modelAndView;
+    }
+
+    @PostMapping({"/add", "/edit/{id}"})
     public ModelAndView addLocation(@Valid @ModelAttribute("locationForm") LocationForm location, BindingResult bindingResult, Model model) {
         ModelAndView modelAndView;
 
@@ -66,10 +87,10 @@ public class LocationController {
                     location.getCity(),
                     location.getPostcode(),
                     location.getTypeId());
-
-            locationService.addLocation(newLocation);
+            locationService.save(newLocation);
             modelAndView = new ModelAndView("redirect:/admin/locations");
         }
         return modelAndView;
     }
+
 }
