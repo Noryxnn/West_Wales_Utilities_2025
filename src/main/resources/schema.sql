@@ -58,10 +58,10 @@ CREATE TABLE IF NOT EXISTS `visits_archive` (
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `requests` (
-                                          `request_id` BIGINT AUTO_INCREMENT PRIMARY KEY,
-                                          `user_id` BIGINT,
-                                          `request_date` DATETIME NOT NULL,
-                                          `visit_start_date` DATE NOT NULL,
-                                          `visit_end_date` DATE NOT NULL,
-                                          `approved` BOOLEAN
+    `request_id` BIGINT AUTO_INCREMENT PRIMARY KEY,
+    `user_id` BIGINT,
+    `request_date` DATETIME NOT NULL,
+    `visit_start_date` DATE NOT NULL,
+    `visit_end_date` DATE NOT NULL,
+    `isApproved` BOOLEAN
 ) ENGINE=InnoDB;

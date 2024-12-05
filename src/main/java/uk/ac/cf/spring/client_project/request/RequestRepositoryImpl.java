@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.List;
 
 @Repository
 public class RequestRepositoryImpl implements RequestRepository {
@@ -24,7 +25,8 @@ public class RequestRepositoryImpl implements RequestRepository {
                 rs.getLong("user_id"),
                 rs.getDate("request_date").toLocalDate().atTime(0,0),
                 rs.getDate("visit_start_date").toLocalDate(),
-                rs.getDate("visit_end_date").toLocalDate()
+                rs.getDate("visit_end_date").toLocalDate(),
+                rs.getBoolean("isApproved")
         );
     }
 
@@ -66,4 +68,8 @@ public class RequestRepositoryImpl implements RequestRepository {
         String sql = "select * from requests where request_id = ?";
         return jdbc.queryForObject(sql, requestMapper, requestId);
     }
-}
+
+    public List<Request> findByUserId(Long userId) {
+        String sql = "SELECT * FROM requests WHERE user_id = ?";
+        return jdbc.query(sql, requestMapper, userId);
+    }}

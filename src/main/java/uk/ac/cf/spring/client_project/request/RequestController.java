@@ -49,7 +49,8 @@ public class RequestController {
                     request.getUserId(),
                     request.getRequestDate(),
                     request.getVisitStartDate(),
-                    request.getVisitEndDate()
+                    request.getVisitEndDate(),
+                    request. isApproved()
             );
 
             Request savedRequest = requestService.save(newRequest);

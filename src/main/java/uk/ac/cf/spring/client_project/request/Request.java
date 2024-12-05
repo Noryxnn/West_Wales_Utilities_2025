@@ -14,8 +14,9 @@ public class Request {
     private LocalDateTime requestDate;
     private LocalDate visitStartDate;
     private LocalDate visitEndDate;
+    private boolean isApproved;
 
-    public Request() { this(0L, 0L, LocalDateTime.now(), null, null);
+    public Request() { this(0L, 0L, LocalDateTime.now(), null, null, false);
     }
 
     public boolean isNew() {
