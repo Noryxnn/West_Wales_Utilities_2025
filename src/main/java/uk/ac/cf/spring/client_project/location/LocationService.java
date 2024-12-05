@@ -2,6 +2,7 @@ package uk.ac.cf.spring.client_project.location;
 
 import java.util.List;
 
+
 public interface LocationService {
     void save(Location location);
 

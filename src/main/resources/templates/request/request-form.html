@@ -14,7 +14,7 @@
 
     <h1>Please enter your request details: </h1>
 
-    <form th:action="@{/requests/new}" th:method="post" th:object="${request}">
+    <form th:action="@{/request}" th:method="post" th:object="${request}">
 
         <input th:field="*{requestId}" th:value="0" type="hidden"/>
 
@@ -24,18 +24,18 @@
             <div class="alert alert-warning" th:errors="*{userId}" th:if="${#fields.hasErrors('userId')}">User ID Error</div>
         </div>
 
-        <input th:field="*{requestDate}" th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd HH:mm:ss')}" type="hidden"/>
-
         <div class="mb-3">
-            <label class="form-label" th:for="*{visitStartDate}">Visit Start Date:</label>
-            <input class="form-control" placeholder=" Start Date of Visit" th:field="*{visitStartDate}" type="date"/>
-            <div class="alert alert-warning" th:errors="*{visitStartDate}" th:if="${#fields.hasErrors('visitStartDate')}">Visit Start Date Error</div>
+            <label class="form-label" th:for="*{locationId}">Location ID:</label>
+            <input class="form-control" placeholder="Location" th:field="*{locationId}" type="text"/>
+            <div class="alert alert-warning" th:errors="*{locationId}" th:if="${#fields.hasErrors('locationId')}">Location Error</div>
         </div>
 
+        <input th:field="*{requestDate}" th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" type="hidden"/>
+
         <div class="mb-3">
-            <label class="form-label" th:for="*{visitEndDate}">Visit End Date:</label>
-            <input class="form-control" placeholder="End Date of Visit" th:field="*{visitEndDate}" type="date"/>
-            <div class="alert alert-warning" th:errors="*{visitEndDate}" th:if="${#fields.hasErrors('visitEndDate')}">Visit End Date Error</div>
+            <label class="form-label" th:for="*{visitDate}">Visit Date:</label>
+            <input class="form-control" placeholder="Date of Visit" th:field="*{visitDate}" type="date"/>
+            <div class="alert alert-warning" th:errors="*{visitDate}" th:if="${#fields.hasErrors('visitDate')}">Visit Date Error</div>
         </div>
 
         <div class="mb-3">
