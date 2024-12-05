@@ -1,5 +1,6 @@
 package uk.ac.cf.spring.client_project.security;
 
+import lombok.Getter;
 import lombok.experimental.UtilityClass;
 
 import javax.crypto.*;
@@ -10,12 +11,16 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Base64;
+import java.util.HashMap;
+import java.util.Map;
 
 // Encryption/decryption adapted from
 // https://www.baeldung.com/java-aes-encryption-decryption
 @UtilityClass
-public class EncryptionUtils {
+public class QREncryptionUtils {
     private static final String ALGORITHM = "AES/CBC/PKCS5Padding";
+    @Getter
+    private final String secretKey = System.getenv("QR_ENCRYPTION_KEY");
 
     // Generate a random initialization vector to add unpredictability to the encryption process
     // Prevents patterns from being detected
@@ -25,14 +30,14 @@ public class EncryptionUtils {
         return new IvParameterSpec(iv);
     }
 
-    public static String encrypt(String input, String secretKey)
+    public static String encrypt(String input)
             throws NoSuchPaddingException, NoSuchAlgorithmException,
             InvalidAlgorithmParameterException, InvalidKeyException,
             BadPaddingException, IllegalBlockSizeException {
 
         Cipher cipher = Cipher.getInstance(ALGORITHM);
         IvParameterSpec iv = generateIv();
-        cipher.init(Cipher.ENCRYPT_MODE, decodeSecretKey(secretKey), iv);
+        cipher.init(Cipher.ENCRYPT_MODE, decodeSecretKey(), iv);
         byte[] cipherText = cipher.doFinal(input.getBytes());
 
         // Combine the IV and the encrypted data
@@ -45,7 +50,7 @@ public class EncryptionUtils {
                 .encodeToString(combinedOutput);
     }
 
-    public static String decrypt(String cipherText, String secretKey)
+    public static String decrypt(String cipherText)
             throws NoSuchPaddingException, NoSuchAlgorithmException,
             InvalidAlgorithmParameterException, InvalidKeyException,
             BadPaddingException, IllegalBlockSizeException {
@@ -62,19 +67,25 @@ public class EncryptionUtils {
         System.arraycopy(encryptedData, ivBytes.length, cipherBytes, 0, cipherBytes.length);
 
         Cipher cipher = Cipher.getInstance(ALGORITHM);
-        cipher.init(Cipher.DECRYPT_MODE, decodeSecretKey(secretKey), iv);
+        cipher.init(Cipher.DECRYPT_MODE, decodeSecretKey(), iv);
         byte[] plainText = cipher.doFinal(cipherBytes);
 
         return new String(plainText);
     }
 
-    private static SecretKeySpec decodeSecretKey(String base64EncodedKey) {
-        if (base64EncodedKey == null) {
+    private static SecretKeySpec decodeSecretKey() {
+        if (secretKey == null) {
             throw new IllegalStateException("Environment variable QR_ENCRYPTION_KEY not found");
         }
 
         // Convert to SecretKey
-        byte[] decodedKeyBytes = Base64.getDecoder().decode(base64EncodedKey);
+        byte[] decodedKeyBytes = Base64.getDecoder().decode(secretKey);
         return new SecretKeySpec(decodedKeyBytes, "AES");
+    }
+
+    public static boolean validateDecryptedData(Map<String, Object> decryptedData) {
+        String secretKey = getSecretKey();
+        return decryptedData.get("secretKey").equals(secretKey) && decryptedData.containsKey("userId") && decryptedData.containsKey("timestamp");
+
     }
 }

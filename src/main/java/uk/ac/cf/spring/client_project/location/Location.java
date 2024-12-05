@@ -17,5 +17,10 @@ public class Location {
     public Location() {
         this(0L, "", "", "", "", "", 0L);
     }
+
+    public boolean isNew() {
+        return this.id == 0;
+    }
+
 }
  //location class

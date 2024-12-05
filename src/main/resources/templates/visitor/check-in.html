@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Check in</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/check-in.css">
+</head>
+
+<body>
+<h1>Check In</h1>
+<div class="qrcode-card">
+    <img th:if="${qrcode}" th:src="'data:image/png;base64,' + ${qrcode}" alt="QR Code">
+    <p th:if="${error}" th:text="${error}"></p>
+</div>
+
+<div>
+    <a class="btn-primary" th:href="@{/dashboard}">Cancel</a>
+</div>
+
+</body>
+</html>

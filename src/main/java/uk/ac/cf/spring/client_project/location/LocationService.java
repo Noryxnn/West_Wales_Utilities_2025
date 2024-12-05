@@ -4,7 +4,7 @@ import java.util.List;
 
 
 public interface LocationService {
-    void addLocation(Location location);
+    void save(Location location);
 
     List<Location> getLocations();
 

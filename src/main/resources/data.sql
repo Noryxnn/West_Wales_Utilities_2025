@@ -2,7 +2,8 @@
 # Sourced from: https://www.sqlines.com/mysql/set_foreign_key_checks#:~:text=When%20to%20Use,in%20any%20parent%2Dchild%20order.
 SET FOREIGN_KEY_CHECKS = 0;
 
-delete from location_types;
+delete
+from location_types;
 insert into location_types (name)
 values ('Other');
 insert into location_types (name)

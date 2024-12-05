@@ -38,7 +38,8 @@ public class RequestControllerTests {
                 1L,
                 LocalDateTime.now(),
                 LocalDate.now().plusDays(1),
-                LocalDate.now().plusDays(2)
+                LocalDate.now().plusDays(2),
+                false
         );
 
         // Simulate session with mock request

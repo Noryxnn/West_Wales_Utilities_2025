@@ -41,7 +41,8 @@ public class RequestController {
                     request.getUserId(),
                     request.getRequestDate(),
                     request.getVisitStartDate(),
-                    request.getVisitEndDate()
+                    request.getVisitEndDate(),
+                    request. isApproved()
             );
             requestService.save(newRequest);
             modelAndView = new ModelAndView("redirect:/request");

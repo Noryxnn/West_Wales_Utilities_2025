@@ -8,13 +8,19 @@ import uk.ac.cf.spring.client_project.qrcode.QRCodeGenerator;
 @Controller
 public class VisitorController {
     @GetMapping("/dashboard")
-    public ModelAndView getDashboard() {
-        ModelAndView modelAndView = new ModelAndView("visitor/visitor-dashboard");
+    public String getDashboard() {
+        return "visitor/visitor-dashboard";
+    }
+
+    @GetMapping("/check-in")
+    public ModelAndView checkIn() {
+        ModelAndView modelAndView = new ModelAndView("visitor/check-in");
         try {
             String qrcode = QRCodeGenerator.getQRCode(250, 250);
             modelAndView.addObject("qrcode", qrcode);
         } catch (Exception e) {
-            modelAndView.addObject("error", "Error generating QR code: " + e.getMessage());
+            System.out.println("Error generating QR code: " + e.getMessage());
+            modelAndView.addObject("error", "Error generating QR code. Please try again.");
         }
         return modelAndView;
     }

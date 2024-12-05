@@ -47,7 +47,8 @@ public class RequestRepositoryTests {
                 1L,
                 LocalDateTime.of(2023, 12, 1, 0, 0),
                 LocalDate.of(2023, 12, 2),
-                LocalDate.of(2023, 12, 5)
+                LocalDate.of(2023, 12, 5),
+                false
         );
 
         RowMapper<Request> rowMapper = (rs, rowNum) -> new Request(
@@ -55,10 +56,10 @@ public class RequestRepositoryTests {
                 rs.getLong("user_id"),
                 rs.getTimestamp("request_date").toLocalDateTime(),
                 rs.getDate("visit_start_date").toLocalDate(),
-                rs.getDate("visit_end_date").toLocalDate()
+                rs.getDate("visit_end_date").toLocalDate(),
+                false
         );
 
         given(jdbcTemplate.queryForObject(eq("select * from requests where request_id = ?"), eq(rowMapper), eq(requestId))).willReturn(expectedRequest);
     }
-
 }

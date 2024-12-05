@@ -14,6 +14,7 @@ public class Request {
     private LocalDate requestDate;
     private LocalDate visitStartDate;
     private LocalDate visitEndDate;
+    private boolean isApproved;
 
 
     /*public Request(Long requestId, @NotNull(message = "User ID is required.") Long userId, LocalDate requestDate, @Future(message = "Visit date must be in the future.") @NotNull(message = "Visit date is required.") LocalDate visitStartDate, LocalDate visitEndDate) { this(0L, 0L, 0L, null, null,null);

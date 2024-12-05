@@ -16,7 +16,7 @@ import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import lombok.experimental.UtilityClass;
-import uk.ac.cf.spring.client_project.security.EncryptionUtils;
+import uk.ac.cf.spring.client_project.security.QREncryptionUtils;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
@@ -65,7 +65,7 @@ public class QRCodeGenerator {
         }
         payload.put("secretKey", secretKey);
 
-        String encryptedPayload = EncryptionUtils.encrypt(String.valueOf(payload), secretKey);
+        String encryptedPayload = QREncryptionUtils.encrypt(String.valueOf(payload));
 
         byte[] image;
         try {
