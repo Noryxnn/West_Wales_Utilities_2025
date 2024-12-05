@@ -1,8 +1,6 @@
 package uk.ac.cf.spring.client_project.request;
 
-import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,62 +11,43 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class RequestController {
-    private final RequestService requestService;
+    private RequestService requestService;
 
     public RequestController(RequestService aRequestService) {
         this.requestService = aRequestService;
     }
 
-    @GetMapping("/requests/new")
+    @GetMapping("/request")
     public ModelAndView request() {
-        ModelAndView modelAndView = new ModelAndView("request/request-form");
+        ModelAndView modelAndView = new ModelAndView("request/requestForm");
         RequestForm request = new RequestForm();
         modelAndView.addObject("request", request);
         return modelAndView;
     }
 
-    @PostMapping("/requests/new")
-    public ModelAndView request(@Valid @ModelAttribute("request") RequestForm request, BindingResult bindingResult, HttpSession session) {
+    @PostMapping("/request")
+    public ModelAndView request(@Valid @ModelAttribute("request") RequestForm request, BindingResult bindingResult, Model model) {
         ModelAndView modelAndView;
-        // Validation checks
-        if (request.getUserId() != null && !requestService.validateUserId(request.getUserId())) {
+        // Check if userId exists in the database
+        if (!requestService.validateUserId(request.getUserId())) {
             bindingResult.rejectValue("userId", "userId.invalid", "User ID does not exist.");
         }
-        if (request.getVisitDateValidationMessage() != null) {
-            bindingResult.rejectValue("visitEndDate", "error.visitEndDate", request.getVisitDateValidationMessage());
-        }
+
         if (bindingResult.hasErrors()) {
-            modelAndView = new ModelAndView("request/request-form");
+            modelAndView = new ModelAndView("request/requestForm", model.asMap());
         } else {
-            // Save the request
             Request newRequest = new Request(
                     request.getRequestId(),
                     request.getUserId(),
                     request.getRequestDate(),
                     request.getVisitStartDate(),
-                    request.getVisitEndDate(),
-                    request.isApproved()
+                    request.getVisitEndDate()
             );
-            Request savedRequest = requestService.save(newRequest);
-            session.setAttribute("request", savedRequest);
-            modelAndView = new ModelAndView("redirect:/requests/confirmation");
+            requestService.save(newRequest);
+            modelAndView = new ModelAndView("redirect:/request");
         }
         return modelAndView;
     }
-    @GetMapping("/requests/confirmation")
-    public ModelAndView requestConfirmation(HttpSession session) {
-        ModelAndView modelAndView = new ModelAndView("request/confirmation");
-        Request request = (Request) session.getAttribute("request");
-        if (request != null) {
-            modelAndView.addObject("request", request);
-//            session.removeAttribute("request");
-        } else {
-            modelAndView.setViewName("error");
-        }
-        return modelAndView;
-    }
-
-
 
 
 

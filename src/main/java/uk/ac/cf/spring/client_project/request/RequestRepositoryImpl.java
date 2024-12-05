@@ -2,16 +2,13 @@ package uk.ac.cf.spring.client_project.request;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Repository
 public class RequestRepositoryImpl implements RequestRepository {
-    private final JdbcTemplate jdbc;
+    private JdbcTemplate jdbc;
     private RowMapper<Request> requestMapper;
 
     public RequestRepositoryImpl(JdbcTemplate jdbc) {
@@ -23,10 +20,9 @@ public class RequestRepositoryImpl implements RequestRepository {
         requestMapper = (rs, i) -> new Request(
                 rs.getLong("request_id"),
                 rs.getLong("user_id"),
-                rs.getDate("request_date").toLocalDate().atTime(0, 0),
-                rs.getDate("visit_start_date").toLocalDate(),
-                rs.getDate("visit_end_date").toLocalDate(),
-                rs.getBoolean("is_approved")
+                rs.getDate("request_date").toLocalDate(),
+                rs.getDate("visit_start_date") != null ? rs.getDate("visit_start_date").toLocalDate() : null,
+                rs.getDate("visit_end_date") != null ? rs.getDate("visit_end_date").toLocalDate() : null
         );
     }
 
@@ -36,33 +32,48 @@ public class RequestRepositoryImpl implements RequestRepository {
     }
 
 
-    public List<Request> getOpenRequests() {
+    /*public List<Request> getOpenRequests() {
         String sql = "select * from requests";
         return jdbc.query(sql, requestMapper);
+    } //to fetch pending data*/
+
+    public List<Request> getOpenRequests() {
+        String sql = "select * from requests";
+        return jdbc.query(sql, (rs, rowNum) -> new Request(
+                rs.getLong("request_id"),
+                rs.getLong("user_id"),
+                rs.getDate("request_date") != null ? rs.getDate("request_date").toLocalDate() : null,
+                rs.getDate("visit_start_date") != null ? rs.getDate("visit_start_date").toLocalDate() : null,
+                rs.getDate("visit_end_date") != null ? rs.getDate("visit_end_date").toLocalDate() : null
+        ));
     }
 
-
-    public Request save(Request request) {
-        SimpleJdbcInsert simpleJdbcInsert = new SimpleJdbcInsert(jdbc)
-                .withTableName("requests")
-                .usingGeneratedKeyColumns("request_id");
-        Map<String, Object> columns = new HashMap<>();
-        columns.put("user_id", request.getUserId());
-        columns.put("request_date", request.getRequestDate());
-        columns.put("visit_start_date", request.getVisitStartDate());
-        columns.put("visit_end_date", request.getVisitEndDate());
-
-        Number requestId = simpleJdbcInsert.executeAndReturnKey(columns);
-        request.setRequestId(requestId.longValue());
-        Request savedRequest = findById(requestId.longValue());
-        System.out.println("Order saved: " + savedRequest);
-
-        return request;
+    public void save(Request aRequest) {
+        if (aRequest.isNew()) {
+            insert(aRequest);
+        } else {
+            update(aRequest);
+        }
     }
 
-    public Request findById(Long requestId) {
-        String sql = "select * from requests where request_id = ?";
-        return jdbc.queryForObject(sql, requestMapper, requestId);
+    private void update(Request aRequest) {
+        String updateSql = "update requests set user_id = ?, request_date = ?, visit_start_date = ?,visit_end_date = ? where request_id = ?";
+        jdbc.update(updateSql,
+                aRequest.getUserId(),
+                aRequest.getRequestDate(),
+                aRequest.getVisitStartDate(),
+                aRequest.getVisitEndDate()
+        );
+    }
+
+    private void insert(Request aRequest) {
+        String insertSql = "insert into requests(user_id, request_date, visit_start_date, visit_end_date) values (?,?,?,?)";
+        jdbc.update(insertSql,
+                aRequest.getUserId(),
+                aRequest.getRequestDate(),
+                aRequest.getVisitStartDate(),
+                aRequest.getVisitEndDate()
+        );
     }
 
     public boolean userExists(Long userId) {
@@ -71,8 +82,8 @@ public class RequestRepositoryImpl implements RequestRepository {
         return count > 0 && count != null;
     }
 
+    @Override
     public List<Request> findByUserId(Long userId) {
-        String sql = "SELECT * FROM requests WHERE user_id = ?";
-        return jdbc.query(sql, requestMapper, userId);
+        return null;
     }
 }
