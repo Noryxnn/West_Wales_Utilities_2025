@@ -75,7 +75,8 @@ public class RequestControllerTests {
                 1L,
                 LocalDateTime.of(2024, 12, 3, 10, 0),
                 LocalDate.of(2024, 12, 4),
-                LocalDate.of(2024, 12, 5)
+                LocalDate.of(2024, 12, 5),
+                false
         );
 
         MockHttpSession session = new MockHttpSession();

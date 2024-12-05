@@ -53,7 +53,7 @@ public class QRCodeGenerator {
 
         // TODO: get user id from session
         // temp data until login system is implemented
-        long tempUserID = 1L;
+        long tempUserID = 2L;
 
         HashMap<String, String> payload = new HashMap<>();
         payload.put("userId", String.valueOf(tempUserID));

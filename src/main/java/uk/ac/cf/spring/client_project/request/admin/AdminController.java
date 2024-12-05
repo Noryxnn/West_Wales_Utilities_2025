@@ -9,7 +9,6 @@ import java.util.List;
 
 @Controller
 public class AdminController {
-
     private AdminService adminService;
 
     public AdminController(AdminService adminService) {

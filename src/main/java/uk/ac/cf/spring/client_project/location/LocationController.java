@@ -1,7 +1,6 @@
 package uk.ac.cf.spring.client_project.location;
 
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,13 +11,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 
 @Controller
-
 @RequestMapping("/admin/locations")
 public class LocationController {
     private final LocationService locationService;
-    @Autowired
-    public LocationController(LocationService locationService) {
-        this.locationService = locationService;
+    public LocationController(LocationService aLocationService) {
+        this.locationService = aLocationService;
     }
 
     @GetMapping
@@ -57,14 +54,6 @@ public class LocationController {
         ModelAndView modelAndView = new ModelAndView("location/location-form");
         Location locationToUpdate = locationService.getLocationById(id);
 
-        LocationForm location = new LocationForm(
-                locationToUpdate.getId(),
-                locationToUpdate.getName(),
-                locationToUpdate.getAddressLine1(),
-                locationToUpdate.getAddressLine2(),
-                locationToUpdate.getCity(),
-                locationToUpdate.getPostcode(),
-                locationToUpdate.getTypeId());
 
         List<LocationType> locationTypes = locationService.getLocationTypes();
         modelAndView.addObject("locationTypes", locationTypes);
@@ -109,12 +98,10 @@ public class LocationController {
 
     @PostMapping("/delete/confirm/{id}")
     public String deleteConfirmedMenuItem(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
-        ModelAndView modelAndView = new ModelAndView("location/location-form");
         Location location = locationService.getLocationById(id);
         locationService.delete(location);
         redirectAttributes.addFlashAttribute("message", "Location successfully marked as deleted. Will be moved to archive at midnight.");
         System.out.println("Deleted Location: " + location.getName());
         return "redirect:/admin/locations";
     }
-
 }
