@@ -34,6 +34,11 @@ public class RequestController {
             bindingResult.rejectValue("userId", "userId.invalid", "User ID does not exist.");
         }
 
+        // Ensure the status is set to PENDING by default
+        if (request.getRequestStatus() == null) {
+            request.setRequestStatus(RequestStatus.PENDING);
+        }
+
         if (bindingResult.hasErrors()) {
             modelAndView = new ModelAndView("request/requestForm", model.asMap());
         } else {
@@ -43,7 +48,9 @@ public class RequestController {
                     request.getRequestDate(),
                     request.getVisitStartDate(),
                     request.getVisitEndDate(),
-                    false
+                    request.getRequestStatus()
+
+
             );
             requestService.save(newRequest);
             modelAndView = new ModelAndView("redirect:/request");
@@ -59,5 +66,10 @@ public class RequestController {
 
     //reference to the CM6213 tutorial featuring how to confirm an order
 
+    @PostMapping("request/deny/{id}")
+    public ModelAndView denyString(@PathVariable Long id) {
+        requestService.denyRequest(id);
+        return new ModelAndView("redirect:/pending-requests");
+    }
 
 }

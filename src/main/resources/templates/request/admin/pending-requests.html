@@ -28,6 +28,7 @@ border:1px solid black;
     <th>Request Date</th>
     <th>Visit Start Date</th>
     <th>Visit End Date</th>
+    <th>Status</th>
     <th>Action</th>
 </tr>
 </thead>
@@ -39,11 +40,24 @@ border:1px solid black;
     <td th:text="${#temporals.format(request.requestDate, 'yyyy-MM-dd')}"></td>
     <td th:text="${#temporals.format(request.visitStartDate, 'yyyy-MM-dd')}"></td>
     <td th:text="${#temporals.format(request.visitEndDate, 'yyyy-MM-dd')}"></td>
-    <td><form th:action="@{/request/confirm/{id}(id=${request.requestId})}" method="post">
-        <button type="submit" th:disabled="${request.approved}"
-                th:text="${request.approved ? 'Confirmed' : 'Confirm Request'}">
-        </button>
-    </form> </td>
+
+    <td>
+        <!-- Display Pending if approved is null -->
+        <span th:if="${request.requestStatus == 'PENDING'}">Pending</span>
+        <span th:if="${request.requestStatus == 'APPROVED'}">Approved</span>
+        <span th:if="${request.requestStatus == 'DENIED'}">Denied</span>
+    </td>
+    <td class="action-buttons">
+        <!-- Approve Button -->
+        <form th:action="@{/request/confirm/{id}(id=${request.requestId})}" method="post">
+            <button class="btn approve-btn" type="submit">Confirm Request</button>
+        </form>
+
+        <!-- Deny Button -->
+        <form th:action="@{/request/deny/{id}(id=${request.requestId})}" method="post">
+            <button class="btn deny-btn" type="submit">Deny Request</button>
+        </form>
+    </td>
 </tr>
 </tbody>
         </table>

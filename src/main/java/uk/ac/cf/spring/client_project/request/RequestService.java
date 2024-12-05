@@ -8,5 +8,7 @@ public interface RequestService {
     void save(Request request);
     boolean validateUserId(Long userId);
 
-    boolean confirmRequest(Long id);
+    void confirmRequest(Long id);
+
+    void denyRequest(Long id);
 }

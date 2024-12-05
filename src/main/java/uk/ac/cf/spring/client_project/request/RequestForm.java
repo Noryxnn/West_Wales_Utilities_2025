@@ -23,7 +23,18 @@ public class RequestForm {
     @NotNull(message = "Visit end date is required.")
     private LocalDate visitEndDate;
 
-    public RequestForm() { this(0L, 0L,  LocalDate.now(), null,null);
+    @NotNull(message = "Request status is required.")
+    private RequestStatus requestStatus;  // Add the RequestStatus enum here
+
+    public RequestStatus getRequestStatus() {
+        return requestStatus;
+    }
+
+    public void setRequestStatus(RequestStatus requestStatus) {
+        this.requestStatus = requestStatus;
+    }
+
+    public RequestForm() { this(0L, 0L,  LocalDate.now(), null,null,RequestStatus.PENDING);
     }
 
 }

@@ -15,27 +15,20 @@ public class Request {
     private LocalDate visitStartDate;
     private LocalDate visitEndDate;
 
-    private Boolean approved = false;
+    private RequestStatus requestStatus;
 
-    public Boolean isApproved() {
-        return approved;
-    } //getter for boolean
-
-    public void setApproved(Boolean approved) { //setter for boolean
-        this.approved = approved;
+    // Default constructor can set approvalStatus to PENDING if you like
+    // Getters and setters for requestStatus
+    public RequestStatus getRequestStatus() {
+        return requestStatus;
     }
 
-
-    /*public Request(Long requestId, @NotNull(message = "User ID is required.") Long userId, LocalDate requestDate, @Future(message = "Visit date must be in the future.") @NotNull(message = "Visit date is required.") LocalDate visitStartDate, LocalDate visitEndDate) { this(0L, 0L, 0L, null, null,null);
-
-    }*/
-
-    public Request(Long aRequestId,Long aUserId,LocalDate aRequestDate,LocalDate aVisitStartDate,LocalDate aVisitEndDate,boolean approved) {
-        this(aRequestId,aUserId,0L,aRequestDate,aVisitStartDate,aVisitEndDate,false);
+    public void setRequestStatus(RequestStatus requestStatus) {
+        this.requestStatus = requestStatus;
     }
-
-
-
+    public Request(Long requestId, Long userId, LocalDate requestDate, LocalDate visitStartDate, LocalDate visitEndDate, RequestStatus requestStatus) {
+        this(requestId, userId, 0L, requestDate, visitStartDate, visitEndDate, RequestStatus.PENDING);
+    }
 
     public boolean isNew() {
         return this.requestId == 0;

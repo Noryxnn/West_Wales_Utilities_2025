@@ -26,22 +26,22 @@ public class RequestServiceImpl implements RequestService {
 
 
     @Transactional
-    public boolean confirmRequest(Long requestId) {
-        // Fetch request from the database using repository
+    public void confirmRequest(Long requestId) {
         Request request = requestRepository.getRequest(requestId);
-
-        if (request != null) {
-
-            request.setApproved(true);
-
-            // Save the updated request back to the repository
-            requestRepository.save(request);
+        if (request != null && request.getRequestStatus() != RequestStatus.APPROVED) {
+            request.setRequestStatus(RequestStatus.APPROVED);
+            requestRepository.save(request);  // Save the updated request
         }
-        return false;
     }
 
-
-
+    @Transactional
+    public void denyRequest(Long requestId) {
+        Request request = requestRepository.getRequest(requestId);
+        if (request != null && request.getRequestStatus() != RequestStatus.DENIED) {
+            request.setRequestStatus(RequestStatus.DENIED);
+            requestRepository.save(request); // Save the updated request
+        }
+    }
 
 
 

@@ -18,15 +18,21 @@ public class RequestRepositoryImpl implements RequestRepository {
     }
 
     private void setRequestMapper() {
-        requestMapper = (rs, i) -> new Request(
-                rs.getLong("request_id"),
-                rs.getLong("user_id"),
-                rs.getDate("request_date").toLocalDate(),
-                rs.getDate("visit_start_date") != null ? rs.getDate("visit_start_date").toLocalDate() : null,
-                rs.getDate("visit_end_date") != null ? rs.getDate("visit_end_date").toLocalDate() : null,
-                rs.getBoolean("approved")
-        );
+        requestMapper = (rs, i) -> {
+            // Map the database column value to the RequestStatus enum
+            RequestStatus status = RequestStatus.valueOf(rs.getString("request_status"));  // Enum mapping
+            return new Request(
+                    rs.getLong("request_id"),
+                    rs.getLong("user_id"),
+                    rs.getTimestamp("request_date") != null ? rs.getTimestamp("request_date").toLocalDateTime().toLocalDate() : null,
+                    rs.getTimestamp("visit_start_date") != null ? rs.getTimestamp("visit_start_date").toLocalDateTime().toLocalDate() : null,
+                    rs.getTimestamp("visit_end_date") != null ? rs.getTimestamp("visit_end_date").toLocalDateTime().toLocalDate() : null,
+                    status  // Set the request status as the mapped enum
+            );
+        };
     }
+
+
 
     public Request getRequest(Long id) {
         String sql = "select * from requests where request_id = ?";
@@ -38,7 +44,6 @@ public class RequestRepositoryImpl implements RequestRepository {
         String sql = "select * from requests";
         return jdbc.query(sql, requestMapper);
     } //to fetch pending data*/
-
     public List<Request> getOpenRequests() {
         String sql = "SELECT * FROM requests WHERE approved = FALSE";
         return jdbc.query(sql, (rs, rowNum) -> new Request(
@@ -47,11 +52,17 @@ public class RequestRepositoryImpl implements RequestRepository {
                 rs.getDate("request_date") != null ? rs.getDate("request_date").toLocalDate() : null,
                 rs.getDate("visit_start_date") != null ? rs.getDate("visit_start_date").toLocalDate() : null,
                 rs.getDate("visit_end_date") != null ? rs.getDate("visit_end_date").toLocalDate() : null,
-                rs.getBoolean("approved")
+                RequestStatus.valueOf(rs.getString("approved"))
         ));
 
 
+
     }
+
+
+
+
+
 
     public void save(Request aRequest) {
         if (aRequest.isNew()) {
@@ -68,19 +79,20 @@ public class RequestRepositoryImpl implements RequestRepository {
                 aRequest.getRequestDate(),
                 aRequest.getVisitStartDate(),
                 aRequest.getVisitEndDate(),
-                aRequest.isApproved(), // Ensure this gets the approved value
-                aRequest.getRequestId());
+                aRequest.getRequestStatus().name(), // Set approved field as it is
+                aRequest.getRequestId()
+        );
     }
 
 
     private void insert(Request aRequest) {
-        String insertSql = "insert into requests(user_id, request_date, visit_start_date, visit_end_date,approved) values (?,?,?,?,false)";
+        String insertSql = "INSERT INTO requests(user_id, request_date, visit_start_date, visit_end_date, approved) VALUES (?, ?, ?, ?, ?)";
         jdbc.update(insertSql,
                 aRequest.getUserId(),
                 aRequest.getRequestDate(),
                 aRequest.getVisitStartDate(),
                 aRequest.getVisitEndDate(),
-                aRequest.getApproved()
+                aRequest.getRequestStatus().name()
         );
     }
 
