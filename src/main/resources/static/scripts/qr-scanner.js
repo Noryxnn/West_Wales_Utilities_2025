@@ -9,13 +9,15 @@ async function startQrScanner() {
     let isProcessing = false;
 
     function onScanSuccess(decodedText) {
-        if (isProcessing) {return;}
+        if (isProcessing) {
+            return;
+        }
         isProcessing = true;
 
         console.log(`Code scanned: ${decodedText}`);
 
         // Send encrypted data to the server
-        fetch('/staff/scan', {
+        fetch('/scan', {
             method: 'POST',
             headers: {
                 'Content-Type': 'text/plain'
@@ -27,11 +29,18 @@ async function startQrScanner() {
 
                 // Process server response
                 console.log('Server Response:', data);
-                if (data.includes('QR code processed successfully!')) {
-                    qrReaderResults.innerHTML = `<p style="color: green;">${data}</p>`;
+                if (data.includes('approved')) {
+                    qrReaderResults.innerHTML = `<p style="color: green;">Visitor is approved</p>`;
+
+                } else if (data.includes('denied')) {
+                    qrReaderResults.innerHTML = `<p style="color: red;">Visitor is denied</p>`;
+
                 } else {
                     qrReaderResults.innerHTML = `<p>Invalid QR code</p>`;
                 }
+                qrReaderResults.innerHTML += `<button class="btn-primary" id="scan-again-btn" onclick="startQrScanner()">Scan Again</button>`;
+
+
             })
             .catch(error => {
                 console.error('Error sending data:', error);

@@ -25,6 +25,7 @@ public class RequestForm {
     @Future (message = "Visit end date must be in the future.")
     @NotNull(message = "Visit end date is required.")
     private LocalDate visitEndDate;
+    private boolean isApproved;
 
     public String getVisitDateValidationMessage() {
         // Checks if visitEndDate is before visitStartDate
@@ -36,6 +37,7 @@ public class RequestForm {
         }
     }
 
-    public RequestForm() { this(0L, 0L, LocalDateTime.now(), null, null);
+    public RequestForm() { this(0L, 0L, LocalDateTime.now(), null, null, false);
     }
+
 }

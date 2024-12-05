@@ -11,6 +11,8 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Base64;
+import java.util.HashMap;
+import java.util.Map;
 
 // Encryption/decryption adapted from
 // https://www.baeldung.com/java-aes-encryption-decryption
@@ -81,8 +83,9 @@ public class QREncryptionUtils {
         return new SecretKeySpec(decodedKeyBytes, "AES");
     }
 
-    public static boolean validateDecryptedData(String decryptedData) {
+    public static boolean validateDecryptedData(Map<String, Object> decryptedData) {
         String secretKey = getSecretKey();
-        return decryptedData.contains(secretKey) && decryptedData.contains("userId") && decryptedData.contains("timestamp");
+        return decryptedData.get("secretKey").equals(secretKey) && decryptedData.containsKey("userId") && decryptedData.containsKey("timestamp");
+
     }
 }
