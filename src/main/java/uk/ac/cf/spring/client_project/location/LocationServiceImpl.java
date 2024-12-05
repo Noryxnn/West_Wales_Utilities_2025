@@ -6,10 +6,14 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class LocationServiceImpl implements LocationService {
-    private final LocationRepository locationRepository;
 
-    public LocationServiceImpl(LocationRepository locationRepository) {
+
+public class LocationServiceImpl implements LocationService {
+
+    private LocationRepository locationRepository;
+
+    @Autowired
+    public LocationServiceImpl(@Lazy LocationRepository locationRepository) {
         this.locationRepository = locationRepository;
     }
 

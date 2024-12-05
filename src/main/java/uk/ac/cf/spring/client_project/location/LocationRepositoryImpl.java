@@ -1,5 +1,6 @@
 package uk.ac.cf.spring.client_project.location;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -9,11 +10,15 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
+
 public class LocationRepositoryImpl implements LocationRepository {
+
+
     private final JdbcTemplate jdbcTemplate;
     private RowMapper<Location> locationRowMapper;
     private RowMapper<LocationType> locationTypeRowMapper;
 
+    @Autowired
     public  LocationRepositoryImpl(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
         setLocationRowMapper();
@@ -29,7 +34,7 @@ public class LocationRepositoryImpl implements LocationRepository {
                 rs.getString("address_line_2"),
                 rs.getString("city"),
                 rs.getString("postcode"),
-                rs.getLong("type_id")
+                rs.getObject("type_id") != null ? rs.getLong("type_id") : null
         );
     }
 
