@@ -13,4 +13,12 @@ public interface LocationRepository {
     List<LocationType> getLocationTypes();
 
     LocationType getLocationTypeById(Long id);
+
+    void delete(Location location);
+
+    void deletePermanently(Location location);
+
+    void archive(Location location);
+
+    List<Location> findDeletedLocations();
 }
