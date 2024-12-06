@@ -7,6 +7,7 @@ import java.util.List;
 public interface RequestRepository {
     List<Request> getOpenRequests();
     Request getRequest(Long id);
-    void save (Request request);
+    Request save (Request request);
     boolean userExists(Long userId);
+    List<Request> findByUserId(Long userId);
 }

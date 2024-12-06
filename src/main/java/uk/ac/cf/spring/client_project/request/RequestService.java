@@ -5,6 +5,6 @@ import java.util.List;
 public interface RequestService {
     List<Request> getOpenRequests();
     Request getRequest(Long requestId);
-    void save(Request request);
+    Request save(Request request);
     boolean validateUserId(Long userId);
 }

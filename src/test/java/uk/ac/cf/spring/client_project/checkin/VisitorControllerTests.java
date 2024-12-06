@@ -7,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import uk.ac.cf.spring.client_project.qrcode.QRCodeGenerator;
 
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mockStatic;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -38,7 +39,7 @@ class VisitorControllerTests {
     @Test
     void shouldGetCheckInWithErrorIfQrCodeGenerationFails() throws Exception {
 
-        mockStatic(QRCodeGenerator.class).when(() -> QRCodeGenerator.getQRCode(250, 250))
+        mockStatic(QRCodeGenerator.class).when(() -> QRCodeGenerator.getQRCode(anyInt(), anyInt()))
                 .thenThrow(new RuntimeException("QR generation failed"));
 
         mvc.perform(get("/check-in"))

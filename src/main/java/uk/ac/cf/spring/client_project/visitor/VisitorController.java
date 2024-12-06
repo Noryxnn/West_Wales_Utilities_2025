@@ -16,7 +16,7 @@ public class VisitorController {
     public ModelAndView checkIn() {
         ModelAndView modelAndView = new ModelAndView("visitor/check-in");
         try {
-            String qrcode = QRCodeGenerator.getQRCode(250, 250);
+            String qrcode = QRCodeGenerator.getQRCode(300, 300);
             modelAndView.addObject("qrcode", qrcode);
         } catch (Exception e) {
             System.out.println("Error generating QR code: " + e.getMessage());
