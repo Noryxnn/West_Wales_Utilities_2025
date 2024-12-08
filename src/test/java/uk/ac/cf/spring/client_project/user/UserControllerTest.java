@@ -13,7 +13,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 
 @WebMvcTest(UserController.class)  // Test only the UserController layer
-public class UserControllerTests {
+public class UserControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
