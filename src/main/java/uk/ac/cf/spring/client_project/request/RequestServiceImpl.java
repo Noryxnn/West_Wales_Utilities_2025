@@ -10,6 +10,8 @@ public class RequestServiceImpl implements RequestService {
     public RequestServiceImpl(RequestRepository aRequestRepository) {
         this.requestRepository = aRequestRepository;
     }
+
+    public List<Request> getAllRequests() {return requestRepository.getAllRequests(); }
     public List<Request> getOpenRequests() {
         return requestRepository.getOpenRequests();
     }
@@ -23,4 +25,10 @@ public class RequestServiceImpl implements RequestService {
     public boolean validateUserId(Long userId) {
         return requestRepository.userExists(userId);
     };
+
+    public void acceptRequest(Long requestId) {requestRepository.acceptRequest(requestId);
+    }
+    public void denyRequest(Long requestId) {requestRepository.denyRequest(requestId); }
+
 }
+

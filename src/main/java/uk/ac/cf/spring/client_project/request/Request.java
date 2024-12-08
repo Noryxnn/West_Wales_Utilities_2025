@@ -14,11 +14,22 @@ public class Request {
     private LocalDateTime requestDate;
     private LocalDate visitStartDate;
     private LocalDate visitEndDate;
-    private boolean isApproved;
+    private Boolean isApproved; // null for pending, true for approved, false for denied
 
-    public Request() { this(0L, 0L, LocalDateTime.now(), null, null, false); }
 
+    // Getters and setters
+    public Boolean getIsApproved() {
+        return isApproved;
+    }
+
+    public void setApproved(Boolean approved) {
+        this.isApproved = approved;
+    }
+
+
+
+    public Request() {this(0L, 0L, LocalDateTime.now(), null, null, null); }
     public boolean isNew() {
-        return this.requestId == 0;
+        return this.requestId == null || this.requestId == 0;
     }
 }

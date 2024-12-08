@@ -33,11 +33,11 @@ values ('Swansea Office', '3', 'Swansea Road', 'Swansea', 'SA1 1SA', 2);
 delete
 from requests;
 insert into requests (user_id, request_date, visit_start_date, visit_end_date, is_approved)
-values (1, '2020-01-01 09:00:00', current_date, DATE_ADD(CURRENT_DATE, INTERVAL 1 WEEK), true);
+values (1, '2020-01-01 09:00:00', current_date, DATE_ADD(CURRENT_DATE, INTERVAL 1 WEEK), null);
 insert into requests (user_id, request_date, visit_start_date, visit_end_date, is_approved)
-values (2, '2020-01-01 09:00:00', '2020-01-01', '2020-01-01', false);
+values (2, '2020-01-01 09:00:00', '2020-01-01', '2020-01-01', null);
 insert into requests (user_id, request_date, visit_start_date, visit_end_date, is_approved)
-values (3, '2020-01-01 09:00:00', '2020-01-01', '2020-01-01', false);
+values (3, '2020-01-01 09:00:00', '2020-01-01', '2020-01-01', null);
 
 
 delete

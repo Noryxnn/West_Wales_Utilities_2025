@@ -39,7 +39,7 @@ class StaffServiceTests {
         Long userId = 1L;
         List<Request> requests = new ArrayList<>();
         Request approvedRequest = new Request();
-        approvedRequest.setApproved(true);
+        approvedRequest.setIsApproved(true);
         approvedRequest.setVisitStartDate(LocalDate.now());
         approvedRequest.setVisitEndDate(LocalDate.now().plusDays(7));
         requests.add(approvedRequest);
@@ -54,7 +54,7 @@ class StaffServiceTests {
         Long userId = 1L;
         List<Request> requests = new ArrayList<>();
         Request unapprovedRequest = new Request();
-        unapprovedRequest.setApproved(false);
+        unapprovedRequest.setIsApproved(false);
         unapprovedRequest.setVisitStartDate(LocalDate.now());
         unapprovedRequest.setVisitEndDate(LocalDate.now().plusDays(7));
         requests.add(unapprovedRequest);

@@ -2,12 +2,9 @@ package uk.ac.cf.spring.client_project.request;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Repository
 public class RequestRepositoryImpl implements RequestRepository {
@@ -35,14 +32,29 @@ public class RequestRepositoryImpl implements RequestRepository {
         return jdbc.queryForObject(sql, requestMapper, id);
     }
 
-
-    public List<Request> getOpenRequests() {
-        String sql = "select * from requests";
+    public List<Request> getAllRequests() {
+        String sql = "SELECT * FROM requests";
         return jdbc.query(sql, requestMapper);
     }
 
+    //to fetch pending data*/
+    public List<Request> getOpenRequests() {
+        String sql = "SELECT * FROM requests WHERE is_approved = NULL";
+        return jdbc.query(sql, (rs, rowNum) -> new Request(
+                rs.getLong("request_id"),
+                rs.getLong("user_id"),
+                rs.getDate("request_date").toLocalDate().atTime(0,0),
+                rs.getDate("visit_start_date").toLocalDate(),
+                rs.getDate("visit_end_date").toLocalDate(),
+                rs.getBoolean("is_approved")
+        ));
 
-    public Request save(Request request) {
+
+    }
+
+
+
+    /*public Request save(Request request) {
         SimpleJdbcInsert simpleJdbcInsert = new SimpleJdbcInsert(jdbc)
                 .withTableName("requests")
                 .usingGeneratedKeyColumns("request_id");
@@ -55,10 +67,47 @@ public class RequestRepositoryImpl implements RequestRepository {
         Number requestId = simpleJdbcInsert.executeAndReturnKey(columns);
         request.setRequestId(requestId.longValue());
         Request savedRequest = findById(requestId.longValue());
-        System.out.println("Order saved: " + savedRequest);
+
 
         return request;
+    }*/
+
+    public Request save(Request aRequest) {
+        if (aRequest.isNew()) {
+            insert(aRequest);
+        } else {
+            update(aRequest);
+        }
+        return aRequest;
     }
+
+
+    private void insert(Request aRequest) {
+        String insertSql = "insert into requests(user_id, request_date, visit_start_date, visit_end_date,is_approved) values (?,?,?,?,null)";
+        jdbc.update(insertSql,
+                aRequest.getUserId(),
+                aRequest.getRequestDate(),
+                aRequest.getVisitStartDate(),
+                aRequest.getVisitEndDate(),
+                aRequest.getIsApproved()
+        );
+    }
+
+
+
+    private void update(Request aRequest) {
+        String updateSql = "UPDATE requests SET user_id = ?, request_date = ?, visit_start_date = ?, visit_end_date = ?, is_approved = ? WHERE request_id = ?";
+        jdbc.update(updateSql,
+                aRequest.getUserId(),
+                aRequest.getRequestDate(),
+                aRequest.getVisitStartDate(),
+
+                aRequest.getVisitEndDate(),
+                aRequest.getIsApproved(), // Ensure this gets the approved value
+                aRequest.getRequestId());
+    }
+
+
 
     public Request findById(Long requestId) {
         String sql = "select * from requests where request_id = ?";
@@ -75,4 +124,27 @@ public class RequestRepositoryImpl implements RequestRepository {
         String sql = "SELECT * FROM requests WHERE user_id = ?";
         return jdbc.query(sql, requestMapper, userId);
     }
+
+    @Override
+    public void acceptRequest(Long requestId) {
+        Request request = findById(requestId);
+
+        if (request != null) {
+            request.setIsApproved(true);
+            save(request);
+        }
+    }
+
+    @Override
+    public void denyRequest(Long requestId) {
+        Request request = findById(requestId);
+
+        if (request != null) {
+            request.setIsApproved(false);
+            save(request);
+        }
+    }
+
+
+
 }
