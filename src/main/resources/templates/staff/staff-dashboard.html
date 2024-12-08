@@ -8,10 +8,22 @@
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
+<h1>Select Location</h1>
 
-<h1>QR Code Scanner</h1>
-<div id="qr-reader"></div>
-<div id="qr-reader-results"></div>
+<form action="/staff/scan" method="post">
+    <label for="locationId">Location:</label>
+    <select name="locationId" id="locationId" onchange="toggleScanButton()">
+        <option value=0 disabled selected>Select a location</option>
+        <option th:each="location : ${locations}"
+                th:value="${location.id}"
+                th:text="${location.name}">
+        </option>
+    </select>
+
+    <div style="margin-top: 10px">
+        <button type="submit" id="scanButton" disabled>Scan</button>
+    </div>
+</form>
 
 <script src="/scripts/qr-scanner.js"></script>
 </body>

@@ -12,8 +12,12 @@ import java.util.HashMap;
 
 @Service
 public class StaffServiceImpl implements StaffService {
-    @Autowired
     RequestRepository requestRepository;
+
+    @Autowired
+    public StaffServiceImpl(RequestRepository requestRepository) {
+        this.requestRepository = requestRepository;
+    }
 
     public boolean isVisitorApproved(Long userId) {
         List<Request> requests = requestRepository.findByUserId(userId);
