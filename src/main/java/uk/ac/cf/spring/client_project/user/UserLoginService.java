@@ -16,8 +16,8 @@ public class UserLoginService {
     public boolean authenticateUser(String email, String password) {
         UserLogin user = userLoginRepository.findByEmail(email);
         if (user == null) {
-            return false; // User does not exist
+            return false;
         }
-        return password.equals(user.getPassword()); // Validate password directly (no encoding)
+        return password.equals(user.getPassword());
     }
 }
