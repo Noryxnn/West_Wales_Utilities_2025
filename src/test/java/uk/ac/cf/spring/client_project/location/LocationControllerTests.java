@@ -75,18 +75,47 @@ class LocationControllerTests {
     @Test
     void shouldSuccessfullyAddLocation() throws Exception {
 
-        mvc.perform(post("/admin/locations/add-location")
-                .param("id", "1")
-                .param("name", "Test Location")
-                .param("addressLine1", "123 Street")
-                .param("addressLine2", "Suite 4")
-                .param("city", "CityName")
-                .param("postcode", "AB12 3CD")
-                .param("typeId", "1")
-        )
-        .andExpect(status().is3xxRedirection())
-        .andExpect(redirectedUrl("/admin/locations"));
+        mvc.perform(post("/admin/locations/add")
+                        .param("id", "1")
+                        .param("name", "Test Location")
+                        .param("addressLine1", "123 Street")
+                        .param("addressLine2", "Suite 4")
+                        .param("city", "CityName")
+                        .param("postcode", "AB12 3CD")
+                        .param("typeId", "1")
+                )
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/admin/locations"));
 
-        verify(locationService).addLocation(any());
+        verify(locationService).save(any());
     }
+
+    // Tests adapted from Wiliam's Location tests, thank you Wiliam
+    @Test
+    void shouldSuccessfullyEditLocation() throws Exception {
+        mvc.perform(post("/admin/locations/edit/1")
+                        .param("id", "1")
+                        .param("name", "Cardiff Office")
+                        .param("addressLine1", "123 Street")
+                        .param("addressLine2", "")
+                        .param("city", "CityName")
+                        .param("postcode", "CF11 2AB")
+                        .param("typeId", "1")
+                )
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/admin/locations"));
+
+        verify(locationService).save(any());
+    }
+
+    @Test
+    void shouldSuccessfullyDeleteLocation() throws Exception {
+        Location mockLocation = new Location(1L, "Test Location", "123 Street", "Suite 4", "CityName", "AB12 3CD", 1L);
+        when(locationService.getLocationById(1L)).thenReturn(mockLocation);
+        mvc.perform(post("/admin/locations/delete/confirm/1"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/admin/locations"));
+        verify(locationService).delete(mockLocation);
+    }
+
 }

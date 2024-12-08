@@ -16,14 +16,11 @@ public class RequestServiceImpl implements RequestService {
     public Request getRequest(Long requestId) {
         return requestRepository.getRequest(requestId);
     }
-    public void save(Request request) {
+    public Request save(Request request) {
         requestRepository.save(request);
+        return request;
     }
     public boolean validateUserId(Long userId) {
         return requestRepository.userExists(userId);
     };
-    public boolean validateLocationId(Long locationId) {
-        return requestRepository.locationExists(locationId);
-    };
-
 }
