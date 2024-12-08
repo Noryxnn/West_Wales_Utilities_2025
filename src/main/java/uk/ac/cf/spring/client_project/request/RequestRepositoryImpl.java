@@ -17,15 +17,22 @@ public class RequestRepositoryImpl implements RequestRepository {
     }
 
     private void setRequestMapper() {
-        requestMapper = (rs, i) -> new Request(
-                rs.getLong("request_id"),
-                rs.getLong("user_id"),
-                rs.getDate("request_date").toLocalDate().atTime(0, 0),
-                rs.getDate("visit_start_date").toLocalDate(),
-                rs.getDate("visit_end_date").toLocalDate(),
-                rs.getBoolean("is_approved")
-        );
+        requestMapper = (rs, i) -> {
+            // Handle null for the status column (if is_approved is used for RequestStatus)
+            String status = rs.getString("status"); // Replace with the actual column name
+
+
+            return new Request(
+                    rs.getLong("request_id"),
+                    rs.getLong("user_id"),
+                    rs.getDate("request_date").toLocalDate().atTime(0, 0),
+                    rs.getDate("visit_start_date").toLocalDate(),
+                    rs.getDate("visit_end_date").toLocalDate(),
+                    RequestStatus.valueOf(rs.getString("status"))
+            );
+        };
     }
+
 
     public Request getRequest(Long id) {
         String sql = "select * from requests where request_id = ?";
@@ -39,14 +46,14 @@ public class RequestRepositoryImpl implements RequestRepository {
 
     //to fetch pending data*/
     public List<Request> getOpenRequests() {
-        String sql = "SELECT * FROM requests WHERE is_approved = NULL";
+        String sql = "SELECT * FROM requests WHERE status = 'PENDING'";
         return jdbc.query(sql, (rs, rowNum) -> new Request(
                 rs.getLong("request_id"),
                 rs.getLong("user_id"),
                 rs.getDate("request_date").toLocalDate().atTime(0,0),
                 rs.getDate("visit_start_date").toLocalDate(),
                 rs.getDate("visit_end_date").toLocalDate(),
-                rs.getBoolean("is_approved")
+                RequestStatus.valueOf(rs.getString("status"))
         ));
 
 
@@ -83,36 +90,36 @@ public class RequestRepositoryImpl implements RequestRepository {
 
 
     private void insert(Request aRequest) {
-        String insertSql = "insert into requests(user_id, request_date, visit_start_date, visit_end_date,is_approved) values (?,?,?,?,null)";
+        String insertSql = "insert into requests(user_id, request_date, visit_start_date, visit_end_date,status) values (?,?,?,?,null)";
         jdbc.update(insertSql,
                 aRequest.getUserId(),
                 aRequest.getRequestDate(),
                 aRequest.getVisitStartDate(),
                 aRequest.getVisitEndDate(),
-                aRequest.getIsApproved()
+                aRequest.getStatus().name()
         );
     }
 
 
 
     private void update(Request aRequest) {
-        String updateSql = "UPDATE requests SET user_id = ?, request_date = ?, visit_start_date = ?, visit_end_date = ?, is_approved = ? WHERE request_id = ?";
+        String updateSql = "UPDATE requests SET user_id = ?, request_date = ?, visit_start_date = ?, visit_end_date = ?, status = ? WHERE request_id = ?";
         jdbc.update(updateSql,
                 aRequest.getUserId(),
                 aRequest.getRequestDate(),
                 aRequest.getVisitStartDate(),
 
                 aRequest.getVisitEndDate(),
-                aRequest.getIsApproved(), // Ensure this gets the approved value
+                aRequest.getStatus().name(), // Ensure this gets the approved value
                 aRequest.getRequestId());
     }
 
 
 
-    public Request findById(Long requestId) {
+    /*public Request findById(Long requestId) {
         String sql = "select * from requests where request_id = ?";
         return jdbc.queryForObject(sql, requestMapper, requestId);
-    }
+    }*/
 
     public boolean userExists(Long userId) {
         String sql = "select count(*) from users where user_id = ?";
@@ -127,23 +134,19 @@ public class RequestRepositoryImpl implements RequestRepository {
 
     @Override
     public void acceptRequest(Long requestId) {
-        Request request = findById(requestId);
-
-        if (request != null) {
-            request.setIsApproved(true);
-            save(request);
-        }
+        String updateSql = "UPDATE requests SET status = 'APPROVED' WHERE request_id = ?";
+        jdbc.update(updateSql, requestId);
     }
 
     @Override
     public void denyRequest(Long requestId) {
-        Request request = findById(requestId);
-
-        if (request != null) {
-            request.setIsApproved(false);
-            save(request);
-        }
+        String updateSql = "UPDATE requests SET status = 'DENIED' WHERE request_id = ?";
+        jdbc.update(updateSql, requestId);
     }
+
+
+
+
 
 
 

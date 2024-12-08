@@ -48,7 +48,7 @@ public class RequestController {
                     LocalDateTime.now(),
                     request.getVisitStartDate(),
                     request.getVisitEndDate(),
-                    request.isApproved()
+                    RequestStatus.PENDING
             );
             Request savedRequest = requestService.save(newRequest);
             session.setAttribute("request", savedRequest);
@@ -69,21 +69,21 @@ public class RequestController {
         return modelAndView;
     }
 
-    //new @PostMapping for confirming someone's request
     @GetMapping("request/accept/{id}")
-    public ModelAndView confirmString(@PathVariable Long id) {
-        requestService.acceptRequest(id);
-        System.out.println("Request with id " + id + "has been accepted!");
+    public ModelAndView acceptRequest(@PathVariable Long id) {
+        requestService.updateRequestStatus(id, RequestStatus.APPROVED);
+        System.out.println("Request with id " + id + " has been approved!");
         return new ModelAndView("redirect:/pending-requests");
     }
 
-    //reference to the CM6213 tutorial featuring how to confirm an order
     @GetMapping("request/deny/{id}")
-    public ModelAndView denyString(@PathVariable Long id) {
-        requestService.denyRequest(id);
-        System.out.println("Request with id " + id + "has been denied!");
+    public ModelAndView denyRequest(@PathVariable Long id) {
+        requestService.updateRequestStatus(id, RequestStatus.DENIED);
+        System.out.println("Request with id " + id + " has been denied!");
         return new ModelAndView("redirect:/pending-requests");
     }
+
+
 
 
 

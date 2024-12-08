@@ -43,22 +43,48 @@ border:1px solid black;
         <!--<a th:href="@{/request/accept/{id}(id=${request.requestId})}">
             <button type="button">Accept</button>
         </a>-->
-    <td>
-        <!-- Accept Request Button -->
+
+    <!-- commented out section -->
+    <!--<td>
+        &lt;!&ndash; Accept Request Button &ndash;&gt;
         <form th:action="@{/request/accept/{id}(id=${request.requestId})}" method="get">
             <button type="submit" th:disabled="${request.isApproved}" th:text="${request.isApproved ? 'Operation finished' : 'Accept Request'}"></button>
         </form>
     </td>
 
     <td>
-        <!-- Deny Request Button -->
+        &lt;!&ndash; Deny Request Button &ndash;&gt;
         <form th:action="@{/request/deny/{id}(id=${request.requestId})}" method="get">
             <button type="submit" th:disabled="${request.isApproved}" th:text="${request.isApproved ? 'Operation finished' : 'Deny Request'}"></button>
         </form>
+    </td>-->
+    <!-- commented out section -->
+
+    <td>
+        <!-- Accept Request Button -->
+        <form th:action="@{/request/accept/{id}(id=${request.requestId})}" method="get">
+            <button type="submit"
+                    th:disabled="${request.status.name() != 'PENDING'}"
+                    th:text="${request.status == T(uk.ac.cf.spring.client_project.request.RequestStatus).APPROVED ?  'Accepted' : 'Accept Request'}">
+            </button>
+        </form>
     </td>
 
+    <td>
+        <!-- Deny Request Button -->
+        <form th:action="@{/request/deny/{id}(id=${request.requestId})}" method="get">
+            <button type="submit"
+                    th:disabled="${request.status.name() != 'PENDING'}"
+                    th:text="${request.status == T(uk.ac.cf.spring.client_project.request.RequestStatus).DENIED ?  'Denied' : 'Deny Request'}">
+            </button>
+        </form>
+    </td>
+    <!-- the T(...) are referenced from https://www.baeldung.com/thymeleaf-enums and
+    https://stackoverflow.com/questions/24937441/comparing-the-enum-constants-in-thymeleaf-->
 
-<!--    <td>-->
+
+
+    <!--    <td>-->
 <!--        &lt;!&ndash; Form with a conditional button &ndash;&gt;-->
 <!--        <form th:action="@{/request/accept/{id}(id=${request.requestId})}" method="post">-->
 <!--            <button type="submit"-->

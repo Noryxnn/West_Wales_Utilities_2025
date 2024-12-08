@@ -4,13 +4,14 @@ import java.util.List;
 
 public interface RequestService {
     List<Request> getAllRequests();
-    List<Request> getOpenRequests();
-    Request getRequest(Long requestId);
+    //List<Request> getOpenRequests();
+    //Request getRequest(Long requestId);
     Request save(Request request);
     boolean validateUserId(Long userId);
 
-    void acceptRequest(Long id);
+    //void acceptRequest(Long id);
 
-    void denyRequest(Long id);
+    //void denyRequest(Long id);
 
+    void updateRequestStatus(Long id, RequestStatus requestStatus);
 }

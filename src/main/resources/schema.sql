@@ -65,5 +65,6 @@ CREATE TABLE IF NOT EXISTS `requests` (
                                           `request_date` DATETIME NOT NULL,
                                           `visit_start_date` DATE NOT NULL,
                                           `visit_end_date` DATE NOT NULL,
-                                          `is_approved` BOOLEAN DEFAULT NULL
+                                          `status` VARCHAR(20) NOT NULL DEFAULT 'PENDING'
 ) ENGINE=InnoDB;
+

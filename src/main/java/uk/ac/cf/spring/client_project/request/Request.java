@@ -14,21 +14,25 @@ public class Request {
     private LocalDateTime requestDate;
     private LocalDate visitStartDate;
     private LocalDate visitEndDate;
-    private Boolean isApproved; // null for pending, true for approved, false for denied
+
+    private RequestStatus status; //pending by default, approved, denied
 
 
-    // Getters and setters
-    public Boolean getIsApproved() {
-        return isApproved;
+    // getter and setter for status
+    public RequestStatus getStatus() {
+        return status;
     }
 
-    public void setApproved(Boolean approved) {
-        this.isApproved = approved;
+    public void setStatus(RequestStatus status) {
+        this.status = status;
+    }
+    public Request() {
+        this(0L, 0L, LocalDateTime.now(), null, null, RequestStatus.PENDING);
     }
 
 
 
-    public Request() {this(0L, 0L, LocalDateTime.now(), null, null, null); }
+
     public boolean isNew() {
         return this.requestId == null || this.requestId == 0;
     }

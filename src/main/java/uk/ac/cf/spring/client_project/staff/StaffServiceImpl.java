@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uk.ac.cf.spring.client_project.request.Request;
 import uk.ac.cf.spring.client_project.request.RequestRepository;
+import uk.ac.cf.spring.client_project.request.RequestStatus;
 
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -18,7 +19,7 @@ public class StaffServiceImpl implements StaffService {
         List<Request> requests = requestRepository.findByUserId(userId);
         LocalDate currentDate = LocalDate.now();
         for (Request request : requests) {
-            if (request.getIsApproved()
+            if (request.getStatus() == RequestStatus.APPROVED
                     && (request.getVisitStartDate().isBefore(currentDate) || request.getVisitStartDate().isEqual(currentDate))
                     && request.getVisitEndDate().isAfter(currentDate)) {
                 System.out.println("Approved request found for user " + userId);
