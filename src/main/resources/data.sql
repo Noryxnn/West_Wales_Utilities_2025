@@ -33,3 +33,42 @@ VALUES
     (2, '2020-01-01 09:00:00', '2020-01-01', '2020-01-01', false),
     (3, '2020-01-01 09:00:00', '2020-01-01', '2020-01-01', false);
 
+INSERT INTO roles (role_name) VALUES
+                                  ('ROLE_ADMIN'),
+                                  ('ROLE_USER'),
+                                  ('ROLE_STAFF');
+
+INSERT INTO user_roles (user_id, role_id) VALUES
+                                              (1, 1), -- John Doe is an admin
+                                              (2, 2), -- Jane Smith is a regular user
+                                              (2, 3); -- Jane Smith is also a staff member
+
+
+INSERT INTO users (first_name, last_name, password, email, company_name)
+VALUES ('Jane', 'Doe', '{bcrypt}$2a$10$hashedPassword', 'jane.doe@example.com', 'Doe Ltd');
+
+INSERT INTO roles (role_name) VALUES ('ROLE_STAFF');
+
+INSERT INTO user_roles (user_id, role_id)
+VALUES ((SELECT user_id FROM users WHERE email = 'jane.doe@example.com'),
+        (SELECT role_id FROM roles WHERE role_name = 'ROLE_STAFF'));
+
+SELECT * FROM users WHERE email = 'jane.doe@example.com';
+
+SELECT * FROM roles WHERE role_name = 'ROLE_STAFF';
+
+DELETE FROM users
+WHERE email = 'jane.doe@example.com'
+  AND user_id NOT IN (SELECT MIN(user_id) FROM users WHERE email = 'jane.doe@example.com');
+
+DELETE FROM roles
+WHERE role_name = 'ROLE_STAFF'
+  AND role_id NOT IN (SELECT MIN(role_id) FROM roles WHERE role_name = 'ROLE_STAFF');
+
+INSERT INTO user_roles (user_id, role_id)
+VALUES ((SELECT user_id FROM users WHERE email = 'jane.doe@example.com'),
+        (SELECT role_id FROM roles WHERE role_name = 'ROLE_STAFF'));
+
+SELECT * FROM user_roles WHERE user_id = (SELECT user_id FROM users WHERE email = 'jane.doe@example.com');
+
+select * from roles;

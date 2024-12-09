@@ -66,3 +66,6 @@ CREATE TABLE requests (
                           FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
+ALTER TABLE users ADD UNIQUE(email);
+ALTER TABLE roles ADD UNIQUE(role_name);
+
