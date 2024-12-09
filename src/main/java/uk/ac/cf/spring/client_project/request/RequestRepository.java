@@ -12,4 +12,5 @@ public interface RequestRepository {
     void acceptRequest(Long requestId);
     void denyRequest(Long requestId);
 
+    List<RequestDTO> findPendingRequests();
 }

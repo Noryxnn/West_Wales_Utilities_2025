@@ -14,4 +14,6 @@ public interface RequestService {
     //void denyRequest(Long id);
 
     void updateRequestStatus(Long id, RequestStatus requestStatus);
+
+    List<RequestDTO> findPendingRequests();
 }

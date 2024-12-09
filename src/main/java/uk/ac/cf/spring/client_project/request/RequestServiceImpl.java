@@ -56,5 +56,11 @@ public class RequestServiceImpl implements RequestService {
 
 
 
+    public List<RequestDTO> findPendingRequests() {
+        return requestRepository.findPendingRequests();
+    }
+
+
+
 }
 

@@ -143,6 +143,34 @@ public class RequestRepositoryImpl implements RequestRepository {
         String updateSql = "UPDATE requests SET status = 'DENIED' WHERE request_id = ?";
         jdbc.update(updateSql, requestId);
     }
+    @Override
+    public List<RequestDTO> findPendingRequests() {
+        String sql = """
+        SELECT r.request_id, r.user_id, u.first_name, u.last_name, r.request_date, 
+               r.visit_start_date, r.visit_end_date, r.status
+        FROM requests r
+        JOIN users u ON r.user_id = u.user_id
+        WHERE r.status = 'PENDING'
+    """;
+
+        return jdbc.query(sql, (rs, rowNum) -> new RequestDTO(
+                rs.getLong("request_id"),
+                rs.getLong("user_id"),
+                rs.getString("first_name"),
+                rs.getString("last_name"),
+                rs.getTimestamp("request_date").toLocalDateTime(),
+                rs.getDate("visit_start_date").toLocalDate(),
+                rs.getDate("visit_end_date").toLocalDate(),
+                rs.getString("status")
+                  // Correctly fetch user_id from the result set
+        ));
+    }
+
+
+
+
+
+
 
 
 
