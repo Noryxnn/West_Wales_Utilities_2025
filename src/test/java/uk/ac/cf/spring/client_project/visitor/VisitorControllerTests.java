@@ -1,4 +1,4 @@
-package uk.ac.cf.spring.client_project.checkin;
+package uk.ac.cf.spring.client_project.visitor;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

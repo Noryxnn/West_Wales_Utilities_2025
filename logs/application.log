@@ -1,0 +1,38 @@
+2024-12-09T14:13:49.539Z  INFO 4436 --- [Client_Project] [restartedMain] u.a.c.s.c.ClientProjectApplication       : Starting ClientProjectApplication using Java 17.0.11 with PID 4436 (C:\Users\c23064426\Documents\client-project-team-10\build\classes\java\main started by c23064426 in C:\Users\c23064426\Documents\client-project-team-10)
+2024-12-09T14:13:49.542Z  INFO 4436 --- [Client_Project] [restartedMain] u.a.c.s.c.ClientProjectApplication       : No active profile set, falling back to 1 default profile: "default"
+2024-12-09T14:13:49.589Z  INFO 4436 --- [Client_Project] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-12-09T14:13:49.589Z  INFO 4436 --- [Client_Project] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-12-09T14:13:50.546Z  INFO 4436 --- [Client_Project] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-12-09T14:13:50.558Z  INFO 4436 --- [Client_Project] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-12-09T14:13:50.558Z  INFO 4436 --- [Client_Project] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.31]
+2024-12-09T14:13:50.597Z  INFO 4436 --- [Client_Project] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-12-09T14:13:50.597Z  INFO 4436 --- [Client_Project] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1007 ms
+2024-12-09T14:13:50.669Z  INFO 4436 --- [Client_Project] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-12-09T14:13:50.724Z  INFO 4436 --- [Client_Project] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.mariadb.jdbc.Connection@6071ccda
+2024-12-09T14:13:50.725Z  INFO 4436 --- [Client_Project] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-12-09T14:13:51.734Z  INFO 4436 --- [Client_Project] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-12-09T14:13:51.760Z  INFO 4436 --- [Client_Project] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2024-12-09T14:13:51.769Z  INFO 4436 --- [Client_Project] [restartedMain] u.a.c.s.c.ClientProjectApplication       : Started ClientProjectApplication in 2.668 seconds (process running for 3.464)
+2024-12-09T14:13:55.383Z  INFO 4436 --- [Client_Project] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-12-09T14:13:55.383Z  INFO 4436 --- [Client_Project] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-12-09T14:13:55.384Z  INFO 4436 --- [Client_Project] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-12-09T14:14:03.496Z  INFO 4436 --- [Client_Project] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-12-09T14:14:03.500Z  INFO 4436 --- [Client_Project] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-12-09T14:14:06.293Z  INFO 3108 --- [Client_Project] [restartedMain] u.a.c.s.c.ClientProjectApplication       : Starting ClientProjectApplication using Java 17.0.11 with PID 3108 (C:\Users\c23064426\Documents\client-project-team-10\build\classes\java\main started by c23064426 in C:\Users\c23064426\Documents\client-project-team-10)
+2024-12-09T14:14:06.294Z  INFO 3108 --- [Client_Project] [restartedMain] u.a.c.s.c.ClientProjectApplication       : No active profile set, falling back to 1 default profile: "default"
+2024-12-09T14:14:06.329Z  INFO 3108 --- [Client_Project] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-12-09T14:14:06.329Z  INFO 3108 --- [Client_Project] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-12-09T14:14:07.178Z  INFO 3108 --- [Client_Project] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-12-09T14:14:07.185Z  INFO 3108 --- [Client_Project] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-12-09T14:14:07.186Z  INFO 3108 --- [Client_Project] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.31]
+2024-12-09T14:14:07.218Z  INFO 3108 --- [Client_Project] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-12-09T14:14:07.218Z  INFO 3108 --- [Client_Project] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 889 ms
+2024-12-09T14:14:07.278Z  INFO 3108 --- [Client_Project] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-12-09T14:14:07.324Z  INFO 3108 --- [Client_Project] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.mariadb.jdbc.Connection@d8c9237
+2024-12-09T14:14:07.325Z  INFO 3108 --- [Client_Project] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-12-09T14:14:07.772Z  INFO 3108 --- [Client_Project] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-12-09T14:14:07.804Z  INFO 3108 --- [Client_Project] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2024-12-09T14:14:07.812Z  INFO 3108 --- [Client_Project] [restartedMain] u.a.c.s.c.ClientProjectApplication       : Started ClientProjectApplication in 1.847 seconds (process running for 2.407)
+2024-12-09T14:14:09.853Z  INFO 3108 --- [Client_Project] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-12-09T14:14:09.853Z  INFO 3108 --- [Client_Project] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-12-09T14:14:09.853Z  INFO 3108 --- [Client_Project] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms

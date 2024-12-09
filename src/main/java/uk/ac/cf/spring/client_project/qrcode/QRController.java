@@ -1,5 +1,7 @@
 package uk.ac.cf.spring.client_project.qrcode;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,8 +14,14 @@ import java.util.Map;
 
 @RestController
 public class QRController {
-    @Autowired
+    private static final Logger logger = LoggerFactory.getLogger(QRController.class);
     StaffService staffService;
+
+    @Autowired
+    public QRController(StaffService staffService) {
+        this.staffService = staffService;
+    }
+
     @PostMapping("/scan")
     public ResponseEntity<String> handleQRCodeScan(@RequestBody String qrData) {
         Map<String, Object> decryptedData;
@@ -23,17 +31,13 @@ public class QRController {
 
             // Validate that the decrypted data contains required fields
             if (!QREncryptionUtils.validateDecryptedData(decryptedData)) {
-                System.out.println("Invalid QR code data");
                 return ResponseEntity.badRequest().body("Invalid QR code data: Missing required fields");
 
             }
         } catch (Exception e) {
-            System.out.println("Failed to decrypt QR code data: " + e.getMessage());
+            logger.error("Failed to decrypt QR code data: {}", e.getMessage());
             return ResponseEntity.badRequest().body("Failed to decrypt QR code data: " + e.getMessage());
         }
-
-        System.out.println("QR Code Data Received: " + qrData);
-        System.out.println("Decrypted Data: " + decryptedData);
 
         Long userId = Long.parseLong(decryptedData.get("userId").toString());
         if (staffService.isVisitorApproved(userId)) {
