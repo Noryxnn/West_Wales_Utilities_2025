@@ -1,18 +1,9 @@
 package uk.ac.cf.spring.client_project.visit;
 
-import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
-@Service
-public class VisitService {
-    private final VisitRepository visitRepository;
-
-    public VisitService(VisitRepository visitRepository) {
-        this.visitRepository = visitRepository;
-    }
-
-    public List<VisitDTO> getCurrentlyOnSiteVisits() {
-        return visitRepository.findCurrentlyOnSiteVisits();
-    }
+public interface VisitService {
+    List<Map<String, Object>> getCurrentlyOnSiteVisits();
 }
