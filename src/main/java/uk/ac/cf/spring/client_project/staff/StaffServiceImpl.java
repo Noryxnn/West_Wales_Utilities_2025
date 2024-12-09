@@ -3,6 +3,8 @@ package uk.ac.cf.spring.client_project.staff;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uk.ac.cf.spring.client_project.request.Request;
@@ -12,6 +14,7 @@ import java.util.HashMap;
 
 @Service
 public class StaffServiceImpl implements StaffService {
+    private static final Logger logger = LoggerFactory.getLogger(StaffServiceImpl.class);
     RequestRepository requestRepository;
 
     @Autowired
@@ -26,12 +29,11 @@ public class StaffServiceImpl implements StaffService {
             if (request.isApproved()
                     && (request.getVisitStartDate().isBefore(currentDate) || request.getVisitStartDate().isEqual(currentDate))
                     && request.getVisitEndDate().isAfter(currentDate)) {
-                System.out.println("Approved request found for user " + userId);
+                logger.info("Approved request found for user {}", userId);
                 return true;
             }
         }
-        System.out.println("No approved requests found for user " + userId);
-
+        logger.info("No approved request found for user {}", userId);
         return false;
     }
 

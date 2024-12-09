@@ -38,6 +38,8 @@ dependencies {
     implementation 'org.mariadb.jdbc:mariadb-java-client:3.4.1'
     implementation 'com.google.zxing:javase:3.5.2' // Library for generating QR codes
     testImplementation 'org.mockito:mockito-inline:5.2.0'
+    implementation 'org.springframework.boot:spring-boot-starter-logging'
+    implementation 'org.slf4j:slf4j-api:2.0.9'
 }
 
 
