@@ -12,6 +12,12 @@ VALUES
     ('Warehouse'),
     ('Construction Site');
 
+INSERT INTO locations (name, address_line_1, address_line_2, city, postcode, type_id)
+VALUES
+    ('Cardiff Office', '1 Greyfriars Road', '', 'Cardiff', 'CF10 3AG', 2),
+    ('Penarth Office', '2 Penarth Road', 'Suite 4', 'Penarth', 'CF10 3AG', 2),
+    ('Swansea Office', '3 Swansea Road', '', 'Swansea', 'SA1 1SA', 2);
+
 -- Insert data into users (this will use auto-incrementing user_id values)
 INSERT INTO users (first_name, last_name, password, email, company_name)
 VALUES
@@ -19,12 +25,6 @@ VALUES
     ('Jane', 'Doe', 'password456', 'jane@doe.com', 'Doe Ltd'),
     ('John', 'Smith', 'password789', 'jsmith@gmail.com', 'Smith Ltd');
 
--- Insert data into locations
-INSERT INTO locations (name, address_line_1, address_line_2, city, postcode, type_id)
-VALUES
-    ('Cardiff Office', '1 Greyfriars Road', '', 'Cardiff', 'CF10 3AG', 2),
-    ('Penarth Office', '2 Penarth Road', 'Suite 4', 'Penarth', 'CF10 3AG', 2),
-    ('Swansea Office', '3 Swansea Road', '', 'Swansea', 'SA1 1SA', 2);
 
 -- Insert data into requests
 INSERT INTO requests (user_id, request_date, visit_start_date, visit_end_date, is_approved)

@@ -53,13 +53,13 @@ public class QRCodeGenerator {
 
         // TODO: get user id from session
         // temp data until login system is implemented
-        long tempUserID = 2L;
+        long tempUserID = 1L;
 
         HashMap<String, String> payload = new HashMap<>();
         payload.put("userId", String.valueOf(tempUserID));
         payload.put("timestamp", Instant.now().toString());
 
-        String secretKey = System.getenv("QR_ENCRYPTION_KEY");
+        String secretKey = QREncryptionUtils.getSecretKey();
         if (secretKey == null) {
             throw new IllegalStateException("Secret key not found");
         }
