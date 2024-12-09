@@ -1,3 +1,11 @@
+function toggleScanButton() {
+    const locationSelect = document.getElementById('locationId');
+    const submitButton = document.getElementById('scanButton');
+    // Enable button only if a location is selected
+    submitButton.disabled = locationSelect.value === '';
+}
+
+
 // QR code scanner script for scanning visitor QR codes
 // Used to check in visitors and record their on-site attendance
 // https://scanapp.org/html5-qrcode-docs/docs/apis/classes/Html5Qrcode

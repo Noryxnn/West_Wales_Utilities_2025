@@ -12,8 +12,13 @@ import java.util.List;
 
 @Service
 public class StaffServiceImpl implements StaffService {
-    @Autowired
+    private static final Logger logger = LoggerFactory.getLogger(StaffServiceImpl.class);
     RequestRepository requestRepository;
+
+    @Autowired
+    public StaffServiceImpl(RequestRepository requestRepository) {
+        this.requestRepository = requestRepository;
+    }
 
     public boolean isVisitorApproved(Long userId) {
         List<Request> requests = requestRepository.findByUserId(userId);
@@ -22,12 +27,11 @@ public class StaffServiceImpl implements StaffService {
             if (request.getStatus() == RequestStatus.APPROVED
                     && (request.getVisitStartDate().isBefore(currentDate) || request.getVisitStartDate().isEqual(currentDate))
                     && request.getVisitEndDate().isAfter(currentDate)) {
-                System.out.println("Approved request found for user " + userId);
+                logger.info("Approved request found for user {}", userId);
                 return true;
             }
         }
-        System.out.println("No approved requests found for user " + userId);
-
+        logger.info("No approved request found for user {}", userId);
         return false;
     }
 
