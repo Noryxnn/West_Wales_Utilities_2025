@@ -1,5 +1,7 @@
 package uk.ac.cf.spring.client_project.staff;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +14,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/staff")
 public class StaffController {
+    private static final Logger logger = LoggerFactory.getLogger(StaffController.class);
     LocationService locationService;
 
     @Autowired
@@ -33,11 +36,13 @@ public class StaffController {
         ModelAndView modelAndView = new ModelAndView("staff/qr-scanner");
 
         if (locationId == null || locationId == 0) {
+            logger.error("An invalid location ID was provided when attempting to scan: {}", locationId);
             throw new IllegalArgumentException("A valid location must be selected");
         }
         Location location = locationService.getLocationById(locationId);
 
         if (location == null) {
+            logger.error("An invalid location was provided when attempting to scan: {}", locationId);
             throw new IllegalArgumentException("Location not found with ID: " + locationId);
         }
         modelAndView.addObject("location", location);

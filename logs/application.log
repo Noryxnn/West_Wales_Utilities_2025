@@ -1,0 +1,201 @@
+2024-12-09T13:14:56.818Z  INFO 19476 --- [Client_Project] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 66 class path changes (0 additions, 66 deletions, 0 modifications)
+2024-12-09T13:14:57.348Z  INFO 19476 --- [Client_Project] [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-12-09T13:14:57.358Z  INFO 19476 --- [Client_Project] [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-12-09T13:15:11.057Z  INFO 19476 --- [Client_Project] [restartedMain] u.a.c.s.c.ClientProjectApplication       : Starting ClientProjectApplication using Java 17.0.11 with PID 19476 (C:\Users\c23060249\projects\uni\client-project-team-10\build\classes\java\main started by c23060249 in C:\Users\c23060249\projects\uni\client-project-team-10)
+2024-12-09T13:15:11.057Z  INFO 19476 --- [Client_Project] [restartedMain] u.a.c.s.c.ClientProjectApplication       : No active profile set, falling back to 1 default profile: "default"
+2024-12-09T13:15:20.125Z  INFO 13084 --- [Client_Project] [Test worker] u.a.c.s.c.ClientProjectApplicationTests  : Starting ClientProjectApplicationTests using Java 17.0.11 with PID 13084 (started by c23060249 in C:\Users\c23060249\projects\uni\client-project-team-10)
+2024-12-09T13:15:20.128Z  INFO 13084 --- [Client_Project] [Test worker] u.a.c.s.c.ClientProjectApplicationTests  : No active profile set, falling back to 1 default profile: "default"
+2024-12-09T13:15:21.553Z  INFO 13084 --- [Client_Project] [Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-12-09T13:15:21.685Z  INFO 13084 --- [Client_Project] [Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.mariadb.jdbc.Connection@23ad71bf
+2024-12-09T13:15:21.688Z  INFO 13084 --- [Client_Project] [Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-12-09T13:15:22.628Z  INFO 13084 --- [Client_Project] [Test worker] u.a.c.s.c.ClientProjectApplicationTests  : Started ClientProjectApplicationTests in 2.836 seconds (process running for 4.691)
+2024-12-09T13:15:23.884Z  INFO 13084 --- [Client_Project] [Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [uk.ac.cf.spring.client_project.checkin.VisitorControllerTests]: VisitorControllerTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-12-09T13:15:23.908Z  INFO 13084 --- [Client_Project] [Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration uk.ac.cf.spring.client_project.ClientProjectApplication for test class uk.ac.cf.spring.client_project.checkin.VisitorControllerTests
+2024-12-09T13:15:23.944Z  INFO 13084 --- [Client_Project] [Test worker] u.a.c.s.c.c.VisitorControllerTests       : Starting VisitorControllerTests using Java 17.0.11 with PID 13084 (started by c23060249 in C:\Users\c23060249\projects\uni\client-project-team-10)
+2024-12-09T13:15:23.944Z  INFO 13084 --- [Client_Project] [Test worker] u.a.c.s.c.c.VisitorControllerTests       : No active profile set, falling back to 1 default profile: "default"
+2024-12-09T13:15:24.343Z  INFO 13084 --- [Client_Project] [Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2024-12-09T13:15:24.349Z  INFO 13084 --- [Client_Project] [Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection org.mariadb.jdbc.Connection@3275a47f
+2024-12-09T13:15:24.350Z  INFO 13084 --- [Client_Project] [Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2024-12-09T13:15:24.698Z  INFO 13084 --- [Client_Project] [Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2024-12-09T13:15:24.698Z  INFO 13084 --- [Client_Project] [Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2024-12-09T13:15:24.699Z  INFO 13084 --- [Client_Project] [Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2024-12-09T13:15:24.707Z  INFO 13084 --- [Client_Project] [Test worker] u.a.c.s.c.c.VisitorControllerTests       : Started VisitorControllerTests in 0.793 seconds (process running for 6.771)
+2024-12-09T13:15:25.015Z  INFO 13084 --- [Client_Project] [Test worker] u.a.c.s.c.qrcode.QRCodeGenerator         : Generated QR code for user 1
+2024-12-09T13:15:25.015Z  INFO 13084 --- [Client_Project] [Test worker] u.a.c.s.c.visitor.VisitorController      : Successfully generated QR code for visitor
+2024-12-09T13:15:25.579Z ERROR 13084 --- [Client_Project] [Test worker] u.a.c.s.c.visitor.VisitorController      : Failed to generate QR code: QR generation failed
+2024-12-09T13:15:25.641Z  INFO 13084 --- [Client_Project] [Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [uk.ac.cf.spring.client_project.location.LocationControllerTests]: LocationControllerTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-12-09T13:15:25.699Z  INFO 13084 --- [Client_Project] [Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration uk.ac.cf.spring.client_project.ClientProjectApplication for test class uk.ac.cf.spring.client_project.location.LocationControllerTests
+2024-12-09T13:15:25.766Z  INFO 13084 --- [Client_Project] [Test worker] u.a.c.s.c.l.LocationControllerTests      : Starting LocationControllerTests using Java 17.0.11 with PID 13084 (started by c23060249 in C:\Users\c23060249\projects\uni\client-project-team-10)
+2024-12-09T13:15:25.766Z  INFO 13084 --- [Client_Project] [Test worker] u.a.c.s.c.l.LocationControllerTests      : No active profile set, falling back to 1 default profile: "default"
+2024-12-09T13:15:26.433Z  INFO 13084 --- [Client_Project] [Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Starting...
+2024-12-09T13:15:26.440Z  INFO 13084 --- [Client_Project] [Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-3 - Added connection org.mariadb.jdbc.Connection@6dcc7696
+2024-12-09T13:15:26.441Z  INFO 13084 --- [Client_Project] [Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Start completed.
+2024-12-09T13:15:26.830Z  INFO 13084 --- [Client_Project] [Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2024-12-09T13:15:26.830Z  INFO 13084 --- [Client_Project] [Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2024-12-09T13:15:26.831Z  INFO 13084 --- [Client_Project] [Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2024-12-09T13:15:26.848Z  INFO 13084 --- [Client_Project] [Test worker] u.a.c.s.c.l.LocationControllerTests      : Started LocationControllerTests in 1.142 seconds (process running for 8.911)
+2024-12-09T13:15:27.158Z  INFO 13084 --- [Client_Project] [Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [uk.ac.cf.spring.client_project.location.LocationRepositoryTests]: LocationRepositoryTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-12-09T13:15:27.160Z  INFO 13084 --- [Client_Project] [Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration uk.ac.cf.spring.client_project.ClientProjectApplication for test class uk.ac.cf.spring.client_project.location.LocationRepositoryTests
+2024-12-09T13:15:27.195Z  INFO 13084 --- [Client_Project] [Test worker] u.a.c.s.c.l.LocationRepositoryTests      : Starting LocationRepositoryTests using Java 17.0.11 with PID 13084 (started by c23060249 in C:\Users\c23060249\projects\uni\client-project-team-10)
+2024-12-09T13:15:27.196Z  INFO 13084 --- [Client_Project] [Test worker] u.a.c.s.c.l.LocationRepositoryTests      : No active profile set, falling back to 1 default profile: "default"
+2024-12-09T13:15:28.198Z  INFO 13084 --- [Client_Project] [Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Starting...
+2024-12-09T13:15:28.206Z  INFO 13084 --- [Client_Project] [Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-4 - Added connection org.mariadb.jdbc.Connection@34d6e9a4
+2024-12-09T13:15:28.207Z  INFO 13084 --- [Client_Project] [Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Start completed.
+2024-12-09T13:15:28.391Z  INFO 13084 --- [Client_Project] [Test worker] u.a.c.s.c.l.LocationRepositoryTests      : Started LocationRepositoryTests in 1.227 seconds (process running for 10.455)
+2024-12-09T13:15:28.501Z  INFO 13084 --- [Client_Project] [Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [uk.ac.cf.spring.client_project.location.LocationSchedulerTests]: LocationSchedulerTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-12-09T13:15:28.504Z  INFO 13084 --- [Client_Project] [Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration uk.ac.cf.spring.client_project.ClientProjectApplication for test class uk.ac.cf.spring.client_project.location.LocationSchedulerTests
+2024-12-09T13:15:28.593Z  INFO 13084 --- [Client_Project] [Test worker] u.a.c.s.c.l.LocationSchedulerTests       : Starting LocationSchedulerTests using Java 17.0.11 with PID 13084 (started by c23060249 in C:\Users\c23060249\projects\uni\client-project-team-10)
+2024-12-09T13:15:28.594Z  INFO 13084 --- [Client_Project] [Test worker] u.a.c.s.c.l.LocationSchedulerTests       : No active profile set, falling back to 1 default profile: "default"
+2024-12-09T13:15:29.033Z  INFO 13084 --- [Client_Project] [Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Starting...
+2024-12-09T13:15:29.039Z  INFO 13084 --- [Client_Project] [Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-5 - Added connection org.mariadb.jdbc.Connection@17fbbf0a
+2024-12-09T13:15:29.039Z  INFO 13084 --- [Client_Project] [Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Start completed.
+2024-12-09T13:15:29.353Z  INFO 13084 --- [Client_Project] [Test worker] u.a.c.s.c.l.LocationSchedulerTests       : Started LocationSchedulerTests in 0.841 seconds (process running for 11.416)
+2024-12-09T13:15:29.356Z  WARN 13084 --- [Client_Project] [Test worker] o.s.test.context.TestContextManager      : Caught exception while allowing TestExecutionListener [org.springframework.test.context.support.DependencyInjectionTestExecutionListener] to prepare test instance [uk.ac.cf.spring.client_project.location.LocationSchedulerTests@4f876114]
+
+org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'uk.ac.cf.spring.client_project.location.LocationSchedulerTests': Unsatisfied dependency expressed through field 'scheduledTaskHolder': No qualifying bean of type 'org.springframework.scheduling.config.ScheduledTaskHolder' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:788) ~[spring-beans-6.1.14.jar:6.1.14]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:768) ~[spring-beans-6.1.14.jar:6.1.14]
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:145) ~[spring-beans-6.1.14.jar:6.1.14]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:509) ~[spring-beans-6.1.14.jar:6.1.14]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1439) ~[spring-beans-6.1.14.jar:6.1.14]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireBeanProperties(AbstractAutowireCapableBeanFactory.java:398) ~[spring-beans-6.1.14.jar:6.1.14]
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:143) ~[spring-test-6.1.14.jar:6.1.14]
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:98) ~[spring-test-6.1.14.jar:6.1.14]
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:260) ~[spring-test-6.1.14.jar:6.1.14]
+	at org.springframework.test.context.junit.jupiter.SpringExtension.postProcessTestInstance(SpringExtension.java:163) ~[spring-test-6.1.14.jar:6.1.14]
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$10(ClassBasedTestDescriptor.java:378) ~[junit-jupiter-engine-5.10.5.jar:5.10.5]
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.executeAndMaskThrowable(ClassBasedTestDescriptor.java:383) ~[junit-jupiter-engine-5.10.5.jar:5.10.5]
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$11(ClassBasedTestDescriptor.java:378) ~[junit-jupiter-engine-5.10.5.jar:5.10.5]
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197) ~[na:na]
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:179) ~[na:na]
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1625) ~[na:na]
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509) ~[na:na]
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499) ~[na:na]
+	at java.base/java.util.stream.StreamSpliterators$WrappingSpliterator.forEachRemaining(StreamSpliterators.java:310) ~[na:na]
+	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:735) ~[na:na]
+	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:734) ~[na:na]
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:762) ~[na:na]
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.invokeTestInstancePostProcessors(ClassBasedTestDescriptor.java:377) ~[junit-jupiter-engine-5.10.5.jar:5.10.5]
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$instantiateAndPostProcessTestInstance$6(ClassBasedTestDescriptor.java:290) ~[junit-jupiter-engine-5.10.5.jar:5.10.5]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.instantiateAndPostProcessTestInstance(ClassBasedTestDescriptor.java:289) ~[junit-jupiter-engine-5.10.5.jar:5.10.5]
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$4(ClassBasedTestDescriptor.java:279) ~[junit-jupiter-engine-5.10.5.jar:5.10.5]
+	at java.base/java.util.Optional.orElseGet(Optional.java:364) ~[na:na]
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$5(ClassBasedTestDescriptor.java:278) ~[junit-jupiter-engine-5.10.5.jar:5.10.5]
+	at org.junit.jupiter.engine.execution.TestInstancesProvider.getTestInstances(TestInstancesProvider.java:31) ~[junit-jupiter-engine-5.10.5.jar:5.10.5]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$prepare$0(TestMethodTestDescriptor.java:106) ~[junit-jupiter-engine-5.10.5.jar:5.10.5]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:105) ~[junit-jupiter-engine-5.10.5.jar:5.10.5]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:69) ~[junit-jupiter-engine-5.10.5.jar:5.10.5]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$prepare$2(NodeTestTask.java:128) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.prepare(NodeTestTask.java:128) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511) ~[na:na]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:160) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:146) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:144) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:143) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:100) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511) ~[na:na]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:160) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:146) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:144) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:143) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:100) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:198) ~[junit-platform-launcher-1.10.5.jar:1.10.5]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:169) ~[junit-platform-launcher-1.10.5.jar:1.10.5]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:93) ~[junit-platform-launcher-1.10.5.jar:1.10.5]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:58) ~[junit-platform-launcher-1.10.5.jar:1.10.5]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:141) ~[junit-platform-launcher-1.10.5.jar:1.10.5]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:57) ~[junit-platform-launcher-1.10.5.jar:1.10.5]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:103) ~[junit-platform-launcher-1.10.5.jar:1.10.5]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:85) ~[junit-platform-launcher-1.10.5.jar:1.10.5]
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:47) ~[junit-platform-launcher-1.10.5.jar:1.10.5]
+	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor$CollectAllTestClassesExecutor.processAllTestClasses(JUnitPlatformTestClassProcessor.java:124) ~[na:na]
+	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor$CollectAllTestClassesExecutor.access$000(JUnitPlatformTestClassProcessor.java:99) ~[na:na]
+	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor.stop(JUnitPlatformTestClassProcessor.java:94) ~[na:na]
+	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.stop(SuiteTestClassProcessor.java:63) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36) ~[na:na]
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24) ~[na:na]
+	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33) ~[na:na]
+	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:92) ~[na:na]
+	at jdk.proxy1/jdk.proxy1.$Proxy4.stop(Unknown Source) ~[na:na]
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker$3.run(TestWorker.java:200) ~[na:na]
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:132) ~[na:na]
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:103) ~[na:na]
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:63) ~[na:na]
+	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56) ~[na:na]
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:121) ~[na:na]
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:71) ~[na:na]
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'org.springframework.scheduling.config.ScheduledTaskHolder' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoMatchingBeanFound(DefaultListableBeanFactory.java:1880) ~[spring-beans-6.1.14.jar:6.1.14]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1406) ~[spring-beans-6.1.14.jar:6.1.14]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1353) ~[spring-beans-6.1.14.jar:6.1.14]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:785) ~[spring-beans-6.1.14.jar:6.1.14]
+	... 91 common frames omitted
+
+2024-12-09T13:15:29.379Z  INFO 13084 --- [Client_Project] [Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [uk.ac.cf.spring.client_project.request.RequestControllerTests]: RequestControllerTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-12-09T13:15:29.418Z  INFO 13084 --- [Client_Project] [Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration uk.ac.cf.spring.client_project.ClientProjectApplication for test class uk.ac.cf.spring.client_project.request.RequestControllerTests
+2024-12-09T13:15:29.631Z  INFO 13084 --- [Client_Project] [Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [uk.ac.cf.spring.client_project.request.RequestRepositoryTests]: RequestRepositoryTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-12-09T13:15:29.635Z  INFO 13084 --- [Client_Project] [Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration uk.ac.cf.spring.client_project.ClientProjectApplication for test class uk.ac.cf.spring.client_project.request.RequestRepositoryTests
+2024-12-09T13:15:29.667Z  INFO 13084 --- [Client_Project] [Test worker] u.a.c.s.c.r.RequestRepositoryTests       : Starting RequestRepositoryTests using Java 17.0.11 with PID 13084 (started by c23060249 in C:\Users\c23060249\projects\uni\client-project-team-10)
+2024-12-09T13:15:29.669Z  INFO 13084 --- [Client_Project] [Test worker] u.a.c.s.c.r.RequestRepositoryTests       : No active profile set, falling back to 1 default profile: "default"
+2024-12-09T13:15:30.492Z  INFO 13084 --- [Client_Project] [Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Starting...
+2024-12-09T13:15:30.498Z  INFO 13084 --- [Client_Project] [Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-6 - Added connection org.mariadb.jdbc.Connection@5d46f4a3
+2024-12-09T13:15:30.500Z  INFO 13084 --- [Client_Project] [Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Start completed.
+2024-12-09T13:15:30.668Z  INFO 13084 --- [Client_Project] [Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2024-12-09T13:15:30.668Z  INFO 13084 --- [Client_Project] [Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2024-12-09T13:15:30.669Z  INFO 13084 --- [Client_Project] [Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2024-12-09T13:15:30.678Z  INFO 13084 --- [Client_Project] [Test worker] u.a.c.s.c.r.RequestRepositoryTests       : Started RequestRepositoryTests in 1.039 seconds (process running for 12.741)
+2024-12-09T13:15:30.701Z  INFO 13084 --- [Client_Project] [Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [uk.ac.cf.spring.client_project.staff.QRScannerTests]: QRScannerTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-12-09T13:15:30.737Z  INFO 13084 --- [Client_Project] [Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration uk.ac.cf.spring.client_project.ClientProjectApplication for test class uk.ac.cf.spring.client_project.staff.QRScannerTests
+2024-12-09T13:15:30.752Z ERROR 13084 --- [Client_Project] [Test worker] u.a.c.s.c.qrcode.QRController            : Failed to decrypt QR code data: arraycopy: last source index 16 out of bounds for byte[8]
+2024-12-09T13:15:30.781Z  INFO 13084 --- [Client_Project] [Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [uk.ac.cf.spring.client_project.staff.StaffControllerTests]: StaffControllerTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-12-09T13:15:30.786Z  INFO 13084 --- [Client_Project] [Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration uk.ac.cf.spring.client_project.ClientProjectApplication for test class uk.ac.cf.spring.client_project.staff.StaffControllerTests
+2024-12-09T13:15:30.826Z  WARN 13084 --- [Client_Project] [Test worker] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'locationId' for method parameter type Long is not present]
+2024-12-09T13:15:30.868Z  INFO 13084 --- [Client_Project] [Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [uk.ac.cf.spring.client_project.staff.StaffServiceTests]: StaffServiceTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-12-09T13:15:30.871Z  INFO 13084 --- [Client_Project] [Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration uk.ac.cf.spring.client_project.ClientProjectApplication for test class uk.ac.cf.spring.client_project.staff.StaffServiceTests
+2024-12-09T13:15:30.911Z  INFO 13084 --- [Client_Project] [Test worker] u.a.c.s.c.staff.StaffServiceTests        : Starting StaffServiceTests using Java 17.0.11 with PID 13084 (started by c23060249 in C:\Users\c23060249\projects\uni\client-project-team-10)
+2024-12-09T13:15:30.912Z  INFO 13084 --- [Client_Project] [Test worker] u.a.c.s.c.staff.StaffServiceTests        : No active profile set, falling back to 1 default profile: "default"
+2024-12-09T13:15:31.389Z  INFO 13084 --- [Client_Project] [Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-7 - Starting...
+2024-12-09T13:15:31.394Z  INFO 13084 --- [Client_Project] [Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-7 - Added connection org.mariadb.jdbc.Connection@205c5cd0
+2024-12-09T13:15:31.395Z  INFO 13084 --- [Client_Project] [Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-7 - Start completed.
+2024-12-09T13:15:31.769Z  INFO 13084 --- [Client_Project] [Test worker] u.a.c.s.c.staff.StaffServiceTests        : Started StaffServiceTests in 0.894 seconds (process running for 13.832)
+2024-12-09T13:15:31.775Z  INFO 13084 --- [Client_Project] [Test worker] u.a.c.s.c.staff.StaffServiceImpl         : Approved request found for user 1
+2024-12-09T13:15:31.787Z  INFO 13084 --- [Client_Project] [Test worker] u.a.c.s.c.staff.StaffServiceImpl         : No approved request found for user 1
+2024-12-09T13:15:31.794Z  INFO 13084 --- [Client_Project] [Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [uk.ac.cf.spring.client_project.user.UserLoginTest]: UserLoginTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-12-09T13:15:31.827Z  INFO 13084 --- [Client_Project] [Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration uk.ac.cf.spring.client_project.ClientProjectApplication for test class uk.ac.cf.spring.client_project.user.UserLoginTest
+2024-12-09T13:15:31.853Z  INFO 13084 --- [Client_Project] [Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [uk.ac.cf.spring.client_project.user.UserRegistrationTest]: UserRegistrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-12-09T13:15:31.857Z  INFO 13084 --- [Client_Project] [Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration uk.ac.cf.spring.client_project.ClientProjectApplication for test class uk.ac.cf.spring.client_project.user.UserRegistrationTest
+2024-12-09T13:15:32.023Z  INFO 13084 --- [Client_Project] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-12-09T13:15:32.033Z  INFO 13084 --- [Client_Project] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-12-09T13:15:32.038Z  INFO 13084 --- [Client_Project] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown initiated...
+2024-12-09T13:15:32.044Z  INFO 13084 --- [Client_Project] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown completed.
+2024-12-09T13:15:32.048Z  INFO 13084 --- [Client_Project] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown initiated...
+2024-12-09T13:15:32.054Z  INFO 13084 --- [Client_Project] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown completed.
+2024-12-09T13:15:32.056Z  INFO 13084 --- [Client_Project] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Shutdown initiated...
+2024-12-09T13:15:32.061Z  INFO 13084 --- [Client_Project] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Shutdown completed.
+2024-12-09T13:15:32.064Z  INFO 13084 --- [Client_Project] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Shutdown initiated...
+2024-12-09T13:15:32.070Z  INFO 13084 --- [Client_Project] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Shutdown completed.
+2024-12-09T13:15:32.072Z  INFO 13084 --- [Client_Project] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Shutdown initiated...
+2024-12-09T13:15:32.078Z  INFO 13084 --- [Client_Project] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Shutdown completed.
+2024-12-09T13:15:32.080Z  INFO 13084 --- [Client_Project] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-7 - Shutdown initiated...
+2024-12-09T13:15:32.085Z  INFO 13084 --- [Client_Project] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-7 - Shutdown completed.
