@@ -6,6 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import uk.ac.cf.spring.client_project.request.Request;
 import uk.ac.cf.spring.client_project.request.RequestRepository;
+import uk.ac.cf.spring.client_project.request.RequestStatus;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -39,7 +40,7 @@ class StaffServiceTests {
         Long userId = 1L;
         List<Request> requests = new ArrayList<>();
         Request approvedRequest = new Request();
-        approvedRequest.setIsApproved(true);
+        approvedRequest.setStatus(RequestStatus.APPROVED); //set to enum
         approvedRequest.setVisitStartDate(LocalDate.now());
         approvedRequest.setVisitEndDate(LocalDate.now().plusDays(7));
         requests.add(approvedRequest);
@@ -54,7 +55,7 @@ class StaffServiceTests {
         Long userId = 1L;
         List<Request> requests = new ArrayList<>();
         Request unapprovedRequest = new Request();
-        unapprovedRequest.setIsApproved(false);
+        unapprovedRequest.setStatus(RequestStatus.DENIED);
         unapprovedRequest.setVisitStartDate(LocalDate.now());
         unapprovedRequest.setVisitEndDate(LocalDate.now().plusDays(7));
         requests.add(unapprovedRequest);

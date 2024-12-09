@@ -2,8 +2,13 @@ package uk.ac.cf.spring.client_project.security;
 
 import lombok.Getter;
 import lombok.experimental.UtilityClass;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import javax.crypto.*;
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.security.InvalidAlgorithmParameterException;
@@ -11,13 +16,13 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Base64;
-import java.util.HashMap;
 import java.util.Map;
 
 // Encryption/decryption adapted from
 // https://www.baeldung.com/java-aes-encryption-decryption
 @UtilityClass
 public class QREncryptionUtils {
+    private static final Logger logger = LoggerFactory.getLogger(QREncryptionUtils.class);
     private static final String ALGORITHM = "AES/CBC/PKCS5Padding";
     @Getter
     private final String secretKey = System.getenv("QR_ENCRYPTION_KEY");
@@ -75,6 +80,7 @@ public class QREncryptionUtils {
 
     private static SecretKeySpec decodeSecretKey() {
         if (secretKey == null) {
+            logger.error("Secret key not found when attempting to decrypt");
             throw new IllegalStateException("Environment variable QR_ENCRYPTION_KEY not found");
         }
 
@@ -86,6 +92,5 @@ public class QREncryptionUtils {
     public static boolean validateDecryptedData(Map<String, Object> decryptedData) {
         String secretKey = getSecretKey();
         return decryptedData.get("secretKey").equals(secretKey) && decryptedData.containsKey("userId") && decryptedData.containsKey("timestamp");
-
     }
 }

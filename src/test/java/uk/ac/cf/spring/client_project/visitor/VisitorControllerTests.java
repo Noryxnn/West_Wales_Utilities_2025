@@ -1,6 +1,7 @@
-package uk.ac.cf.spring.client_project.checkin;
+package uk.ac.cf.spring.client_project.visitor;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.MockedStatic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -29,12 +30,21 @@ class VisitorControllerTests {
 
     @Test
     void shouldGetCheckInWithQrCodeAttribute() throws Exception {
-        mvc.perform(get("/check-in"))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(view().name("visitor/check-in"))
-                .andExpect(model().attributeExists("qrcode"));
+
+        try (MockedStatic<QRCodeGenerator> mockedQrCode = mockStatic(QRCodeGenerator.class)) {
+            mockedQrCode.when(() -> QRCodeGenerator.getQRCode(300, 300))
+                    .thenReturn("mockQrCode");  // Return a mock QR code string
+
+            mvc.perform(get("/check-in"))
+                    .andDo(print())
+                    .andExpect(status().isOk())
+                    .andExpect(view().name("visitor/check-in"))
+                    .andExpect(model().attributeExists("qrcode"));  // Assert the "qrcode" attribute exists
+        }
     }
+
+    //referenced from: https://stackoverflow.com/questions/21105403/mocking-static-methods-with-mockito
+
 
     @Test
     void shouldGetCheckInWithErrorIfQrCodeGenerationFails() throws Exception {
