@@ -1,7 +1,7 @@
 CREATE DATABASE IF NOT EXISTS client_project_db;
 USE client_project_db;
 
-DROP TABLE IF EXISTS request_status, requests, visits_archive, visits, locations, location_types, user_roles, roles, users;
+DROP TABLE IF EXISTS request_status, requests, visits_archive, visits, locations, locations_archive, location_types, user_roles, roles, users;
 
 -- create the tables in the correct order
 CREATE TABLE users (
@@ -34,6 +34,18 @@ CREATE TABLE location_types (
 SELECT * FROM location_types;
 
 CREATE TABLE locations (
+                           location_id INT AUTO_INCREMENT PRIMARY KEY,
+                           name VARCHAR(255) NOT NULL,
+                           address_line_1 VARCHAR(255) NOT NULL,
+                           address_line_2 VARCHAR(255),
+                           city VARCHAR(255) NOT NULL,
+                           postcode VARCHAR(255) NOT NULL,
+                           type_id INT,
+    deleted BOOLEAN DEFAULT FALSE,
+                           FOREIGN KEY (type_id) REFERENCES location_types (type_id)
+) ENGINE=InnoDB;
+
+CREATE TABLE locations_archive (
                            location_id INT AUTO_INCREMENT PRIMARY KEY,
                            name VARCHAR(255) NOT NULL,
                            address_line_1 VARCHAR(255) NOT NULL,
