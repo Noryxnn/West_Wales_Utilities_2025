@@ -38,15 +38,9 @@
             margin-bottom: 30px;
         }
 
-        /* Buttons Container */
-        .button-container {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        /* Button Styles */
+        /* Buttons */
         .button {
+            display: inline-block;
             text-decoration: none;
             color: #fff;
             font-size: 1.2em;
@@ -55,18 +49,9 @@
             border: none;
             transition: background-color 0.3s ease;
             cursor: pointer;
+            margin: 10px 0;
         }
 
-        /* Register Button */
-        .register-button {
-            background-color: #ff6600; /* Wales & West Utilities orange */
-        }
-
-        .register-button:hover {
-            background-color: #e65c00;
-        }
-
-        /* Login Button */
         .login-button {
             background-color: #333; /* Dark grey */
         }
@@ -75,15 +60,25 @@
             background-color: #1a1a1a;
         }
 
+        .register-button {
+            background-color: #ff6600; /* Wales & West Utilities orange */
+        }
+
+        .register-button:hover {
+            background-color: #e65c00;
+        }
+
+        /* Divider */
+        .divider {
+            margin: 30px 0;
+            font-size: 1em;
+            color: #999;
+        }
+
         /* Mobile Responsiveness */
         @media (max-width: 600px) {
-            .button-container {
-                flex-direction: column;
-            }
-
             .button {
                 width: 100%;
-                margin-bottom: 10px;
             }
         }
     </style>
@@ -91,11 +86,10 @@
 <body>
 <div class="welcome-container">
     <h1>Welcome to Wales & West Utilities</h1>
-    <p>Choose an option below to get started:</p>
-    <div class="button-container">
-        <a href="http://localhost:8080/register" class="button register-button">Sign Up</a>
-        <a href="http://localhost:8080/login" class="button login-button">Login</a>
-    </div>
+    <p>Tracking Digital Identity and Visitor Management</p>
+    <a href="http://localhost:8080/login" class="button login-button">Login</a>
+    <div class="divider">Haven't got an account?</div>
+    <a href="http://localhost:8080/register" class="button register-button">Sign Up</a>
 </div>
 </body>
 </html>
