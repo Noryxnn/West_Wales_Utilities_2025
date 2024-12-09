@@ -1,3 +1,5 @@
+SET foreign_key_checks = 0;
+
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
                                        `user_id` BIGINT AUTO_INCREMENT PRIMARY KEY,
