@@ -22,7 +22,6 @@ public class SecurityConfig {
             "/register",
             "/welcome",
             "/error",
-            //"/login",
             "/loginSuccess"
     };
 
@@ -35,7 +34,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(request -> request
                         .requestMatchers(ENDPOINTS_WHITELIST).permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/staff/**").hasRole("STAFF")
+                        .requestMatchers("/staff/**", "/scan").hasRole("STAFF")
                         .requestMatchers("/dashboard", "requests/**", "check-in").hasRole("VISITOR")
                         .anyRequest().authenticated())
                 .formLogin(form -> form
