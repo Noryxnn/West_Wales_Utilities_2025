@@ -56,13 +56,30 @@ CREATE TABLE locations_archive (
                            FOREIGN KEY (type_id) REFERENCES location_types (type_id)
 ) ENGINE=InnoDB;
 
+CREATE TABLE IF NOT EXISTS `visits` (
+                                        `visit_id` INT AUTO_INCREMENT PRIMARY KEY,
+                                        `location_id` INT,
+                                        `user_id` INT,
+                                        `check_in` TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS `visits_archive` (
+                                                `visit_archive_id` INT AUTO_INCREMENT PRIMARY KEY,
+                                                `visit_id` INT,
+                                                `location_id` INT,
+                                                `user_id` INT,
+                                                `check_in` DATETIME NOT NULL,
+                                                `check_out` DATETIME NOT NULL
+) ENGINE=InnoDB;
+-- added visits table
+
 CREATE TABLE requests (
                           request_id BIGINT AUTO_INCREMENT PRIMARY KEY,
                           user_id BIGINT,
                           request_date DATETIME NOT NULL,
                           visit_start_date DATE NOT NULL,
                           visit_end_date DATE NOT NULL,
-                          is_approved BOOLEAN,
+                          `status` VARCHAR(20) NOT NULL DEFAULT 'PENDING',
                           FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
