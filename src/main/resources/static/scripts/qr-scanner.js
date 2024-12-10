@@ -37,11 +37,11 @@ async function startQrScanner() {
 
                 // Process server response
                 console.log('Server Response:', data);
-                if (data.includes('approved')) {
-                    qrReaderResults.innerHTML = `<p style="color: green;">Visitor is approved</p>`;
+                if (data.includes('success')) {
+                    qrReaderResults.innerHTML = `<p style="color: green;">Check-in successful</p>`;
 
                 } else if (data.includes('denied')) {
-                    qrReaderResults.innerHTML = `<p style="color: red;">Visitor is denied</p>`;
+                    qrReaderResults.innerHTML = `<p style="color: red;">Check-in denied</p>`;
 
                 } else {
                     qrReaderResults.innerHTML = `<p>Invalid QR code</p>`;

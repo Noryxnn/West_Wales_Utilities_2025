@@ -18,12 +18,13 @@ VALUES
     ('Penarth Office', '2 Penarth Road', 'Suite 4', 'Penarth', 'CF10 3AG', 2),
     ('Swansea Office', '3 Swansea Road', '', 'Swansea', 'SA1 1SA', 2);
 
+
 -- Insert data into users (this will use auto-incrementing user_id values)
 INSERT INTO users (first_name, last_name, password, email, company_name)
 VALUES
-    ('John', 'Doe', 'password123', 'john@doe.gmail.com', 'Doe Ltd'),
-    ('Jane', 'Doe', 'password456', 'jane@doe.com', 'Doe Ltd'),
-    ('John', 'Smith', 'password789', 'jsmith@gmail.com', 'Smith Ltd');
+    ('John', 'Doe', 'john123', 'john@doe.gmail.com', 'Doe Ltd'),
+    ('Jane', 'Doe', 'jane123', 'jane@doe.com', 'Doe Ltd'),
+    ('John', 'Smith', 'smith123', 'jsmith@gmail.com', 'Smith Ltd');
 
 
 -- Insert data into requests
@@ -32,3 +33,9 @@ VALUES
     (1, '2020-01-01 09:00:00', CURDATE(), DATE_ADD(CURDATE(), INTERVAL 7 DAY), 'APPROVED'),
     (2, '2020-01-01 09:00:00', '2020-01-01', '2020-01-01', 'PENDING'),
     (3, '2020-01-01 09:00:00', '2020-01-01', '2020-01-01', 'PENDING');
+
+INSERT INTO visits (visit_id, user_id, location_id, check_in_datetime, check_out_datetime)
+VALUES
+    (1, 1, 1, '2020-01-01 09:00:00', '2020-01-01 17:00:00'),
+    (2, 2, 2, '2020-01-01 09:00:00', null),
+    (3, 3, 3, '2020-01-01 09:00:00', null);

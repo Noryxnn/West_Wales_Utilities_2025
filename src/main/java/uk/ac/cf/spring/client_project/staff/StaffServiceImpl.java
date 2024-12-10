@@ -1,5 +1,8 @@
 package uk.ac.cf.spring.client_project.staff;
 
+import java.time.LocalDate;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,11 +10,6 @@ import org.springframework.stereotype.Service;
 import uk.ac.cf.spring.client_project.request.Request;
 import uk.ac.cf.spring.client_project.request.RequestRepository;
 import uk.ac.cf.spring.client_project.request.RequestStatus;
-
-import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.List;
-
 @Service
 public class StaffServiceImpl implements StaffService {
     private static final Logger logger = LoggerFactory.getLogger(StaffServiceImpl.class);
@@ -36,21 +34,4 @@ public class StaffServiceImpl implements StaffService {
         logger.info("No approved request found for user {}", userId);
         return false;
     }
-
-    public HashMap<String, Object> stringToHashMap(String input) {
-        input = input.substring(1, input.length() - 1);
-
-        HashMap<String, Object> map = new HashMap<>();
-        String[] splitInput = input.split(", ");
-
-        for (String s : splitInput) {
-            String[] splitItem = s.split("=", 2);
-            String key = splitItem[0].trim();
-            String value = splitItem[1].trim();
-
-            map.put(key, value);
-        }
-        return map;
-    }
-
 }

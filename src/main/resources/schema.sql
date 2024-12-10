@@ -82,3 +82,12 @@ CREATE TABLE requests (
                           status VARCHAR(20) NOT NULL DEFAULT 'PENDING'
 ) ENGINE=InnoDB;
 
+CREATE TABLE visits (
+                        visit_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                        user_id BIGINT NOT NULL,
+                        location_id INT NOT NULL,
+                        check_in_datetime DATETIME NOT NULL,
+                        check_out_datetime DATETIME
+) ENGINE=InnoDB;
+
+

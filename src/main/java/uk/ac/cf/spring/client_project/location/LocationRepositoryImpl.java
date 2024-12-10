@@ -12,8 +12,6 @@ import java.util.List;
 @Repository
 
 public class LocationRepositoryImpl implements LocationRepository {
-
-
     private final JdbcTemplate jdbcTemplate;
     private RowMapper<Location> locationRowMapper;
     private RowMapper<LocationType> locationTypeRowMapper;
