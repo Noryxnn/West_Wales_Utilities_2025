@@ -15,9 +15,6 @@ public class RequestServiceImpl implements RequestService {
     public List<Request> getPendingRequests() {
         return requestRepository.getPendingRequests();
     }
-    public Request getRequest(Long requestId) {
-        return requestRepository.getRequest(requestId);
-    }
     public Request save(Request request) {
         requestRepository.save(request);
         return request;

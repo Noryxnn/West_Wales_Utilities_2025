@@ -35,9 +35,6 @@ CREATE TABLE IF NOT EXISTS location_types
     name    VARCHAR(255) NOT NULL
 ) ENGINE = InnoDB;
 
-SELECT *
-FROM location_types;
-
 CREATE TABLE IF NOT EXISTS locations
 (
     location_id    INT AUTO_INCREMENT PRIMARY KEY,
