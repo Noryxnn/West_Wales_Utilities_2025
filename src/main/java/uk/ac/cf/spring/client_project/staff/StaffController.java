@@ -1,5 +1,6 @@
 package uk.ac.cf.spring.client_project.staff;
 
+import jakarta.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ public class StaffController {
     }
 
     @PostMapping("/scan")
-    public ModelAndView getScanner(@RequestParam("locationId") Long locationId) {
+    public ModelAndView getScanner(@RequestParam("locationId") Long locationId, HttpSession session) {
         ModelAndView modelAndView = new ModelAndView("staff/qr-scanner");
 
         if (locationId == null || locationId == 0) {
@@ -45,7 +46,8 @@ public class StaffController {
             logger.error("An invalid location was provided when attempting to scan: {}", locationId);
             throw new IllegalArgumentException("Location not found with ID: " + locationId);
         }
-        modelAndView.addObject("location", location);
+        session.setAttribute("locationId", locationId);
+        modelAndView.addObject("locationName", location.getName());
 
         return modelAndView;
     }

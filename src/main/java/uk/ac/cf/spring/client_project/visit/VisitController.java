@@ -1,10 +1,8 @@
 package uk.ac.cf.spring.client_project.visit;
 
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/admin/visits")
@@ -17,7 +15,7 @@ public class VisitController {
 
     @GetMapping
     public ModelAndView getAllVisits() {
-        ModelAndView modelAndView = new ModelAndView("visit/visittracking");
+        ModelAndView modelAndView = new ModelAndView("visit/visit-tracking");
         modelAndView.addObject("visits", visitService.getCurrentlyOnSiteVisits());
         return modelAndView;
     }
