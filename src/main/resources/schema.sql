@@ -79,7 +79,6 @@ CREATE TABLE requests (
                           request_date DATETIME NOT NULL,
                           visit_start_date DATE NOT NULL,
                           visit_end_date DATE NOT NULL,
-                          `status` VARCHAR(20) NOT NULL DEFAULT 'PENDING',
-                          FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE CASCADE
+                          status VARCHAR(20) NOT NULL DEFAULT 'PENDING'
 ) ENGINE=InnoDB;
 

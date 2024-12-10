@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -68,25 +67,4 @@ public class RequestController {
         }
         return modelAndView;
     }
-
-    @GetMapping("request/accept/{id}")
-    public ModelAndView acceptRequest(@PathVariable Long id) {
-        requestService.updateRequestStatus(id, RequestStatus.APPROVED);
-        System.out.println("Request with id " + id + " has been approved!");
-        return new ModelAndView("redirect:/pending-requests");
-    }
-
-    @GetMapping("request/deny/{id}")
-    public ModelAndView denyRequest(@PathVariable Long id) {
-        requestService.updateRequestStatus(id, RequestStatus.DENIED);
-        System.out.println("Request with id " + id + " has been denied!");
-        return new ModelAndView("redirect:/pending-requests");
-    }
-
-
-
-
-
-
-
 }

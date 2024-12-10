@@ -12,8 +12,8 @@ public class RequestServiceImpl implements RequestService {
     }
 
     public List<Request> getAllRequests() {return requestRepository.getAllRequests(); }
-    public List<Request> getOpenRequests() {
-        return requestRepository.getOpenRequests();
+    public List<Request> getPendingRequests() {
+        return requestRepository.getPendingRequests();
     }
     public Request getRequest(Long requestId) {
         return requestRepository.getRequest(requestId);
@@ -25,14 +25,6 @@ public class RequestServiceImpl implements RequestService {
     public boolean validateUserId(Long userId) {
         return requestRepository.userExists(userId);
     }
-
-
-
-
-
-    public void acceptRequest(Long requestId) {requestRepository.acceptRequest(requestId);}
-
-    public void denyRequest(Long requestId) {requestRepository.denyRequest(requestId); }
 
     @Override
     public void updateRequestStatus(Long requestId, RequestStatus requestStatus) {
@@ -53,14 +45,5 @@ public class RequestServiceImpl implements RequestService {
 
         }
     }
-
-
-
-    public List<RequestDTO> findPendingRequests() {
-        return requestRepository.findPendingRequests();
-    }
-
-
-
 }
 

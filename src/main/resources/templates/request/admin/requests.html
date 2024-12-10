@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+    <title>Pending Requests</title>
+</head>
+<body>
+
+<div>
+    <!-- Header -->
+    <div>
+    </div>
+
+    <div>
+        <h1>Pending Requests</h1>
+
+        <table>
+            <thead>
+            <tr>
+                <th>Request ID</th>
+                <th>User ID</th>
+                <th>Request Date</th>
+                <th>Visit Start Date</th>
+                <th>Visit End Date</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="request : ${requests}">
+
+                <td th:text="${request.requestId}"></td>
+                <td th:text="${request.userId}"></td>
+                <td th:text="${#temporals.format(request.requestDate, 'yyyy-MM-dd')}"></td>
+                <td th:text="${#temporals.format(request.visitStartDate, 'yyyy-MM-dd')}"></td>
+                <td th:text="${#temporals.format(request.visitEndDate, 'yyyy-MM-dd')}"></td>
+
+                <td>
+                    <!-- Show buttons if status is PENDING -->
+                    <div th:if="${request.status.name() == 'PENDING'}">
+                        <form th:action="@{/admin/request/accept/{id}(id=${request.requestId})}" method="get">
+                            <button type="submit">Accept</button>
+                        </form>
+                        <form th:action="@{/admin/request/deny/{id}(id=${request.requestId})}" method="get">
+                            <button type="submit">Deny</button>
+                        </form>
+                    </div>
+                    <!-- Show text if status is APPROVED or DENIED -->
+                    <div th:if="${request.status.name() == 'APPROVED'}">
+                        Accepted
+                    </div>
+                    <div th:if="${request.status.name() == 'DENIED'}">
+                        Denied
+                    </div>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Footer -->
+<div>
+</div>
+
+</body>
+</html>

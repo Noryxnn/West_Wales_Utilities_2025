@@ -27,10 +27,8 @@ VALUES
 
 
 -- Insert data into requests
-INSERT INTO requests (user_id, request_date, visit_start_date, visit_end_date)
+INSERT INTO requests (user_id, request_date, visit_start_date, visit_end_date, status)
 VALUES
-    (1, '2020-01-01 09:00:00', CURDATE(), DATE_ADD(CURDATE(), INTERVAL 7 DAY)),
-    (2, '2020-01-01 09:00:00', '2020-01-01', '2020-01-01'),
-    (3, '2020-01-01 09:00:00', '2020-01-01', '2020-01-01');
-
-
+    (1, '2020-01-01 09:00:00', CURDATE(), DATE_ADD(CURDATE(), INTERVAL 7 DAY), 'APPROVED'),
+    (2, '2020-01-01 09:00:00', '2020-01-01', '2020-01-01', 'PENDING'),
+    (3, '2020-01-01 09:00:00', '2020-01-01', '2020-01-01', 'PENDING');
