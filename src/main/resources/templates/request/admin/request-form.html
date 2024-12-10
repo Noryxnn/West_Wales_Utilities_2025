@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Request a Visit</title>
+
+    <!--    Placeholder for fragments.-->
+    <!--    <link th:replace="~{fragments/header :: bootstrap-css}"/>-->
+
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Please enter request details: </h1>
+
+    <form th:action="@{/admin/requests/new}" th:method="post" th:object="${request}">
+
+        <input th:field="*{requestId}" th:value="0" type="hidden"/>
+
+        <div class="mb-3">
+            <label class="form-label" th:for="*{userId}">User ID:</label>
+            <input class="form-control" placeholder="User ID" th:field="*{userId}" type="text"/>
+            <div class="alert alert-warning" th:errors="*{userId}" th:if="${#fields.hasErrors('userId')}">User ID Error</div>
+        </div>
+
+        <input th:field="*{requestDate}" th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd HH:mm:ss')}" type="hidden"/>
+
+        <div class="mb-3">
+            <label class="form-label" th:for="*{visitStartDate}">Visit Start Date:</label>
+            <input class="form-control" placeholder=" Start Date of Visit" th:field="*{visitStartDate}" type="date"/>
+            <div class="alert alert-warning" th:errors="*{visitStartDate}" th:if="${#fields.hasErrors('visitStartDate')}">Visit Start Date Error</div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" th:for="*{visitEndDate}">Visit End Date:</label>
+            <input class="form-control" placeholder="End Date of Visit" th:field="*{visitEndDate}" type="date"/>
+            <div class="alert alert-warning" th:errors="*{visitEndDate}" th:if="${#fields.hasErrors('visitEndDate')}">Visit End Date Error</div>
+        </div>
+
+        <div class="mb-3">
+            <button class="btn btn-primary">Submit</button>
+        </div>
+
+    </form>
+
+
+</div>
+
+<!--Placeholder for fragments.-->
+<!--<div th:replace="~{fragments/footer :: footer-links}"></div>-->
+<!--<div th:replace="~{fragments/footer :: bootstrap-js}"></div>-->
+
+</body>

@@ -53,6 +53,7 @@ CREATE TABLE locations_archive (
                            city VARCHAR(255) NOT NULL,
                            postcode VARCHAR(255) NOT NULL,
                            type_id INT,
+                        deleted_at DATETIME,
                            FOREIGN KEY (type_id) REFERENCES location_types (type_id)
 ) ENGINE=InnoDB;
 

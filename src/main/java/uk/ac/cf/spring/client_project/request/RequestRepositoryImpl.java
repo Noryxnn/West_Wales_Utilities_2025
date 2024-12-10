@@ -52,10 +52,16 @@ public class RequestRepositoryImpl implements RequestRepository {
         columns.put("visit_start_date", request.getVisitStartDate());
         columns.put("visit_end_date", request.getVisitEndDate());
 
-        Number requestId = simpleJdbcInsert.executeAndReturnKey(columns);
-        request.setRequestId(requestId.longValue());
-        Request savedRequest = findById(requestId.longValue());
-        System.out.println("Order saved: " + savedRequest);
+        try {
+            Number requestId = simpleJdbcInsert.executeAndReturnKey(columns);
+            request.setRequestId(requestId.longValue());
+        } catch (Exception e) {
+            System.err.println("Error inserting request: " + e.getMessage());
+            throw e;
+        }
+
+        Request savedRequest = findById(request.getRequestId());
+        System.out.println("Request saved: " + savedRequest);
 
         return request;
     }
