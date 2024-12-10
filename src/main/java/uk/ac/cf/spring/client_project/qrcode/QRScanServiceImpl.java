@@ -6,7 +6,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import uk.ac.cf.spring.client_project.security.QREncryptionUtils;
 import uk.ac.cf.spring.client_project.staff.StaffService;
+import uk.ac.cf.spring.client_project.visit.VisitDTO;
+import uk.ac.cf.spring.client_project.visit.VisitService;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,12 +17,14 @@ import java.util.Map;
 public class QRScanServiceImpl implements QRScanService {
     private static final Logger logger = LoggerFactory.getLogger(QRScanServiceImpl.class);
     StaffService staffService;
+    VisitService visitService;
 
-    public QRScanServiceImpl(StaffService staffService) {
+    public QRScanServiceImpl(StaffService staffService, VisitService visitService) {
         this.staffService = staffService;
+        this.visitService = visitService;
     }
 
-    public ResponseEntity<String> scanQRCode(String qrData) {
+    public ResponseEntity<String> scanQRCode(String qrData, Long locationId) {
         Map<String, Object> decryptedData;
         try {
             // Decrypt the QR code data
@@ -39,10 +44,24 @@ public class QRScanServiceImpl implements QRScanService {
 
         Long userId = Long.parseLong(decryptedData.get("userId").toString());
         if (staffService.isVisitorApproved(userId)) {
-            return ResponseEntity.ok("approved");
+            // Check in the visitor if they are approved for visit so that records can be kept
+            checkIn(userId, locationId);
+            return ResponseEntity.ok("success");
         } else {
             return ResponseEntity.ok("denied");
         }
+    }
+
+    public void checkIn(Long userId, Long locationId) {
+        VisitDTO visit = new VisitDTO();
+        visit.setUserId(userId);
+        visit.setLocationId(locationId);
+        visit.setCheckInDateTime(LocalDateTime.now());
+
+        visitService.save(visit);
+
+        logger.info("Visitor {} checked in at location {}", userId, locationId);
+        ResponseEntity.ok("success");
     }
 
 

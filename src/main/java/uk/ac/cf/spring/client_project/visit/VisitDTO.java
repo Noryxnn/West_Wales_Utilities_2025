@@ -15,6 +15,6 @@ public class VisitDTO {
     private LocalDateTime checkOutDateTime;
 
     public VisitDTO() {
-        this(0L, 0L, 0L, LocalDateTime.now(), null);
+        this(0L, 0L, 0L, null, null);
     }
 }

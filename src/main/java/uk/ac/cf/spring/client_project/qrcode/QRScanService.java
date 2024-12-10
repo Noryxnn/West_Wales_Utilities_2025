@@ -10,5 +10,5 @@ public interface QRScanService {
      * @param qrData The QR code data as a string
      * @return The approval status of a visitor
      */
-    ResponseEntity<String> scanQRCode(String qrData);
+    ResponseEntity<String> scanQRCode(String qrData, Long locationId);
 }

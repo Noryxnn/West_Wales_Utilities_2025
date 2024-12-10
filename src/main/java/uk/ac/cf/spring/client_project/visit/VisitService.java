@@ -6,4 +6,5 @@ import java.util.Map;
 
 public interface VisitService {
     List<Map<String, Object>> getCurrentlyOnSiteVisits();
+    void save(VisitDTO visitDTO);
 }

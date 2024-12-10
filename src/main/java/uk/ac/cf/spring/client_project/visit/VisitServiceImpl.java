@@ -16,4 +16,8 @@ public class VisitServiceImpl implements VisitService {
     public List<Map<String, Object>> getCurrentlyOnSiteVisits() {
         return visitRepository.getCurrentlyOnSiteVisits();
     }
+
+    public void save(VisitDTO visit) {
+        visitRepository.save(visit);
+    }
 }

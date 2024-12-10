@@ -5,4 +5,5 @@ import java.util.Map;
 
 public interface VisitRepository {
     List<Map<String, Object>> getCurrentlyOnSiteVisits();
+    void save(VisitDTO visit);
 }

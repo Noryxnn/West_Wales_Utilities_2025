@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import uk.ac.cf.spring.client_project.request.Request;
 import uk.ac.cf.spring.client_project.request.RequestRepository;
 
-import java.util.HashMap;
 
 @Service
 public class StaffServiceImpl implements StaffService {

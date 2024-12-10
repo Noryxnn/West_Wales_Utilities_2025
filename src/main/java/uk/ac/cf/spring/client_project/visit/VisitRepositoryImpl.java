@@ -14,25 +14,16 @@ import java.util.Map;
 @Repository
 public class VisitRepositoryImpl implements VisitRepository {
     private final JdbcTemplate jdbcTemplate;
-    private RowMapper<VisitDTO> visitRowMapper;
     @Getter
     private RowMapper<Map<String, Object>> visitDetailsRowMapper;
 
     @Autowired
     public VisitRepositoryImpl(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
-        setRowMappers();
+        setVisitDetailsRowMapper();
     }
 
-    private void setRowMappers() {
-        visitRowMapper = (rs, rowNum) -> new VisitDTO(
-                rs.getLong("visit_id"),
-                rs.getLong("user_id"),
-                rs.getLong("location_id"),
-                rs.getTimestamp("check_in").toLocalDateTime(),
-                rs.getTimestamp("check_out").toLocalDateTime()
-        );
-
+    private void setVisitDetailsRowMapper() {
         visitDetailsRowMapper = (rs, rowNum) -> {
             Map<String, Object> visitDetails = new HashMap<>();
             visitDetails.put("visitorName", rs.getString("user_first_name") + " " + rs.getString("user_last_name"));
@@ -53,9 +44,14 @@ public class VisitRepositoryImpl implements VisitRepository {
                 JOIN users u ON v.user_id = u.user_id
                 JOIN locations l ON v.location_id = l.location_id
                 
-                WHERE v.check_out_datetime IS NOT NULL
+                WHERE v.check_out_datetime IS NULL
                 """;
 
         return jdbcTemplate.query(sql, visitDetailsRowMapper);
+    }
+
+    public void save(VisitDTO visit) {
+        String sql = "INSERT INTO visits (user_id, location_id, check_in_datetime) VALUES (?, ?, ?)";
+        jdbcTemplate.update(sql, visit.getUserId(), visit.getLocationId(), visit.getCheckInDateTime());
     }
 }

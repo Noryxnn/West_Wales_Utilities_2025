@@ -1,7 +1,6 @@
 package uk.ac.cf.spring.client_project.qrcode;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,7 +18,8 @@ public class QRScanController {
     }
 
     @PostMapping("/scan")
-    public ResponseEntity<String> handleQRCodeScan(@RequestBody String qrData) {
-        return qrScanService.scanQRCode(qrData);
+    public ResponseEntity<String> handleQRCodeScan(@RequestBody String qrData, HttpSession session) {
+        Long locationId = (Long) session.getAttribute("locationId");
+        return qrScanService.scanQRCode(qrData, locationId);
     }
 }

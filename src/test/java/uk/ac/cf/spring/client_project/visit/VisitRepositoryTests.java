@@ -6,9 +6,11 @@ import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -34,7 +36,7 @@ class VisitRepositoryTests {
                 JOIN users u ON v.user_id = u.user_id
                 JOIN locations l ON v.location_id = l.location_id
                 
-                WHERE v.check_out_datetime IS NOT NULL
+                WHERE v.check_out_datetime IS NULL
                 """;
 
         when(jdbcTemplate.query(mockSQL, visitRepository.getVisitDetailsRowMapper())).thenReturn(List.of(
@@ -53,5 +55,18 @@ class VisitRepositoryTests {
         assertEquals("Building A", result.get(0).get("locationName"));
         assertEquals("08/12/2024", result.get(0).get("checkInDate"));
         assertEquals("10:30AM", result.get(0).get("checkInTime"));
+    }
+
+    @Test
+    void shouldSaveVisitInDatabase() {
+        VisitDTO visit = new VisitDTO();
+        visit.setUserId(1L);
+        visit.setLocationId(1L);
+        visit.setCheckInDateTime(LocalDateTime.now());
+
+        visitRepository.save(visit);
+
+        verify(jdbcTemplate).update("INSERT INTO visits (user_id, location_id, check_in_datetime) VALUES (?, ?, ?)",
+                visit.getUserId(), visit.getLocationId(), visit.getCheckInDateTime());
     }
 }
