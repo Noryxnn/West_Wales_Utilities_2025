@@ -7,4 +7,6 @@ import java.util.Map;
 public interface VisitService {
     List<Map<String, Object>> getCurrentlyOnSiteVisits();
     void save(VisitDTO visitDTO);
+    void update(VisitDTO visitDTO);
+    VisitDTO getCurrentVisit(Long userId, Long locationId);
 }
