@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
@@ -21,12 +22,12 @@ class VisitControllerTests {
 
     @Test
     void testGetAllVisits() {
-        VisitDTO mockVisit = new VisitDTO("John", "Office", "2024-12-04T10:00:00");
-        when(visitService.getCurrentlyOnSiteVisits()).thenReturn(List.of(mockVisit));
+        List<Map<String, Object>> mockVisits = List.of(Map.of("visitorName", "John Doe", "locationName", "Office", "checkInDate", "04/12/2024", "checkInTime", "00:00"));
+        when(visitService.getCurrentlyOnSiteVisits()).thenReturn(mockVisits);
 
         ModelAndView result = visitController.getAllVisits();
 
-        assertEquals("visit/visittracking", result.getViewName());
+        assertEquals("visit/visit-tracking", result.getViewName());
         assertEquals(1, ((List<?>) result.getModel().get("visits")).size());
     }
 }

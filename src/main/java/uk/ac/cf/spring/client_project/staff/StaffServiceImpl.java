@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import uk.ac.cf.spring.client_project.request.Request;
 import uk.ac.cf.spring.client_project.request.RequestRepository;
 
-import java.util.HashMap;
 
 @Service
 public class StaffServiceImpl implements StaffService {
@@ -36,21 +35,4 @@ public class StaffServiceImpl implements StaffService {
         logger.info("No approved request found for user {}", userId);
         return false;
     }
-
-    public HashMap<String, Object> stringToHashMap(String input) {
-        input = input.substring(1, input.length() - 1);
-
-        HashMap<String, Object> map = new HashMap<>();
-        String[] splitInput = input.split(", ");
-
-        for (String s : splitInput) {
-            String[] splitItem = s.split("=", 2);
-            String key = splitItem[0].trim();
-            String value = splitItem[1].trim();
-
-            map.put(key, value);
-        }
-        return map;
-    }
-
 }
