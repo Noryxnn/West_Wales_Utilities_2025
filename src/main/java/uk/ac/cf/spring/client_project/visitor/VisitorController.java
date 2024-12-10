@@ -10,7 +10,7 @@ import uk.ac.cf.spring.client_project.qrcode.QRCodeGenerator;
 @Controller
 public class VisitorController {
     private static final Logger logger = LoggerFactory.getLogger(VisitorController.class);
-    @GetMapping("/dashboard")
+    @GetMapping("/visitor/dashboard")
     public String getDashboard() {
         return "visitor/visitor-dashboard";
     }
