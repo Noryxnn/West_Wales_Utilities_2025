@@ -9,7 +9,6 @@ import uk.ac.cf.spring.client_project.request.RequestRepository;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -21,18 +20,6 @@ class StaffServiceTests {
     StaffService staffService;
     @MockBean
     RequestRepository requestRepository;
-
-    @Test
-    void shouldConvertStringToHashMap() {
-        String input = "{secretKey=123=, userId=1, timestamp=2024-12-04T19:31:02.653446300Z}";
-
-        HashMap<String, Object> output = staffService.stringToHashMap(input);
-
-        assertEquals(3, output.size());
-        assertEquals("1", output.get("userId"));
-        assertEquals("2024-12-04T19:31:02.653446300Z", output.get("timestamp"));
-        assertEquals("123=", output.get("secretKey"));
-    }
 
     @Test
     void shouldReturnTrueForApprovedVisitor() {

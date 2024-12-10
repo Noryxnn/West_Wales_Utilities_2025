@@ -18,12 +18,13 @@ VALUES
     ('Penarth Office', '2 Penarth Road', 'Suite 4', 'Penarth', 'CF10 3AG', 2),
     ('Swansea Office', '3 Swansea Road', '', 'Swansea', 'SA1 1SA', 2);
 
+
 -- Insert data into users (this will use auto-incrementing user_id values)
 INSERT INTO users (first_name, last_name, password, email, company_name)
 VALUES
-    ('John', 'Doe', 'password123', 'john@doe.gmail.com', 'Doe Ltd'),
-    ('Jane', 'Doe', 'password456', 'jane@doe.com', 'Doe Ltd'),
-    ('John', 'Smith', 'password789', 'jsmith@gmail.com', 'Smith Ltd');
+    ('John', 'Doe', 'john123', 'john@doe.gmail.com', 'Doe Ltd'),
+    ('Jane', 'Doe', 'jane123', 'jane@doe.com', 'Doe Ltd'),
+    ('John', 'Smith', 'smith123', 'jsmith@gmail.com', 'Smith Ltd');
 
 
 -- Insert data into requests
@@ -33,42 +34,9 @@ VALUES
     (2, '2020-01-01 09:00:00', '2020-01-01', '2020-01-01', false),
     (3, '2020-01-01 09:00:00', '2020-01-01', '2020-01-01', false);
 
-INSERT INTO roles (role_name) VALUES
-                                  ('ROLE_ADMIN'),
-                                  ('ROLE_USER'),
-                                  ('ROLE_STAFF');
 
-INSERT INTO user_roles (user_id, role_id) VALUES
-                                              (1, 1), -- John Doe is an admin
-                                              (2, 2), -- Jane Smith is a regular user
-                                              (2, 3); -- Jane Smith is also a staff member
-
-
-INSERT INTO users (first_name, last_name, password, email, company_name)
-VALUES ('Jane', 'Doe', '{bcrypt}$2a$10$hashedPassword', 'jane.doe@example.com', 'Doe Ltd');
-
-INSERT INTO roles (role_name) VALUES ('ROLE_STAFF');
-
-INSERT INTO user_roles (user_id, role_id)
-VALUES ((SELECT user_id FROM users WHERE email = 'jane.doe@example.com'),
-        (SELECT role_id FROM roles WHERE role_name = 'ROLE_STAFF'));
-
-SELECT * FROM users WHERE email = 'jane.doe@example.com';
-
-SELECT * FROM roles WHERE role_name = 'ROLE_STAFF';
-
-DELETE FROM users
-WHERE email = 'jane.doe@example.com'
-  AND user_id NOT IN (SELECT MIN(user_id) FROM users WHERE email = 'jane.doe@example.com');
-
-DELETE FROM roles
-WHERE role_name = 'ROLE_STAFF'
-  AND role_id NOT IN (SELECT MIN(role_id) FROM roles WHERE role_name = 'ROLE_STAFF');
-
-INSERT INTO user_roles (user_id, role_id)
-VALUES ((SELECT user_id FROM users WHERE email = 'jane.doe@example.com'),
-        (SELECT role_id FROM roles WHERE role_name = 'ROLE_STAFF'));
-
-SELECT * FROM user_roles WHERE user_id = (SELECT user_id FROM users WHERE email = 'jane.doe@example.com');
-
-select * from roles;
+INSERT INTO visits (visit_id, user_id, location_id, check_in_datetime, check_out_datetime)
+VALUES
+    (1, 1, 1, '2020-01-01 09:00:00', '2020-01-01 17:00:00'),
+    (2, 2, 2, '2020-01-01 09:00:00', null),
+    (3, 3, 3, '2020-01-01 09:00:00', null);

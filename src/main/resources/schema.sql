@@ -66,6 +66,12 @@ CREATE TABLE requests (
                           FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
-ALTER TABLE users ADD UNIQUE(email);
-ALTER TABLE roles ADD UNIQUE(role_name);
+CREATE TABLE visits (
+                        visit_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                        user_id BIGINT NOT NULL,
+                        location_id INT NOT NULL,
+                        check_in_datetime DATETIME NOT NULL,
+                        check_out_datetime DATETIME
+) ENGINE=InnoDB;
+
 
