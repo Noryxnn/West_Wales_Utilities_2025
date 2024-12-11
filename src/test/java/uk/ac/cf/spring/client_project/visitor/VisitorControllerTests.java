@@ -21,7 +21,7 @@ class VisitorControllerTests {
 
     @Test
     void shouldGetDashboard() throws Exception {
-        mvc.perform(get("/visitor/dashboard"))
+        mvc.perform(get("/dashboard"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(view().name("visitor/visitor-dashboard"));

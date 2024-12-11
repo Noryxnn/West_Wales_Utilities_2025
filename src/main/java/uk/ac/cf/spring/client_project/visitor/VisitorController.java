@@ -10,12 +10,12 @@ import uk.ac.cf.spring.client_project.qrcode.QRCodeGenerator;
 @Controller
 public class VisitorController {
     private static final Logger logger = LoggerFactory.getLogger(VisitorController.class);
-    @GetMapping("/visitor/dashboard")
+    @GetMapping("/dashboard")
     public String getDashboard() {
         return "visitor/visitor-dashboard";
     }
 
-    @GetMapping("/visitor/check-in")
+    @GetMapping("/check-in")
     public ModelAndView checkIn() {
         ModelAndView modelAndView = new ModelAndView("visitor/check-in");
         try {
