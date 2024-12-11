@@ -32,21 +32,20 @@ public class QRScanServiceImpl implements QRScanService {
     public ResponseEntity<String> scanQRCode(String qrData, Long locationId) {
         Map<String, Object> decryptedData;
         try {
-            // Decrypt the QR code data
+            // Decrypt the QR code data and convert it to a HashMap
             decryptedData = qrDataToHashmap(QREncryptionUtils.decrypt(qrData));
 
 
             // Validate that the decrypted data contains required fields
             if (!QREncryptionUtils.validateDecryptedData(decryptedData)) {
                 return ResponseEntity.badRequest().body("Invalid QR code data: Missing required fields");
-
             }
 
 
             // Check if the QR code is expired
             String isoTimestamp = decryptedData.get("timestamp").toString();
             if (isQRCodeExpired(isoTimestamp)) {  // expires after 5 minutes
-                logger.info("Check-in attempt made with expired QR code for user {}", decryptedData.get("userId"));
+                logger.info("Expired QR code used for user {}", decryptedData.get("userId"));
                 return ResponseEntity.badRequest().body("QR code is expired. Please generate a new one.");
             }
 

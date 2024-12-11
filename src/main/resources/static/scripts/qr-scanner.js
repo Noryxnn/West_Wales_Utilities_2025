@@ -38,13 +38,13 @@ async function startQrScanner() {
                 // Process server response
                 console.log('Server Response:', data);
                 if (data.includes('success')) {
-                    qrReaderResults.innerHTML = `<p style="color: green;">Check-in successful</p>`;
-
+                    qrReaderResults.innerHTML = `<p style="color: green;">Check-in successful!</p>`;
                 } else if (data.includes('denied')) {
-                    qrReaderResults.innerHTML = `<p style="color: red;">Check-in denied</p>`;
-
+                    qrReaderResults.innerHTML = `<p style="color: red;">Access denied. The visitor is not authorized.</p>`;
+                } else if (data.includes('expired')) {
+                    qrReaderResults.innerHTML = `<p style="color: red;">This QR code has expired</p>`;
                 } else {
-                    qrReaderResults.innerHTML = `<p>Invalid QR code</p>`;
+                    qrReaderResults.innerHTML = `<p style="color: red;">Invalid QR code or an error occurred. Please try again.</p>`;
                 }
                 qrReaderResults.innerHTML += `<button class="btn-primary" id="scan-again-btn" onclick="startQrScanner()">Scan Again</button>`;
 
