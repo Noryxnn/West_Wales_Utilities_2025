@@ -4,28 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Staff Dashboard</title>
-    <script src="https://unpkg.com/html5-qrcode"></script>
     <link rel="stylesheet" href="/css/styles.css">
+    <script src="https://unpkg.com/html5-qrcode"></script>
 </head>
 <body>
-<h1>Staff Dashboard</h1>
+<div class="dashboard-container">
+    <h1>Staff Dashboard</h1>
+    <p>Welcome, Staff Member! Please choose an action below.</p>
 
-<!-- Location Selection Form -->
-<form action="/staff/scan" method="post">
-    <label for="locationId">Select Location:</label>
-    <select name="locationId" id="locationId" onchange="toggleScanButton()">
-        <option value="0" disabled selected>Select a location</option>
-        <option th:each="location : ${locations}"
-                th:value="${location.id}"
-                th:text="${location.name}">
-        </option>
-    </select>
+    <form action="/staff/scan" method="post" class="form-container">
+        <label for="locationId">Select Location:</label>
+        <select name="locationId" id="locationId" onchange="toggleScanButton()" class="dropdown">
+            <option value="0" disabled selected>Select a location</option>
+            <option th:each="location : ${locations}"
+                    th:value="${location.id}"
+                    th:text="${location.name}">
+            </option>
+        </select>
 
-    <!-- Scan Button -->
-    <div style="margin-top: 10px">
-        <button type="submit" id="scanButton" disabled>Go to QR Scanner</button>
-    </div>
-</form>
+        <div class="button-container">
+            <button type="submit" id="scanButton" class="btn-primary" disabled>Go to QR Scanner</button>
+        </div>
+    </form>
+</div>
 
 <script src="/scripts/qr-scanner.js"></script>
 </body>
