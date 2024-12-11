@@ -37,7 +37,7 @@ class QRScanControllerTests {
         when(session.getAttribute("locationId")).thenReturn(locationId);
         when(qrScanService.scanQRCode(qrData, locationId)).thenReturn(ResponseEntity.ok("success"));
 
-        mockMvc.perform(post("/scan")
+        mockMvc.perform(post("/api/scan")
                         .content(qrData)
                         .contentType(MediaType.TEXT_PLAIN)
                         .sessionAttr("locationId", locationId)
@@ -57,7 +57,7 @@ class QRScanControllerTests {
         when(session.getAttribute("locationId")).thenReturn(locationId);
         when(qrScanService.scanQRCode(qrData, locationId)).thenReturn(ResponseEntity.ok("denied"));
 
-        mockMvc.perform(post("/scan")
+        mockMvc.perform(post("/api/scan")
                         .content(qrData)
                         .contentType(MediaType.TEXT_PLAIN)
                         .sessionAttr("locationId", locationId)

@@ -25,7 +25,6 @@ public class User {
     private Boolean enabled;
 
 
-    // Default constructor for Spring's form binding
     public User() {
         this.userId = 0;
         this.firstName = "";

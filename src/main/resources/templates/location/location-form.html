@@ -9,7 +9,7 @@
 
 <form th:method="post" th:object="${locationForm}">
     <input th:field="*{id}" type="hidden" th:value="0"/>
-
+    <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
     <div>
         <label for="name">Name:
             <input type="text" th:field="*{name}" id="name"/>

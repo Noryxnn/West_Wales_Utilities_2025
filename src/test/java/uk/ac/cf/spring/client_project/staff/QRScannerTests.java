@@ -21,7 +21,7 @@ class QRScannerTests {
     @Test
     @WithMockUser(username="john@doe.com", roles = {"STAFF"})
     void shouldReturnBadRequestForInvalidQrCode() throws Exception {
-        mockMvc.perform(post("/scan").
+        mockMvc.perform(post("/api/scan").
                         contentType(MediaType.TEXT_PLAIN).
                         content("invalidData")
                         .with(csrf()))
