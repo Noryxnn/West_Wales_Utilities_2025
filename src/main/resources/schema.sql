@@ -87,7 +87,7 @@ CREATE TABLE IF NOT EXISTS visits
 ) ENGINE = InnoDB;
 
 CREATE VIEW IF NOT EXISTS user_authorities as
-select u.email AS username, CONCAT('ROLE_', r.role_name) AS authority
-from users u
-         inner join user_roles ur on u.email = ur.email
-         inner join roles r on ur.role_id = r.role_id;
+SELECT u.email AS username, CONCAT('ROLE_', r.role_name) AS authority
+FROM users u
+         INNER JOIN user_roles ur ON u.email = ur.email
+         INNER JOIN roles r ON ur.role_id = r.role_id;
