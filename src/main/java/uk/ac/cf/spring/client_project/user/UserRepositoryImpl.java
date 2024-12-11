@@ -22,8 +22,7 @@ public class UserRepositoryImpl implements UserRepository {
                 rs.getString("first_name"),
                 rs.getString("last_name"),
                 rs.getString("password"),
-                rs.getString("email"),
-                rs.getString("company_name")
+                rs.getString("email")
         );
     }
 
@@ -39,8 +38,8 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public void save(User user) {
-        jdbcTemplate.update("INSERT INTO users (first_name, last_name, password, email, company_name) VALUES (?, ?, ?, ?, ?)",
-                user.getFirstName(), user.getLastName(), user.getPassword(), user.getEmail(), user.getCompanyName());
+        jdbcTemplate.update("INSERT INTO users (first_name, last_name, password, email) VALUES (?, ?, ?, ?)",
+                user.getFirstName(), user.getLastName(), user.getPassword(), user.getEmail());
     }
 
     @Override
@@ -50,7 +49,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public void addUser(User user) {
-        String sql = "INSERT INTO users(first_name, last_name, password, email, company_name) VALUES (?,?,?,?,?)";
-        jdbcTemplate.update(sql, user.getFirstName(), user.getLastName(), user.getPassword(), user.getEmail(), user.getCompanyName());
+        String sql = "INSERT INTO users(first_name, last_name, password, email) VALUES (?,?,?,?)";
+        jdbcTemplate.update(sql, user.getFirstName(), user.getLastName(), user.getPassword(), user.getEmail());
     }
 }

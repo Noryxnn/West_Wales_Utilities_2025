@@ -4,15 +4,13 @@ USE client_project_db;
 DROP TABLE IF EXISTS request_status, requests, visits_archive, visits, locations, locations_archive, location_types, user_roles, roles, users;
 
 -- create the tables in the correct order
-CREATE TABLE IF NOT EXISTS users
-(
-    user_id      BIGINT AUTO_INCREMENT PRIMARY KEY,
-    first_name   VARCHAR(255) NOT NULL,
-    last_name    VARCHAR(255),
-    password     VARCHAR(255),
-    email        VARCHAR(255) NOT NULL UNIQUE,
-    company_name VARCHAR(255) NOT NULL
-) ENGINE = InnoDB;
+CREATE TABLE users (
+                       user_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                       first_name VARCHAR(255) NOT NULL,
+                       last_name VARCHAR(255),
+                       password VARCHAR(255),
+                       email VARCHAR(255) NOT NULL UNIQUE
+) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS roles
 (
