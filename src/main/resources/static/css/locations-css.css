@@ -150,7 +150,6 @@ input[type="submit"]:hover {
     background-color: #e65c00;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
     .container {
         padding: 20px;

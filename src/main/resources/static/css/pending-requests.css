@@ -67,7 +67,6 @@ tbody tr:hover {
     background-color: #e6f7ff;
 }
 
-/* Buttons */
 .action-button {
     background-color: #FFA500;
     color: #ffffff;
@@ -82,14 +81,13 @@ tbody tr:hover {
 }
 
 .action-button.accept:hover {
-    background-color: #008000; /* Green for Accept */
+    background-color: #008000;
 }
 
 .action-button.deny:hover {
-    background-color: #ff0000; /* Red for Deny */
+    background-color: #ff0000;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
     .container {
         padding: 10px;
@@ -113,3 +111,30 @@ tbody tr:hover {
         margin-bottom: 15px;
     }
 }
+
+
+.mb-3 {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.mb-3 label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+.mb-3 input[type="date"] {
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+

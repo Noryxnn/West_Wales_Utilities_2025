@@ -64,7 +64,6 @@ tbody tr:hover {
     background-color: #e6f7ff;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
     table, thead, tbody, th, td, tr {
         display: block;

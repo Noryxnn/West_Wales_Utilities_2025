@@ -82,7 +82,6 @@ label {
     background-color: #e65c00;
 }
 
-/* Mobile responsiveness */
 @media (max-width: 768px) {
     .dashboard-container {
         padding: 20px;
