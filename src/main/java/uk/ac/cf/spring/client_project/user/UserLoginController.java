@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class UserLoginController {
-
     private final UserLoginService userLoginService;
 
     @Autowired
@@ -30,15 +29,10 @@ public class UserLoginController {
         boolean isAuthenticated = userLoginService.authenticateUser(email, password);
 
         if (isAuthenticated) {
-            return "redirect:/loginSuccess";
+            return "redirect:/dashboard";
         } else {
             model.addAttribute("error", "Account not found or incorrect credentials.");
             return "user/loginForm"; // Return to the login form with error message
         }
-    }
-
-    @GetMapping("/loginSuccess")
-    public String showLoginSuccess() {
-        return "user/loginSuccess";
     }
 }

@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import javax.sql.DataSource;
 
@@ -22,12 +23,18 @@ public class SecurityConfig {
             "/",
             "/register",
             "/welcome",
-            "/error",
-            "/loginSuccess"
+            "/error"
     };
 
     @Autowired
         private DataSource dataSource;
+
+    private AuthenticationSuccessHandler authenticationSuccessHandler;
+
+    @Autowired
+    public void WebSecurityConfig(AuthenticationSuccessHandler authenticationSuccessHandler) {
+        this.authenticationSuccessHandler = authenticationSuccessHandler;
+    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -35,12 +42,12 @@ public class SecurityConfig {
                 .authorizeHttpRequests(request -> request
                         .requestMatchers(ENDPOINTS_WHITELIST).permitAll()
                         .requestMatchers("/admin/**", "/staff/**").hasRole("ADMIN")
-                        .requestMatchers("/staff/**", "/scan").hasRole("STAFF")
+                        .requestMatchers("/staff/**").hasRole("STAFF")
                         .requestMatchers("/dashboard", "requests/**", "check-in").hasRole("VISITOR")
                         .anyRequest().authenticated())
                 .formLogin(form -> form
                         .loginPage("/login")
-                        .defaultSuccessUrl("/loginSuccess", true)
+                        .successHandler(authenticationSuccessHandler)
                         .usernameParameter("email")
                         .permitAll())
                 .logout((l) -> l.permitAll().logoutSuccessUrl("/welcome"));
