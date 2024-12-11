@@ -82,6 +82,35 @@
         .google-login {
             margin-top: 20px;
         }
+
+        /* Styling for the "Create Account" button */
+        .create-account-btn {
+            width: 100%;
+            padding: 12px;
+            font-size: 1.1rem;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            margin-top: 10px;
+        }
+
+        .create-account-btn:hover {
+            background-color: #218838;
+            transform: translateY(-2px);
+        }
+
+        .create-account-btn:active {
+            background-color: #1e7e34;
+            transform: translateY(0);
+        }
+
+        /* Optional: Add a subtle shadow effect */
+        .create-account-btn {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 <body>
@@ -138,6 +167,7 @@
                         // Create a registration button
                         const registrationButton = document.createElement('button');
                         registrationButton.textContent = 'Create Account';
+                        registrationButton.classList.add('create-account-btn');
                         registrationButton.onclick = () => {
                             window.location.href = 'http://localhost:8080/register';
                         };
@@ -153,7 +183,7 @@
     }
 </script>
 
-
 <div id="error-message" class="error"></div>
+
 </body>
 </html>
