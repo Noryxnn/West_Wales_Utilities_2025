@@ -1,0 +1,200 @@
+/* General Reset */
+body, h1, table, th, td {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Container Styling */
+.container {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    max-width: 800px;
+    width: 100%;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.2em;
+    color: #004B87;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 1.1em;
+    color: #555555;
+    margin-bottom: 20px;
+}
+
+/* General Button Styling */
+button, a.button {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px 20px;
+    text-align: center;
+    color: #ffffff; /* White text */
+    background-color: #ff6600; /* Orange background */
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    text-decoration: none; /* Removes underline for links */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+button:hover, a.button:hover {
+    background-color: #e65c00; /* Darker orange on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+}
+
+/* Ensuring Links Styled as Buttons Look Like Buttons */
+a {
+    color: inherit; /* Inherits the text color from the button styling */
+    text-decoration: none; /* Removes underline */
+}
+
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+thead {
+    background-color: #004B87;
+    color: #ffffff;
+}
+
+thead th {
+    text-align: left;
+    padding: 12px 15px;
+    font-weight: bold;
+}
+
+tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tbody tr:hover {
+    background-color: #e6f7ff;
+}
+
+td, th {
+    padding: 12px 15px;
+}
+
+/* Forms */
+form {
+    margin-top: 20px;
+}
+
+form label {
+    font-size: 1rem;
+    margin-bottom: 5px;
+    color: #333333;
+    text-align: left;
+    display: block;
+}
+
+input[type="text"], select, textarea {
+    width: calc(100% - 20px);
+    max-width: 600px;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: #ffffff;
+}
+
+input[type="submit"] {
+    display: block;
+    width: 80%;
+    max-width: 300px;
+    margin: 10px auto;
+    padding: 10px 20px;
+    text-align: center;
+    color: #ffffff;
+    background-color: #ff6600;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #e65c00;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+        margin: 10px;
+    }
+
+    h1 {
+        font-size: 1.8em;
+    }
+
+    p {
+        font-size: 1em;
+    }
+
+    table, thead, tbody, th, td, tr {
+        display: block;
+        width: 100%;
+    }
+
+    th, td {
+        text-align: left;
+        padding: 10px;
+    }
+
+    input[type="text"], select, textarea {
+        width: 100%;
+    }
+
+    button, a.button, input[type="submit"] {
+        width: 100%;
+        padding: 15px;
+    }
+}
+/* Add consistent button styling */
+input[type="submit"], button, a.button {
+    display: inline-block;
+    width: auto;
+    margin: 0 10px;
+    padding: 10px 20px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* Ensure both elements are in the same horizontal alignment */
+div > * {
+    vertical-align: middle;
+}

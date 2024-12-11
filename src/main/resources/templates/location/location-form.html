@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/locations-css.css">
     <title>Location Form</title>
 </head>
 <body>
@@ -64,9 +65,9 @@
         </label>
     </div>
 
-    <div>
-        <input type="submit" value="Submit"/>
-        <button><a th:href="@{/admin/locations}">Cancel</a></button>
+    <div style="text-align: center;">
+        <button type="submit">Submit</button>
+        <button type="button"><a th:href="@{/admin/locations}" style="text-decoration: none;">Cancel</a></button>
     </div>
 </form>
 </body>
