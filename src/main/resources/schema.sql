@@ -70,8 +70,8 @@ CREATE TABLE visits (
                         visit_id BIGINT AUTO_INCREMENT PRIMARY KEY,
                         user_id BIGINT NOT NULL,
                         location_id INT NOT NULL,
-                        check_in_time DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
-                        check_out_time DATETIME,
+                        check_in_datetime DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+                        check_out_datetime DATETIME,
                         FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE CASCADE,
                         FOREIGN KEY (location_id) REFERENCES locations (location_id) ON DELETE CASCADE
 ) ENGINE=InnoDB;

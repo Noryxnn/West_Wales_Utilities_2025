@@ -21,9 +21,9 @@ VALUES
 -- Insert data into users (this will use auto-incrementing user_id values)
 INSERT INTO users (first_name, last_name, password, email, company_name)
 VALUES
-    ('John', 'Doe', 'password123', 'john@doe.gmail.com', 'Doe Ltd'),
-    ('Jane', 'Doe', 'password456', 'jane@doe.com', 'Doe Ltd'),
-    ('John', 'Smith', 'password789', 'jsmith@gmail.com', 'Smith Ltd');
+    ('John', 'Doe', 'john123', 'john@doe.gmail.com', 'Doe Ltd'),
+    ('Jane', 'Doe', 'jane123', 'jane@doe.com', 'Doe Ltd'),
+    ('John', 'Smith', 'smith123', 'jsmith@gmail.com', 'Smith Ltd');
 
 
 -- Insert data into requests
@@ -34,10 +34,8 @@ VALUES
     (3, '2020-01-01 09:00:00', '2020-01-01', '2020-01-01', false);
 
 
--- Insert dummy data into `visits` table
-INSERT INTO visits (user_id, location_id, check_in_time, check_out_time) VALUES
-                                                                             (1, 1, '2024-12-10 09:00:00', '2024-12-10 17:00:00'),
-                                                                             (2, 2, '2024-12-10 08:30:00', '2024-12-10 16:30:00'),
-                                                                             (3, 3, '2024-12-11 10:00:00', NULL), -- Check-out time not yet recorded
-                                                                             (1, 2, '2024-12-09 13:00:00', '2024-12-09 18:00:00'),
-                                                                             (2, 3, '2024-12-08 11:00:00', '2024-12-08 15:00:00');
+INSERT INTO visits (visit_id, user_id, location_id, check_in_datetime, check_out_datetime)
+VALUES
+    (1, 1, 1, '2020-01-01 09:00:00', '2020-01-01 17:00:00'),
+    (2, 2, 2, '2020-01-01 09:00:00', null),
+    (3, 3, 3, '2020-01-01 09:00:00', null);
