@@ -58,6 +58,22 @@
             color: #999;
         }
 
+        #loginButton {
+            margin-top: 20px;
+            padding: 12px 30px;
+            font-size: 1.2em;
+            background-color: #309af5;
+            color: #fff;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #loginButton:hover {
+            background-color: #3b8fc7;
+        }
+
         @media (max-width: 600px) {
             .form-container {
                 margin: 50px auto;
@@ -65,6 +81,11 @@
             }
 
             #googleSignInBtn {
+                padding: 10px 20px;
+                font-size: 1em;
+            }
+
+            #loginButton {
                 padding: 10px 20px;
                 font-size: 1em;
             }
@@ -104,14 +125,21 @@
             .then(response => response.json())
             .then(responseData => {
                 if (responseData.status === 'success') {
-                    // Registration successful
+                    // Display success message
                     document.getElementById('response').innerText =
                         `Welcome, ${responseData.firstName}! (${responseData.email})`;
 
-                    // Optional: Redirect or perform additional actions
-                    // window.location.href = '/dashboard';
+                    // Add a button to go to the login page
+                    const loginButton = document.createElement('button');
+                    loginButton.id = 'loginButton';
+                    loginButton.innerText = 'Go to Login Page';
+                    loginButton.onclick = () => {
+                        window.location.href = 'http://localhost:8080/login';
+                    };
+
+                    document.querySelector('.form-container').appendChild(loginButton);
                 } else {
-                    // Registration failed
+                    // Display error message
                     document.getElementById('response').innerText = responseData.message;
                 }
             })
