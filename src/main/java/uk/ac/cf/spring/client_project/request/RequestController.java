@@ -19,15 +19,15 @@ public class RequestController {
         this.requestService = aRequestService;
     }
 
-    @GetMapping("/requests/new")
+    @GetMapping("/visitor/requests/new")
     public ModelAndView request() {
-        ModelAndView modelAndView = new ModelAndView("request/request-form");
+        ModelAndView modelAndView = new ModelAndView("/request/request-form");
         RequestForm request = new RequestForm();
         modelAndView.addObject("request", request);
         return modelAndView;
     }
 
-    @PostMapping("/requests/new")
+    @PostMapping("/visitor/requests/new")
     public ModelAndView request(@Valid @ModelAttribute("request") RequestForm request, BindingResult bindingResult, HttpSession session) {
         ModelAndView modelAndView;
         // Validation checks
@@ -38,7 +38,7 @@ public class RequestController {
             bindingResult.rejectValue("visitEndDate", "error.visitEndDate", request.getVisitDateValidationMessage());
         }
         if (bindingResult.hasErrors()) {
-            modelAndView = new ModelAndView("request/request-form");
+            modelAndView = new ModelAndView("/request/request-form");
         } else {
             // Save the request
             Request newRequest = new Request(
@@ -51,13 +51,13 @@ public class RequestController {
             );
             Request savedRequest = requestService.save(newRequest);
             session.setAttribute("request", savedRequest);
-            modelAndView = new ModelAndView("redirect:/requests/confirmation");
+            modelAndView = new ModelAndView("redirect:/request/confirmation");
         }
         return modelAndView;
     }
-    @GetMapping("/requests/confirmation")
+    @GetMapping("/visitor/requests/confirmation")
     public ModelAndView requestConfirmation(HttpSession session) {
-        ModelAndView modelAndView = new ModelAndView("request/confirmation");
+        ModelAndView modelAndView = new ModelAndView("/request/confirmation");
         Request request = (Request) session.getAttribute("request");
         if (request != null) {
             modelAndView.addObject("request", request);

@@ -15,7 +15,7 @@ public class VisitorController {
         return "visitor/visitor-dashboard";
     }
 
-    @GetMapping("/check-in")
+    @GetMapping("/visitor/check-in")
     public ModelAndView checkIn() {
         ModelAndView modelAndView = new ModelAndView("visitor/check-in");
         try {

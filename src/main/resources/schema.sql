@@ -66,3 +66,25 @@ CREATE TABLE requests (
                           FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
+CREATE TABLE visits (
+                        visit_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                        user_id BIGINT NOT NULL,
+                        location_id INT NOT NULL,
+                        check_in_time DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+                        check_out_time DATETIME,
+                        FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE CASCADE,
+                        FOREIGN KEY (location_id) REFERENCES locations (location_id) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+CREATE TABLE visits_archive (
+                                visit_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                                user_id BIGINT NOT NULL,
+                                location_id INT NOT NULL,
+                                check_in_time DATETIME NOT NULL,
+                                check_out_time DATETIME,
+                                FOREIGN KEY (user_id) REFERENCES users (user_id),
+                                FOREIGN KEY (location_id) REFERENCES locations (location_id)
+) ENGINE=InnoDB;
+
+ALTER TABLE visits ADD COLUMN check_in DATETIME;
+

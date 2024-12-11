@@ -14,7 +14,7 @@
 
     <h1>Please enter your request details: </h1>
 
-    <form th:action="@{/requests/new}" th:method="post" th:object="${request}">
+    <form th:action="@{/visitor/requests/new}" th:method="post" th:object="${request}">
 
         <input th:field="*{requestId}" th:value="0" type="hidden"/>
 
