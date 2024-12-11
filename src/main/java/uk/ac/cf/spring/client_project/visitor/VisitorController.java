@@ -15,11 +15,11 @@ public class VisitorController {
         return "visitor/visitor-dashboard";
     }
 
-    @GetMapping("/check-in")
+    @GetMapping("/access")
     public ModelAndView checkIn() {
-        ModelAndView modelAndView = new ModelAndView("visitor/check-in");
+        ModelAndView modelAndView = new ModelAndView("visitor/access");
         try {
-            String qrcode = QRCodeGenerator.getQRCode(300, 300);
+            String qrcode = QRCodeGenerator.getQRCode(800, 800);
             logger.info("Successfully generated QR code for visitor");
 
             modelAndView.addObject("qrcode", qrcode);
