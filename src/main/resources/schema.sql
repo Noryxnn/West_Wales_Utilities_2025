@@ -9,8 +9,7 @@ CREATE TABLE users (
                        first_name VARCHAR(255) NOT NULL,
                        last_name VARCHAR(255),
                        password VARCHAR(255),
-                       email VARCHAR(255) NOT NULL UNIQUE,
-                       company_name VARCHAR(255) NOT NULL
+                       email VARCHAR(255) NOT NULL UNIQUE
 ) ENGINE=InnoDB;
 
 CREATE TABLE roles (

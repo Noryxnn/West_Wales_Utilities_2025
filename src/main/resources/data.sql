@@ -19,11 +19,11 @@ VALUES
 
 
 -- Insert data into users (this will use auto-incrementing user_id values)
-INSERT INTO users (first_name, last_name, password, email, company_name)
+INSERT INTO users (first_name, last_name, password, email)
 VALUES
-    ('John', 'Doe', 'john123', 'john@doe.gmail.com', 'Doe Ltd'),
-    ('Jane', 'Doe', 'jane123', 'jane@doe.com', 'Doe Ltd'),
-    ('John', 'Smith', 'smith123', 'jsmith@gmail.com', 'Smith Ltd');
+    ('John', 'Doe', 'john123', 'john@doe.gmail.com'),
+    ('Jane', 'Doe', 'jane123', 'jane@doe.com'),
+    ('John', 'Smith', 'smith123', 'jsmith@gmail.com');
 
 
 INSERT INTO requests (user_id, request_date, visit_start_date, visit_end_date, is_approved)
