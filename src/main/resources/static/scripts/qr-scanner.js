@@ -39,24 +39,24 @@ async function startQrScanner() {
                 // Process server response
                 console.log('Server Response:', data);
                 if (data.includes('success')) {
-                    qrReaderResults.innerHTML = `<p class="scan-status" style="color: green;">Check-in successful</p>`;
+                    qrReaderResults.innerHTML = `<p class="scan-status" style="color: green;">Check-in Successful</p>`;
 
                 } else if (data.includes('denied')) {
-                    qrReaderResults.innerHTML = `<p class="scan-status" style="color: red;">Check-in denied</p>`;
+                    qrReaderResults.innerHTML = `<p class="scan-status" style="color: red;">Check-in Denied</p>`;
 
                 } else {
-                    qrReaderResults.innerHTML = `<p class="scan-status">Invalid QR code</p>`;
+                    qrReaderResults.innerHTML = `<p class="scan-status">Invalid QR Code</p>`;
                 }
                 qrReaderResults.innerHTML += `<button class="btn-primary" id="scan-again-btn" onclick="startQrScanner()">Scan Again</button>`;
+                qrReaderResults.style.display = 'flex';
 
-                qrReaderResults.style.display = 'block';
             })
             .catch(error => {
                 console.error('Error sending data:', error);
                 qrReaderResults.innerHTML = `<p class="scan-status" style="color: red;">Error sending data: ${error}</p>`;
             })
             .finally(() => {
-                html5QrCode.stop();
+                html5QrCode.pause();
                 isProcessing = false;
             });
     }

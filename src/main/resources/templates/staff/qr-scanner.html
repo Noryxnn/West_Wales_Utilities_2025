@@ -11,8 +11,14 @@
 <body>
 
 <h2 th:text="${locationName}"></h2>
+
 <div class="qr-reader" id="qr-reader"></div>
-<div class="qr-reader-results" id="qr-reader-results"></div>
+
+<div class="qr-reader-results" id="qr-reader-results">
+    <div class="scan-status" id="scan-status"></div>
+</div>
+
+<a class="scan btn-primary" th:href="@{/staff/dashboard}">Cancel</a>
 
 <script src="/scripts/qr-scanner.js"></script>
 </body>
