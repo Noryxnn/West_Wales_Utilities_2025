@@ -6,13 +6,13 @@
     <title>QR Code Scanner</title>
     <script src="https://unpkg.com/html5-qrcode"></script>
     <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/qr-scanner.css">
 </head>
 <body>
 
-<h1>QR Code Scanner</h1>
 <h2 th:text="${locationName}"></h2>
-<div id="qr-reader"></div>
-<div id="qr-reader-results"></div>
+<div class="qr-reader" id="qr-reader"></div>
+<div class="qr-reader-results" id="qr-reader-results"></div>
 
 <script src="/scripts/qr-scanner.js"></script>
 </body>
