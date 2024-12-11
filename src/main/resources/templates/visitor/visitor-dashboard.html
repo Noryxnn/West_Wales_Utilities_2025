@@ -4,12 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Visitor Dashboard</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .dashboard-container {
+            text-align: center;
+            margin: 50px auto;
+            padding: 20px;
+            background: #fff;
+            max-width: 600px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        a.button {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: #fff;
+            background-color: #333;
+            border-radius: 5px;
+        }
+        a.button:hover {
+            background-color: #555;
+        }
+    </style>
 </head>
 <body>
-<h1>Visitor Dashboard</h1>
-<div>
-    <a class="btn-primary" th:href="@{/check-in}">Check In</a>
+<div class="dashboard-container">
+    <h1>Visitor Dashboard</h1>
+    <p>Welcome! Choose an option below:</p>
+    <a href="/check-in" class="button">Check In</a>
+    <a href="/requests/new" class="button">Request Visit</a>
 </div>
 </body>
 </html>

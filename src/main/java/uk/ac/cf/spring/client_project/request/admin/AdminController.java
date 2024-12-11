@@ -18,6 +18,12 @@ public class AdminController {
         this.requestService = requestService;
     }
 
+    @GetMapping("/dashboard")
+    public String adminDashboard() {
+        return "dashboard/admin-dashboard";
+    }
+
+
     @GetMapping("/requests")
     public ModelAndView getRequests() {
         ModelAndView modelAndView = new ModelAndView("request/admin/requests");
