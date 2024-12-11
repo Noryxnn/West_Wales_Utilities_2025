@@ -11,7 +11,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import uk.ac.cf.spring.client_project.user.UserService;
 
 import javax.sql.DataSource;
 
@@ -35,7 +34,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(request -> request
                         .requestMatchers(ENDPOINTS_WHITELIST).permitAll()
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/admin/**", "/staff/**").hasRole("ADMIN")
                         .requestMatchers("/staff/**", "/scan").hasRole("STAFF")
                         .requestMatchers("/dashboard", "requests/**", "check-in").hasRole("VISITOR")
                         .anyRequest().authenticated())
@@ -66,6 +65,5 @@ public class SecurityConfig {
             AuthenticationConfiguration configuration) throws Exception {
         return configuration.getAuthenticationManager();
     }
-
 
 }

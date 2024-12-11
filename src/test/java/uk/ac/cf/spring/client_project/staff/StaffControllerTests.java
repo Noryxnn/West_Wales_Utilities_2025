@@ -20,7 +20,7 @@ class StaffControllerTests {
     MockMvc mockMvc;
 
     @Test
-    @WithMockUser(username="john@doe.com", roles={"STAFF"})
+    @WithMockUser(username="john@doe.com", roles={"STAFF", "ADMIN"})
     void shouldGetStaffDashboard() throws Exception {
         mockMvc.perform(get("/staff/dashboard"))
                 .andDo(print())
@@ -29,7 +29,7 @@ class StaffControllerTests {
     }
 
     @Test
-    @WithMockUser(username = "john@doe.com", roles={"STAFF"})
+    @WithMockUser(username = "john@doe.com", roles={"STAFF", "ADMIN"})
     void shouldGetLocationsWithDashboard() throws Exception {
         mockMvc.perform(get("/staff/dashboard"))
                 .andDo(print())
@@ -38,7 +38,7 @@ class StaffControllerTests {
     }
 
     @Test
-    @WithMockUser(username = "john@doe.com", roles = {"STAFF"})
+    @WithMockUser(username = "john@doe.com", roles = {"STAFF", "ADMIN"})
     void shouldDenyAccessToScannerWithoutLocation() throws Exception {
         mockMvc.perform(post("/staff/scan")
                 .with(csrf()))
@@ -47,7 +47,7 @@ class StaffControllerTests {
     }
 
     @Test
-    @WithMockUser(username = "john@doe.com", roles={"STAFF"})
+    @WithMockUser(username = "john@doe.com", roles={"STAFF", "ADMIN"})
     void shouldAllowAccessToScannerWithValidLocation() throws Exception {
         mockMvc.perform(post("/staff/scan")
                         .param("locationId", "1")
