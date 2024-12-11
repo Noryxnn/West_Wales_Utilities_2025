@@ -42,7 +42,7 @@ public class RequestControllerTests {
                 LocalDateTime.now(),
                 LocalDate.now().plusDays(1),
                 LocalDate.now().plusDays(2),
-                false
+                RequestStatus.PENDING
         );
 
         // Simulate session with mock request
@@ -76,7 +76,7 @@ public class RequestControllerTests {
                 LocalDateTime.of(2024, 12, 3, 10, 0),
                 LocalDate.of(2024, 12, 4),
                 LocalDate.of(2024, 12, 5),
-                false
+                RequestStatus.PENDING
         );
 
         MockHttpSession session = new MockHttpSession();

@@ -4,6 +4,7 @@ DELETE FROM locations;
 DELETE FROM users;
 DELETE FROM location_types;
 
+-- Insert data into location_types
 INSERT INTO location_types (name)
 VALUES
     ('Other'),
@@ -26,12 +27,12 @@ VALUES
     ('John', 'Smith', 'smith123', 'jsmith@gmail.com');
 
 
-INSERT INTO requests (user_id, request_date, visit_start_date, visit_end_date, is_approved)
+-- Insert data into requests
+INSERT INTO requests (user_id, request_date, visit_start_date, visit_end_date, status)
 VALUES
-    (1, '2020-01-01 09:00:00', CURDATE(), DATE_ADD(CURDATE(), INTERVAL 7 DAY), true),
-    (2, '2020-01-01 09:00:00', '2020-01-01', '2020-01-01', false),
-    (3, '2020-01-01 09:00:00', '2020-01-01', '2020-01-01', false);
-
+    (1, '2020-01-01 09:00:00', CURDATE(), DATE_ADD(CURDATE(), INTERVAL 7 DAY), 'APPROVED'),
+    (2, '2020-01-01 09:00:00', '2020-01-01', '2020-01-01', 'PENDING'),
+    (3, '2020-01-01 09:00:00', '2020-01-01', '2020-01-01', 'PENDING');
 
 INSERT INTO visits (visit_id, user_id, location_id, check_in_datetime, check_out_datetime)
 VALUES
