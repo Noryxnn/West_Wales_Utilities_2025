@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class User {
+public class Register {
     private Integer userId;
 
     @NotBlank(message = "First name is required")
@@ -23,7 +23,7 @@ public class User {
     private String email;
 
 
-    public User() {
+    public Register() {
         this.userId = 0;
         this.firstName = "";
         this.lastName = "";

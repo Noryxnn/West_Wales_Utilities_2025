@@ -15,7 +15,7 @@
         }
 
         .form-container {
-            max-width: 500px;
+            max-width: 600px;
             margin: 100px auto;
             padding: 30px;
             background-color: #fff;
@@ -30,20 +30,61 @@
             margin-bottom: 20px;
         }
 
-        #googleSignInBtn {
-            background-color: #309af5;
-            color: #fff;
-            font-size: 1.2em;
-            padding: 12px 30px;
-            border-radius: 25px;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            width: 100%;
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
         }
 
-        #googleSignInBtn:hover {
+        label {
+            font-size: 1.1em;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        input[type="text"], input[type="email"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 5px;
+        }
+
+        .form-group button {
+            width: 100%;
+            padding: 12px;
+            font-size: 1.2em;
+            background-color: #309af5;
+            color: #fff;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-group button:hover {
             background-color: #3b8fc7;
+        }
+
+        .divider {
+            margin: 30px 0;
+            font-size: 1.1em;
+            color: #999;
+        }
+
+        /* Centering Google Sign-In */
+        .google-sign-in {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .g_id_signin {
+            width: 100%;
+            max-width: 350px; /* You can change this based on the desired size */
+            background-color: transparent; /* No surrounding button */
+            border: none; /* Remove any border */
         }
 
         #response {
@@ -52,42 +93,10 @@
             color: #ff6600;
         }
 
-        .divider {
-            margin: 30px 0;
-            font-size: 1em;
-            color: #999;
-        }
-
-        #loginButton {
-            margin-top: 20px;
-            padding: 12px 30px;
-            font-size: 1.2em;
-            background-color: #309af5;
-            color: #fff;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        #loginButton:hover {
-            background-color: #3b8fc7;
-        }
-
         @media (max-width: 600px) {
             .form-container {
                 margin: 50px auto;
                 padding: 20px;
-            }
-
-            #googleSignInBtn {
-                padding: 10px 20px;
-                font-size: 1em;
-            }
-
-            #loginButton {
-                padding: 10px 20px;
-                font-size: 1em;
             }
         }
 
@@ -95,19 +104,53 @@
 </head>
 <body>
 <div class="form-container">
-    <h1>Create an account</h1>
+    <h1>Create an Account</h1>
+    <form action="/register" method="POST">
+        <!-- First Name -->
+        <div class="form-group">
+            <label for="firstname">First Name</label>
+            <input type="text" id="firstname" name="firstname" required placeholder="Enter your first name">
+        </div>
+        <!-- Last Name -->
+        <div class="form-group">
+            <label for="lastname">Last Name</label>
+            <input type="text" id="lastname" name="lastname" required placeholder="Enter your last name">
+        </div>
+        <!-- Email -->
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required placeholder="Enter your email">
+        </div>
+        <!-- Password -->
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required placeholder="Enter your password">
+        </div>
+
+        <!-- Submit Button -->
+        <div class="form-group">
+            <button type="submit">Register</button>
+        </div>
+    </form>
+
+    <div class="divider">OR</div>
+
+    <!-- Google Sign-In -->
     <div id="g_id_onload"
          data-client_id="907822677520-21sch8i398ejsfkidnffmqtase9lnecq.apps.googleusercontent.com"
          data-callback="handleCredentialResponse">
     </div>
-    <div class="g_id_signin"
-         data-type="standard"
-         data-size="large"
-         data-theme="outline"
-         data-text="sign_in_with"
-         data-shape="rectangular"
-         data-logo_alignment="left">
+    <div class="google-sign-in">
+        <div class="g_id_signin"
+             data-type="standard"
+             data-size="large"
+             data-theme="outline"
+             data-text="sign_in_with"
+             data-shape="rectangular"
+             data-logo_alignment="left">
+        </div>
     </div>
+
     <div id="response"></div>
 </div>
 
@@ -132,7 +175,7 @@
                     // Add a button to go to the login page
                     const loginButton = document.createElement('button');
                     loginButton.id = 'loginButton';
-                    loginButton.innerText = 'Go to Login Page';
+                    loginButton.innerText = 'Continue to Log In';
                     loginButton.onclick = () => {
                         window.location.href = 'http://localhost:8080/login';
                     };
@@ -149,5 +192,6 @@
             });
     }
 </script>
+
 </body>
 </html>

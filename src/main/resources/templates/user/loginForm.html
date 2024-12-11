@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
     <style>
         body {
             background-color: #f8f8f8;
@@ -26,6 +27,7 @@
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             margin-top: 20px;
+            text-align: center;
         }
 
         h1 {
@@ -76,26 +78,82 @@
             margin-bottom: 10px;
             text-align: center;
         }
+
+        .google-login {
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
+
 <div class="form-container">
     <h1>Login</h1>
-    <form action="/login" method="POST">
-        <label for="email">Email</label>
-        <input type="email" name="email" id="email" placeholder="Enter your email" required>
 
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password" placeholder="Enter your password" required>
-
-        <input type="submit" value="Login">
-    </form>
+    <!-- Google Sign-In Section -->
+    <div class="google-login">
+        <div id="g_id_onload"
+             data-client_id="907822677520-21sch8i398ejsfkidnffmqtase9lnecq.apps.googleusercontent.com"
+             data-callback="handleGoogleLogin"
+             data-auto_prompt="false">
+        </div>
+        <div class="g_id_signin"
+             data-type="standard"
+             data-size="large"
+             data-theme="outline"
+             data-text="sign_in_with"
+             data-shape="rectangular"
+             data-logo_alignment="left">
+        </div>
+    </div>
 
     <!-- Display error messages -->
     <div>
         <p th:text="${error}" class="error"></p> <!-- Display error message if login fails -->
     </div>
 </div>
+
+<script>
+    function handleGoogleLogin(response) {
+        const idToken = response.credential;
+
+        // Send ID token to the server for verification
+        fetch('/auth/google-login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ idToken: idToken })
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    // Successful login, redirect to dashboard
+                    window.location.href = 'http://localhost:8080/dashboard';
+                } else {
+                    // User not registered or other error
+                    const errorDiv = document.querySelector('.error');
+                    errorDiv.textContent = data.message;
+
+                    if (data.message.includes("not registered")) {
+                        // Create a registration button
+                        const registrationButton = document.createElement('button');
+                        registrationButton.textContent = 'Create Account';
+                        registrationButton.onclick = () => {
+                            window.location.href = 'http://localhost:8080/register';
+                        };
+                        errorDiv.appendChild(registrationButton);
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('Error during Google login:', error);
+                const errorDiv = document.querySelector('.error');
+                errorDiv.textContent = 'An error occurred while logging in with Google.';
+            });
+    }
+</script>
+
+
+<div id="error-message" class="error"></div>
 </body>
 </html>
-

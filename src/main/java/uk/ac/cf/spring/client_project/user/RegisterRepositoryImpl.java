@@ -7,17 +7,17 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class UserRepositoryImpl implements UserRepository {
+public class RegisterRepositoryImpl implements RegisterRepository {
     private final JdbcTemplate jdbcTemplate;
-    private RowMapper<User> userRowMapper;
+    private RowMapper<Register> userRowMapper;
 
-    public UserRepositoryImpl(JdbcTemplate jdbcTemplate) {
+    public RegisterRepositoryImpl(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
         setUserRowMapper();
     }
 
     private void setUserRowMapper() {
-        userRowMapper = (rs, i) -> new User(
+        userRowMapper = (rs, i) -> new Register(
                 rs.getInt("user_id"),
                 rs.getString("first_name"),
                 rs.getString("last_name"),
@@ -27,17 +27,17 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public List<User> getAllUsers() {
+    public List<Register> getAllUsers() {
         return jdbcTemplate.query("SELECT * FROM users", userRowMapper);
     }
 
     @Override
-    public User getUserById(Integer id) {
+    public Register getUserById(Integer id) {
         return jdbcTemplate.queryForObject("SELECT * FROM users WHERE user_id = ?", userRowMapper, id);
     }
 
     @Override
-    public void save(User user) {
+    public void save(Register user) {
         jdbcTemplate.update("INSERT INTO users (first_name, last_name, password, email) VALUES (?, ?, ?, ?)",
                 user.getFirstName(), user.getLastName(), user.getPassword(), user.getEmail());
     }
@@ -48,7 +48,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public void addUser(User user) {
+    public void addUser(Register user) {
         String sql = "INSERT INTO users(first_name, last_name, password, email) VALUES (?,?,?,?)";
         jdbcTemplate.update(sql, user.getFirstName(), user.getLastName(), user.getPassword(), user.getEmail());
     }

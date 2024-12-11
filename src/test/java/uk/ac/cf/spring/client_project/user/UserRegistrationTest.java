@@ -21,12 +21,12 @@ public class UserRegistrationTest {
     private MockMvc mockMvc;
 
     @Autowired
-    private UserRepository userRepository;
+    private RegisterRepository registerRepository;
 
     @BeforeEach
     public void setUp() {
         // Clear database to avoid conflicts between tests
-        userRepository.getAllUsers().forEach(user -> userRepository.deleteUserById(user.getUserId()));
+        registerRepository.getAllUsers().forEach(user -> registerRepository.deleteUserById(user.getUserId()));
     }
 
     @Test

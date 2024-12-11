@@ -6,8 +6,8 @@ import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.gson.GsonFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import uk.ac.cf.spring.client_project.user.User;
-import uk.ac.cf.spring.client_project.user.UserService;
+import uk.ac.cf.spring.client_project.user.Register;
+import uk.ac.cf.spring.client_project.user.RegisterService;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -20,10 +20,10 @@ import java.util.Map;
 public class AuthenticatorController {
     private static final String CLIENT_ID = "907822677520-21sch8i398ejsfkidnffmqtase9lnecq.apps.googleusercontent.com";
 
-    private final UserService userService;
+    private final RegisterService userService;
 
     @Autowired
-    public AuthenticatorController(UserService userService) {
+    public AuthenticatorController(RegisterService userService) {
         this.userService = userService;
     }
 
@@ -45,7 +45,7 @@ public class AuthenticatorController {
                 String lastName = (String) payload.get("family_name");
 
                 // Register or retrieve user
-                User user = userService.registerGoogleUser(email, firstName, lastName);
+                Register user = userService.registerGoogleUser(email, firstName, lastName);
 
                 response.put("status", "success");
                 response.put("message", "Successfully verified and registered user");

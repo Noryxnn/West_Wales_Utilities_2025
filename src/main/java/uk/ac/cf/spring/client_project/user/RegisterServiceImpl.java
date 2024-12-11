@@ -5,39 +5,39 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserServiceImpl implements UserService {
-    private final UserRepository userRepository;
+public class RegisterServiceImpl implements RegisterService {
+    private final RegisterRepository registerRepository;
 
-    public UserServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public RegisterServiceImpl(RegisterRepository registerRepository) {
+        this.registerRepository = registerRepository;
     }
 
     @Override
-    public void registerUser(User user) {
-        userRepository.addUser(user);
+    public void registerUser(Register user) {
+        registerRepository.addUser(user);
     }
 
     @Override
-    public User getUserById(int id) {
-        return userRepository.getUserById(id);
+    public Register getUserById(int id) {
+        return registerRepository.getUserById(id);
     }
 
     @Override
-    public List<User> getAllUsers() {
-        return userRepository.getAllUsers();
+    public List<Register> getAllUsers() {
+        return registerRepository.getAllUsers();
     }
 
     @Override
-    public User registerGoogleUser(String email, String firstName, String lastName) {
+    public Register registerGoogleUser(String email, String firstName, String lastName) {
         // Check if user already exists
-        Optional<User> existingUser = findUserByEmail(email);
+        Optional<Register> existingUser = findUserByEmail(email);
 
         if (existingUser.isPresent()) {
             return existingUser.get();
         }
 
         // Create new user
-        User newUser = new User();
+        Register newUser = new Register();
         newUser.setEmail(email);
         newUser.setFirstName(firstName != null ? firstName : "");
         newUser.setLastName(lastName != null ? lastName : "");
@@ -45,12 +45,12 @@ public class UserServiceImpl implements UserService {
         // Set a placeholder password or generate a random one
         newUser.setPassword("GOOGLE_SSO_" + System.currentTimeMillis());
 
-        userRepository.addUser(newUser);
+        registerRepository.addUser(newUser);
         return newUser;
     }
 
     @Override
-    public Optional<User> findUserByEmail(String email) {
+    public Optional<Register> findUserByEmail(String email) {
         return getAllUsers().stream()
                 .filter(user -> user.getEmail().equals(email))
                 .findFirst();
