@@ -50,7 +50,8 @@ public class UserRegistrationTest {
                         .param("lastName", "Brown")
                         .param("password", "securePass123")
                         .param("confirmPassword", "securePass123")
-                        .param("email", "invalid-email") // Invalid email format
+                        .param("email", "invalid-email")// Invalid email format
+                        .param("enabled", "true")
                         .with(csrf()))
                 .andExpect(status().isOk()) // Expect the form page to reload
                 .andExpect(view().name("user/registrationForm")) // Return to registration form

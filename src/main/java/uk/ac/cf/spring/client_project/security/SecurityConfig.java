@@ -11,12 +11,14 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import uk.ac.cf.spring.client_project.user.UserService;
 
 import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
     public static final String[] ENDPOINTS_WHITELIST = {
             "/",
             "/register",

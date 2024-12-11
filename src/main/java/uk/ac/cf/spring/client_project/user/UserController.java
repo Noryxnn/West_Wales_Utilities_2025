@@ -1,6 +1,7 @@
 package uk.ac.cf.spring.client_project.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,10 +15,12 @@ import jakarta.validation.Valid;
 @Controller
 public class UserController {
     private final UserService userService;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/register")
@@ -31,6 +34,9 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             return "user/registrationForm";
         }
+
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
         try {
             userService.registerUser(user);
             return "user/registrationSuccess";

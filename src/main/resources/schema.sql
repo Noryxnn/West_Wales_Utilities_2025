@@ -11,7 +11,7 @@ CREATE TABLE users (
                        last_name VARCHAR(255),
                        password VARCHAR(255),
                        email VARCHAR(255) NOT NULL UNIQUE,
-                       enabled BOOLEAN NOT NULL
+                       enabled BOOLEAN DEFAULT TRUE NOT NULL
 ) ENGINE=InnoDB;
 
 CREATE TABLE roles (
@@ -75,9 +75,3 @@ select u.email AS username, CONCAT('ROLE_', r.role_name) AS authority
 from users u
          inner join user_roles ur on u.email = ur.email
          inner join roles r on ur.role_id = r.role_id;
-
-SELECT * FROM user_authorities;
-SELECT email AS username, password, enabled FROM users WHERE email = 'john@smith.com';
-SELECT email AS username, password, enabled FROM users WHERE email = 'jane@doe.com';
-SELECT email AS username, password, enabled FROM users WHERE email = 'john@doe.com'
-

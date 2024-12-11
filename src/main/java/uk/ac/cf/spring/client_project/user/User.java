@@ -22,6 +22,8 @@ public class User {
     @Email(message = "Invalid email format")
     private String email;
 
+    private Boolean enabled;
+
 
     // Default constructor for Spring's form binding
     public User() {
@@ -30,5 +32,7 @@ public class User {
         this.lastName = "";
         this.password = "";
         this.email = "";
+        this.enabled = true;
+
     }
 }
