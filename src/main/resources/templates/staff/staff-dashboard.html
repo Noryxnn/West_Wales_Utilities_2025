@@ -3,25 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QR Code Scanner</title>
+    <title>Staff Dashboard</title>
     <script src="https://unpkg.com/html5-qrcode"></script>
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-<h1>Select Location</h1>
+<h1>Staff Dashboard</h1>
 
+<!-- Location Selection Form -->
 <form action="/staff/scan" method="post">
-    <label for="locationId">Location:</label>
+    <label for="locationId">Select Location:</label>
     <select name="locationId" id="locationId" onchange="toggleScanButton()">
-        <option value=0 disabled selected>Select a location</option>
+        <option value="0" disabled selected>Select a location</option>
         <option th:each="location : ${locations}"
                 th:value="${location.id}"
                 th:text="${location.name}">
         </option>
     </select>
 
+    <!-- Scan Button -->
     <div style="margin-top: 10px">
-        <button type="submit" id="scanButton" disabled>Scan</button>
+        <button type="submit" id="scanButton" disabled>Go to QR Scanner</button>
     </div>
 </form>
 
