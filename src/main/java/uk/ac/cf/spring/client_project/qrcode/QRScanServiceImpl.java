@@ -9,6 +9,8 @@ import uk.ac.cf.spring.client_project.staff.StaffService;
 import uk.ac.cf.spring.client_project.visit.VisitDTO;
 import uk.ac.cf.spring.client_project.visit.VisitService;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,6 +18,8 @@ import java.util.Map;
 @Service
 public class QRScanServiceImpl implements QRScanService {
     private static final Logger logger = LoggerFactory.getLogger(QRScanServiceImpl.class);
+    private static final Duration QR_EXPIRATION_TIME = Duration.ofMinutes(5);
+
     StaffService staffService;
     VisitService visitService;
 
@@ -24,11 +28,13 @@ public class QRScanServiceImpl implements QRScanService {
         this.visitService = visitService;
     }
 
+
     public ResponseEntity<String> scanQRCode(String qrData, Long locationId) {
         Map<String, Object> decryptedData;
         try {
             // Decrypt the QR code data
             decryptedData = qrDataToHashmap(QREncryptionUtils.decrypt(qrData));
+
 
             // Validate that the decrypted data contains required fields
             if (!QREncryptionUtils.validateDecryptedData(decryptedData)) {
@@ -36,21 +42,32 @@ public class QRScanServiceImpl implements QRScanService {
 
             }
 
+
+            // Check if the QR code is expired
+            String isoTimestamp = decryptedData.get("timestamp").toString();
+            if (isQRCodeExpired(isoTimestamp)) {  // expires after 5 minutes
+                logger.info("Check-in attempt made with expired QR code for user {}", decryptedData.get("userId"));
+                return ResponseEntity.badRequest().body("QR code is expired. Please generate a new one.");
+            }
+
+
         } catch (Exception e) {
             logger.error("Failed to decrypt QR code data: {}", e.getMessage());
             return ResponseEntity.badRequest().body("Failed to decrypt QR code data: " + e.getMessage());
 
         }
 
+
+        // Check in the visitor if they are approved for visit so that records can be kept
         Long userId = Long.parseLong(decryptedData.get("userId").toString());
         if (staffService.isVisitorApproved(userId)) {
-            // Check in the visitor if they are approved for visit so that records can be kept
             checkIn(userId, locationId);
             return ResponseEntity.ok("success");
         } else {
             return ResponseEntity.ok("denied");
         }
     }
+
 
     public void checkIn(Long userId, Long locationId) {
         VisitDTO visit = new VisitDTO();
@@ -85,5 +102,13 @@ public class QRScanServiceImpl implements QRScanService {
             map.put(key, value);
         }
         return map;
+    }
+
+
+    boolean isQRCodeExpired(String isoTimestamp) {
+        Instant qrCodeTime = Instant.parse(isoTimestamp);
+        Instant currentTime = Instant.now();
+
+        return currentTime.isAfter(qrCodeTime.plus(QR_EXPIRATION_TIME));
     }
 }
