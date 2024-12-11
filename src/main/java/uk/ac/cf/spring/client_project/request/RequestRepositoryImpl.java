@@ -51,22 +51,55 @@ public class RequestRepositoryImpl implements RequestRepository {
     }
 
     public Request save(Request request) {
+
+        if (request.getStatus() == null) {
+            request.setStatus(RequestStatus.PENDING);
+        }
+
+        if (request.getRequestId() == null || request.getRequestId() == 0) {
+
+            return insertRequest(request);
+        } else {
+
+            return updateRequest(request);
+        }
+    }
+
+    private Request insertRequest(Request request) {
         SimpleJdbcInsert simpleJdbcInsert = new SimpleJdbcInsert(jdbc)
                 .withTableName("requests")
                 .usingGeneratedKeyColumns("request_id");
+
         Map<String, Object> columns = new HashMap<>();
         columns.put("user_id", request.getUserId());
         columns.put("request_date", request.getRequestDate());
         columns.put("visit_start_date", request.getVisitStartDate());
         columns.put("visit_end_date", request.getVisitEndDate());
+        columns.put("status", request.getStatus().name());
 
         Number requestId = simpleJdbcInsert.executeAndReturnKey(columns);
         request.setRequestId(requestId.longValue());
-        Request savedRequest = getRequest(requestId.longValue());
-        System.out.println("Order saved: " + savedRequest);
-
         return request;
     }
+
+    private Request updateRequest(Request request) {
+        String sql = "UPDATE requests SET status = ?, visit_start_date = ?, visit_end_date = ? WHERE request_id = ?";
+
+        int rowsAffected = jdbc.update(sql,
+                request.getStatus().name(),
+                request.getVisitStartDate(),
+                request.getVisitEndDate(),
+                request.getRequestId());
+
+        if (rowsAffected == 0) {
+
+            throw new IllegalArgumentException("Request not found for id: " + request.getRequestId());
+        }
+
+        return getRequest(request.getRequestId());
+    }
+
+
 
 
     public boolean userExists(Long userId) {

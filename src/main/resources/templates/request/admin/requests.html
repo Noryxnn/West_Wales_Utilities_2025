@@ -8,11 +8,21 @@
         }
     </style>
     <title>Pending Requests</title>
+    <script>
+        function confirmAction(event, actionType) {
+
+            const confirmationMessage = `Are you sure you want to ${actionType.toLowerCase()} this request?`;
+            if (!confirm(confirmationMessage)) {
+
+                event.preventDefault();
+            }
+        }
+    </script>
 </head>
 <body>
 
 <div>
-    <!-- Header -->
+
     <div>
     </div>
 
@@ -40,16 +50,16 @@
                 <td th:text="${#temporals.format(request.visitEndDate, 'yyyy-MM-dd')}"></td>
 
                 <td>
-                    <!-- Show buttons if status is PENDING -->
+
                     <div th:if="${request.status.name() == 'PENDING'}">
                         <form th:action="@{/admin/request/accept/{id}(id=${request.requestId})}" method="get">
-                            <button type="submit">Accept</button>
+                            <button type="submit" onclick="confirmAction(event, 'Approve')">Accept</button>
                         </form>
                         <form th:action="@{/admin/request/deny/{id}(id=${request.requestId})}" method="get">
-                            <button type="submit">Deny</button>
+                            <button type="submit" onclick="confirmAction(event, 'Deny')">Deny</button>
                         </form>
                     </div>
-                    <!-- Show text if status is APPROVED or DENIED -->
+
                     <div th:if="${request.status.name() == 'APPROVED'}">
                         Accepted
                     </div>
@@ -64,7 +74,7 @@
     </div>
 </div>
 
-<!-- Footer -->
+
 <div>
 </div>
 
