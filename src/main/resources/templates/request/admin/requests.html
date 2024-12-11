@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+    <title>Pending Requests</title>
+    <script>
+        function confirmAction(event, actionType) {
+
+            const confirmationMessage = `Are you sure you want to ${actionType.toLowerCase()} this request?`;
+            if (!confirm(confirmationMessage)) {
+
+                event.preventDefault();
+            }
+        }
+    </script>
+</head>
+<body>
+
+<div>
+
+    <div>
+    </div>
+
+    <div>
+        <h1>Pending Requests</h1>
+
+        <table>
+            <thead>
+            <tr>
+                <th>Request ID</th>
+                <th>User ID</th>
+                <th>Request Date</th>
+                <th>Visit Start Date</th>
+                <th>Visit End Date</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="request : ${requests}">
+
+                <td th:text="${request.requestId}"></td>
+                <td th:text="${request.userId}"></td>
+                <td th:text="${#temporals.format(request.requestDate, 'yyyy-MM-dd')}"></td>
+                <td th:text="${#temporals.format(request.visitStartDate, 'yyyy-MM-dd')}"></td>
+                <td th:text="${#temporals.format(request.visitEndDate, 'yyyy-MM-dd')}"></td>
+
+                <td>
+
+                    <div th:if="${request.status.name() == 'PENDING'}">
+                        <form th:action="@{/admin/request/accept/{id}(id=${request.requestId})}" method="get">
+                            <button type="submit" onclick="confirmAction(event, 'Approve')">Accept</button>
+                        </form>
+                        <form th:action="@{/admin/request/deny/{id}(id=${request.requestId})}" method="get">
+                            <button type="submit" onclick="confirmAction(event, 'Deny')">Deny</button>
+                        </form>
+                    </div>
+
+                    <div th:if="${request.status.name() == 'APPROVED'}">
+                        Accepted
+                    </div>
+                    <div th:if="${request.status.name() == 'DENIED'}">
+                        Denied
+                    </div>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<div>
+</div>
+
+</body>
+</html>

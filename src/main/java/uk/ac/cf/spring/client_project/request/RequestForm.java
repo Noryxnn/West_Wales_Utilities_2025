@@ -23,9 +23,9 @@ public class RequestForm {
     private LocalDate visitStartDate;
     @NotNull(message = "Visit end date is required.")
     private LocalDate visitEndDate;
-    private boolean isApproved;
 
-    public RequestForm() { this(0L, 0L,  LocalDateTime.now(), null,null, false);
+    public RequestForm() {
+        this(0L, 0L, LocalDateTime.now(), null, null);
     }
 
     public String getVisitDateValidationMessage() {
@@ -37,4 +37,5 @@ public class RequestForm {
             return null;
         }
     }
+
 }
