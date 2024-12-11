@@ -11,6 +11,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -34,9 +35,7 @@ public class UserRegistrationTest {
                         .param("firstName", "") // Missing first name
                         .param("lastName", "Brown")
                         .param("password", "securePass123")
-                        .param("confirmPassword", "securePass123")
-                        .param("email", "alice@example.com")
-                        .param("companyName", "Alice Inc."))
+                        .param("email", "alice@example.com"))
                 .andExpect(status().isOk()) // Expect the form page to reload
                 .andExpect(view().name("user/registrationForm")) // Return to registration form
                 .andExpect(model().attributeHasFieldErrors("user", "firstName")); // Missing first name validation error
@@ -48,12 +47,10 @@ public class UserRegistrationTest {
                         .param("firstName", "Alice")
                         .param("lastName", "Brown")
                         .param("password", "securePass123")
-                        .param("confirmPassword", "securePass123")
-                        .param("email", "invalid-email") // Invalid email format
-                        .param("companyName", "Alice Inc."))
+                        .param("email", "invalid-email")) // Invalid email format
                 .andExpect(status().isOk()) // Expect the form page to reload
                 .andExpect(view().name("user/registrationForm")) // Return to registration form
                 .andExpect(model().attributeHasFieldErrors("user", "email")); // Invalid email validation error
     }
-}
 
+}
