@@ -101,7 +101,6 @@ public class RequestRepositoryImpl implements RequestRepository {
 
 
 
-
     public boolean userExists(Long userId) {
         String sql = "select count(*) from users where user_id = ?";
         Integer count = jdbc.queryForObject(sql, Integer.class, userId);

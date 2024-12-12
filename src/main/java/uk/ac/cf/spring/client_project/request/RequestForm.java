@@ -4,6 +4,7 @@ import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
@@ -11,22 +12,18 @@ import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class RequestForm {
     private Long requestId;
-    @NotNull(message = "User ID is required.")
     private Long userId;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime requestDate;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Future (message = "Visit date must be in the future.")
     @NotNull(message = "Visit start date is required.")
     private LocalDate visitStartDate;
     @NotNull(message = "Visit end date is required.")
     private LocalDate visitEndDate;
 
-    public RequestForm() {
-        this(0L, 0L, LocalDateTime.now(), null, null);
-    }
+
 
     public String getVisitDateValidationMessage() {
         // Checks if visitEndDate is before visitStartDate
