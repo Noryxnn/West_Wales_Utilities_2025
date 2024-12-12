@@ -41,7 +41,7 @@ h1 {
     z-index: 10;
 }
 
-.scan-status {
+.qr-reader-results p {
     font-size: 1.5em;
     font-weight: bold;
     padding: 10px;

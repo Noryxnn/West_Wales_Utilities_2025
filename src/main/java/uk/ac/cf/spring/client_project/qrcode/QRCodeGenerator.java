@@ -50,16 +50,12 @@ public class QRCodeGenerator {
         return pngOutputStream.toByteArray();
     }
 
-    public static String getQRCode(int width, int height)
+    public static String getQRCode(Long userId, int width, int height)
             throws InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException,
             NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
 
-        // TODO: get user id from session
-        // temp data until login system is implemented
-        long userID = 1L;
-
         HashMap<String, String> payload = new HashMap<>();
-        payload.put("userId", String.valueOf(userID));
+        payload.put("userId", String.valueOf(userId));
         payload.put("timestamp", Instant.now().toString());
 
         String secretKey = QREncryptionUtils.getSecretKey();
@@ -75,7 +71,7 @@ public class QRCodeGenerator {
         try {
             // Generate QR code as byte array
             image = generateQRCode(encryptedPayload, width, height);
-            logger.info("Generated QR code for user {}", userID);
+            logger.info("Generated QR code for user {}", userId);
 
         } catch (WriterException e) {
             logger.error("Failed to generate QR code: {}", e.getMessage());
