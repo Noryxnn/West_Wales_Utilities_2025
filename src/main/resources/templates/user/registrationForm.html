@@ -130,6 +130,7 @@
         <input type="submit" value="Register">
     </form>
 
+<!--
     <div>
         <div id="g_id_onload"
              data-client_id="907822677520-21sch8i398ejsfkidnffmqtase9lnecq.apps.googleusercontent.com"
@@ -147,12 +148,13 @@
     </div>
 
 </div>
+-->
 
 <script>
 
     // Google Login
 
-    const csrfToken = document.querySelector('input[name="_csrf"]').value;
+    /** const csrfToken = document.querySelector('input[name="_csrf"]').value;
 
     function handleCredentialResponse(response) {
         if (!response.credential) {
@@ -183,7 +185,7 @@
                 console.error('Error:', err);
                 document.getElementById('response').innerText = 'Error during sign-in. Please try again.';
             });
-    }
+    } **/
 
     // Function to toggle password visibility
     function togglePassword(fieldId) {
