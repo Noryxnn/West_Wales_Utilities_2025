@@ -6,12 +6,13 @@
 
     <!--    Placeholder for fragments.-->
     <!--    <link th:replace="~{fragments/header :: bootstrap-css}"/>-->
+    <link rel="stylesheet" href="/css/styles.css">
 
 </head>
 <body>
 
 <div class="container">
-
+    <div th:replace="~{fragments/header :: header}"/>
     <h1>Please enter your request details: </h1>
 
     <form th:action="@{/requests/new}" th:method="post" th:object="${request}">
@@ -51,4 +52,7 @@
 <!--<div th:replace="~{fragments/footer :: footer-links}"></div>-->
 <!--<div th:replace="~{fragments/footer :: bootstrap-js}"></div>-->
 
+
+</div>
+<div th:replace="~{fragments/footer :: footer}"/>
 </body>

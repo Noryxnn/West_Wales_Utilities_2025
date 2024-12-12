@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/styles.css">
   <title>Admin Dashboard - Wales & West Utilities</title>
   <style>
     body {
@@ -75,6 +76,7 @@
   </style>
 </head>
 <body>
+<div th:replace="~{fragments/header :: header}"/>
 <div class="dashboard-container">
   <h1>Admin Dashboard</h1>
   <p>Welcome, Admin! Please choose an action below.</p>
@@ -82,5 +84,6 @@
   <a href="/admin/locations" class="button location-button">Manage Locations</a>
   <a href="/admin/requests" class="button requests-button">Manage Requests</a>
 </div>
+<div th:replace="~{fragments/footer :: footer}"/>
 </body>
 </html>

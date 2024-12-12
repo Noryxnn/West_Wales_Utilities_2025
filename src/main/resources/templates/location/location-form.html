@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Location Form</title>
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
+<div th:replace="~{fragments/header :: header}"/>
 <h1>Location Form</h1>
 
 <form th:method="post" th:object="${locationForm}">
@@ -69,5 +71,6 @@
         <button><a th:href="@{/admin/locations}">Cancel</a></button>
     </div>
 </form>
+<div th:replace="~{fragments/footer :: footer}"/>
 </body>
 </html>

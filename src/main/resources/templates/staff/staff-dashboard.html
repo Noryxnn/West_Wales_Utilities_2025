@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
+<div th:replace="~{fragments/header :: header}"/>
 <h1>Staff Dashboard</h1>
 
 <!-- Location Selection Form -->
@@ -28,5 +29,6 @@
 </form>
 
 <script src="/scripts/qr-scanner.js"></script>
+<div th:replace="~{fragments/footer :: footer}"/>
 </body>
 </html>

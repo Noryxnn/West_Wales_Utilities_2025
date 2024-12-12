@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Location Details</title>
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
+<div th:replace="~{fragments/header :: header}"/>
 
 <h1>Location Details</h1>
 
@@ -34,5 +36,6 @@
         <td th:text="${locationType.name}"></td>
     </tr>
 </table>
+<div th:replace="~{fragments/footer :: footer}"/>
 </body>
 </html>

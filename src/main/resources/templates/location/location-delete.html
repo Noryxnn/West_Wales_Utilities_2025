@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Confirm Delete</title>
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 
 <body>
+<div th:replace="~{fragments/header :: header}"/>
 <h1>Confirm Delete</h1>
 
 <p>Are you sure you want to delete this location?</p>
@@ -25,6 +27,6 @@
         <a th:href="@{/admin/locations}" style="text-decoration: none;">Cancel</a>
     </button>
 </div>
-
+<div th:replace="~{fragments/footer :: footer}"/>
 </body>
 </html>

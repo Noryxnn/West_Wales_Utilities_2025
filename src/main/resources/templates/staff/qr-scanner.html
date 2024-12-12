@@ -8,12 +8,13 @@
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-
+<div th:replace="~{fragments/header :: header}"/>
 <h1>QR Code Scanner</h1>
 <h2 th:text="${locationName}"></h2>
 <div id="qr-reader"></div>
 <div id="qr-reader-results"></div>
 
 <script src="/scripts/qr-scanner.js"></script>
+<div th:replace="~{fragments/footer :: footer}"/>
 </body>
 </html>

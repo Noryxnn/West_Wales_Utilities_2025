@@ -2,7 +2,6 @@ body {
     font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
     margin: 0;
     padding: 0;
-    text-align: center;
     background-color: #fff;
     color: #666;
 }
@@ -26,4 +25,57 @@ h1 {
 
 .btn-primary:hover {
     background-color: #b24315;
+}
+
+/* Basic styles for the navbar */
+.header-navbar {
+    position: fixed;
+
+    display: flex;
+    margin-bottom: auto;
+    justify-content: space-between;
+    align-items: center;
+    top:0;
+    left: 0;
+    right: 0;
+}
+
+.logo-section img {
+    height: 60px;
+}
+
+.signout-section {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.sign-out-link {
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+.sign-out-link:hover {
+    text-decoration: underline;
+}
+
+nav.header-navbar {
+    background-color: rgb(202, 203, 204);
+}
+
+
+/* Basic styles for the footer*/
+.footer{
+    position: fixed;
+    width: 100%;
+    background-color: rgb(224,114,34);
+    text-align: left;
+    color:white;
+    display: flex;
+    margin-top: auto;
+    bottom: 0; /*for it to stick at the bottom*/
+    padding-bottom: 5px;
+    left: 0;
+
+
+
 }

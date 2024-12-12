@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Locations</title>
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
+<div th:replace="~{fragments/header :: header}"/>
 <h1>Locations</h1>
 
 <button><a th:href="@{/admin/locations/add}">Add Location</a></button>
@@ -22,6 +24,6 @@
         <td><button><a th:href="@{/admin/locations/delete/{id} (id=${location.id})}">Delete</a></button></td>
     </tbody>
 </table>
-
+<div th:replace="~{fragments/footer :: footer}"/>
 </body>
 </html>

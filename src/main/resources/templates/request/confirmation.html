@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Visit Request Confirmation</title>
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
 
 <div class="container">
-
+    <div th:replace="~{fragments/header :: header}"/>
     <div class="alert alert-success" role="alert">
         <h1>Request Confirmation</h1>
 
@@ -23,7 +24,8 @@
         <a class="btn btn-info" href="/dashboard" role="button">Back to Dashboard</a>
         <a class="btn btn-info" href="/requests/new" role="button">Make Another Request</a>
     </div>
-</div>
 
+</div>
+<div th:replace="~{fragments/footer :: footer}"/>
 </body>
 </html>
