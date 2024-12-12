@@ -1,0 +1,35 @@
+body {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    flex-direction: column;
+    padding: 15px;
+}
+
+.qrcode-card {
+    max-width: 300px;
+    padding: 15px;
+    background-color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin: 20px 0;
+    box-sizing: border-box;
+}
+
+.qrcode-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    display: block;
+    margin: 0 auto;
+}
+
+.timer {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #c94d1b;
+    margin: 40px 0;
+}
+

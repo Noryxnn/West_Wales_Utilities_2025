@@ -1,0 +1,140 @@
+body, h1, table, th, td {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    color: #333333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    text-align: center;
+    width: 100%;
+    max-width: 800px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #004B87;
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+thead {
+    background-color: #FFA500;
+    color: #ffffff;
+}
+
+thead th {
+    text-align: left;
+    padding: 12px 15px;
+    font-weight: bold;
+}
+
+tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+td {
+    padding: 12px 15px;
+}
+
+tbody tr:hover {
+    background-color: #e6f7ff;
+}
+
+.action-button {
+    background-color: #FFA500;
+    color: #ffffff;
+    border: none;
+    padding: 8px 16px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    margin: 5px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.action-button.accept:hover {
+    background-color: #008000;
+}
+
+.action-button.deny:hover {
+    background-color: #ff0000;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 1.8em;
+    }
+
+    table, thead, tbody, th, td, tr {
+        display: block;
+        width: 100%;
+    }
+
+    th, td {
+        text-align: left;
+        padding: 10px;
+    }
+
+    tbody tr {
+        margin-bottom: 15px;
+    }
+}
+
+
+.mb-3 {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.mb-3 label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+.mb-3 input[type="date"] {
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+

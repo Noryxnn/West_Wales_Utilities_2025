@@ -3,9 +3,10 @@ package uk.ac.cf.spring.client_project.request;
 import java.util.List;
 
 public interface RequestService {
-    List<Request> getOpenRequests();
-    Request getRequest(Long requestId);
-    void save(Request request);
+    List<Request> getAllRequests();
+    Request save(Request request);
     boolean validateUserId(Long userId);
-    boolean validateLocationId(Long locationId);
+    void updateRequestStatus(Long id, RequestStatus requestStatus);
+
+    List<Request> getPendingRequests();
 }
