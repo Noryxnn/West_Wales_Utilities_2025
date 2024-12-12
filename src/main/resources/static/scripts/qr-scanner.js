@@ -24,12 +24,15 @@ async function startQrScanner() {
         isProcessing = true;
 
         console.log(`Code scanned: ${decodedText}`);
+        const csrfToken = document.querySelector('input[name="_csrf"]').value;
+
 
         // Send encrypted data to the server
-        fetch('/scan', {
+        fetch('/api/scan', {
             method: 'POST',
             headers: {
-                'Content-Type': 'text/plain'
+                'Content-Type': 'text/plain',
+                'X-CSRF-TOKEN': csrfToken
             },
             body: decodedText
         })
@@ -38,8 +41,11 @@ async function startQrScanner() {
 
                 // Process server response
                 console.log('Server Response:', data);
-                if (data.includes('success')) {
-                    qrReaderResults.innerHTML = `<p class="scan-status" style="color: green;">Check-in Successful</p>`;
+                if (data.includes('checkin')) {
+                    qrReaderResults.innerHTML = `<p style="color: green;">Check-in successful</p>`;
+
+                } else if (data.includes('checkout')) {
+                    qrReaderResults.innerHTML = `<p style="color: red;">Checkout successful</p>`;
 
                 } else if (data.includes('denied')) {
                     qrReaderResults.innerHTML = `<p class="scan-status" style="color: red;">Check-in Denied</p>`;

@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockHttpSession;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.web.servlet.ModelAndView;
@@ -13,6 +14,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -25,6 +27,7 @@ public class RequestControllerTests {
     private MockMvc mvc;
 
     @Test
+    @WithMockUser(username = "john@doe.com", roles = {"VISITOR"})
     public void shouldRenderRequestForm() throws Exception {
         mvc.perform(get("/requests/new"))
                 .andDo(print())
@@ -34,6 +37,7 @@ public class RequestControllerTests {
     }
 
     @Test
+    @WithMockUser(username = "john@doe.com", roles = {"VISITOR"})
     public void shouldRenderConfirmationPageWhenRequestInSession() throws Exception {
         // Create a mock request object
         Request mockRequest = new Request(
@@ -42,7 +46,7 @@ public class RequestControllerTests {
                 LocalDateTime.now(),
                 LocalDate.now().plusDays(1),
                 LocalDate.now().plusDays(2),
-                false
+                RequestStatus.PENDING
         );
 
         // Simulate session with mock request
@@ -56,8 +60,10 @@ public class RequestControllerTests {
     }
 
     @Test
+    @WithMockUser(username = "john@doe.com", roles = {"VISITOR"})
     public void shouldReturnToFormOnValidationErrors() throws Exception {
         mvc.perform(post("/requests/new")
+                        .with(csrf())
                         .param("userId", "invalid")
                         .param("requestDate", LocalDateTime.now().toString())
                         .param("visitStartDate", LocalDate.now().plusDays(1).toString())
@@ -69,6 +75,7 @@ public class RequestControllerTests {
     }
 
     @Test
+    @WithMockUser(username = "john@doe.com", roles = {"VISITOR"})
     public void shouldSubmitRequest() throws Exception {
         Request request = new Request(
                 1L,
@@ -76,7 +83,7 @@ public class RequestControllerTests {
                 LocalDateTime.of(2024, 12, 3, 10, 0),
                 LocalDate.of(2024, 12, 4),
                 LocalDate.of(2024, 12, 5),
-                false
+                RequestStatus.PENDING
         );
 
         MockHttpSession session = new MockHttpSession();

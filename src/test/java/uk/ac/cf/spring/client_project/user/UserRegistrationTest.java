@@ -7,10 +7,12 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -36,7 +38,7 @@ public class UserRegistrationTest {
                         .param("password", "securePass123")
                         .param("confirmPassword", "securePass123")
                         .param("email", "alice@example.com")
-                        .param("companyName", "Alice Inc."))
+                        .with(csrf()))
                 .andExpect(status().isOk()) // Expect the form page to reload
                 .andExpect(view().name("user/registrationForm")) // Return to registration form
                 .andExpect(model().attributeHasFieldErrors("user", "firstName")); // Missing first name validation error
@@ -49,8 +51,9 @@ public class UserRegistrationTest {
                         .param("lastName", "Brown")
                         .param("password", "securePass123")
                         .param("confirmPassword", "securePass123")
-                        .param("email", "invalid-email") // Invalid email format
-                        .param("companyName", "Alice Inc."))
+                        .param("email", "invalid-email")// Invalid email format
+                        .param("enabled", "true")
+                        .with(csrf()))
                 .andExpect(status().isOk()) // Expect the form page to reload
                 .andExpect(view().name("user/registrationForm")) // Return to registration form
                 .andExpect(model().attributeHasFieldErrors("user", "email")); // Invalid email validation error

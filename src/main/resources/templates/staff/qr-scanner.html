@@ -20,6 +20,8 @@
 
 <a class="scan btn-primary" th:href="@{/staff/dashboard}">Cancel</a>
 
+
+<input type="hidden" name="_csrf" th:value="${_csrf.token}" />
 <script src="/scripts/qr-scanner.js"></script>
 </body>
 </html>

@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Visitor Dashboard</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/visitor-dashboard.css">
 </head>
 <body>
-<h1>Visitor Dashboard</h1>
-<div>
-    <a class="btn-primary" th:href="@{/check-in}">Check In</a>
+<div class="dashboard-container">
+    <h1>Visitor Dashboard</h1>
+    <p>Welcome! Choose an option below:</p>
+    <a href="/check-in" class="btn-primary">Check In</a>
+    <a href="/requests/new" class="btn-primary">Request Visit</a>
 </div>
 </body>
 </html>

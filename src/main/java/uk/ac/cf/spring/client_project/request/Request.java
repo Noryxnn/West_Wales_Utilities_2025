@@ -14,11 +14,14 @@ public class Request {
     private LocalDateTime requestDate;
     private LocalDate visitStartDate;
     private LocalDate visitEndDate;
-    private boolean isApproved;
+    private RequestStatus status; //pending by default, approved, denied
 
-    public Request() { this(0L, 0L, LocalDateTime.now(), null, null, false); }
+
+    public Request() {
+        this(0L, 0L, LocalDateTime.now(), null, null, RequestStatus.PENDING);
+    }
 
     public boolean isNew() {
-        return this.requestId == 0;
+        return this.requestId == null || this.requestId == 0;
     }
 }
