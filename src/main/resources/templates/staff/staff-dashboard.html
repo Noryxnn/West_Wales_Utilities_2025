@@ -13,6 +13,8 @@
     <p>Welcome, Staff Member! Please choose an action below.</p>
 
     <form action="/staff/scan" method="post" class="form-container">
+        <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+
         <label for="locationId">Select Location:</label>
         <select name="locationId" id="locationId" onchange="toggleScanButton()" class="dropdown">
             <option value="0" disabled selected>Select a location</option>
