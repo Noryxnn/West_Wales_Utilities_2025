@@ -22,7 +22,8 @@ public class UserRepositoryImpl implements UserRepository {
                 rs.getString("first_name"),
                 rs.getString("last_name"),
                 rs.getString("password"),
-                rs.getString("email")
+                rs.getString("email"),
+                rs.getBoolean("enabled")
         );
     }
 
@@ -38,8 +39,10 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public void save(User user) {
-        jdbcTemplate.update("INSERT INTO users (first_name, last_name, password, email) VALUES (?, ?, ?, ?)",
-                user.getFirstName(), user.getLastName(), user.getPassword(), user.getEmail());
+        jdbcTemplate.update("INSERT INTO users (first_name, last_name, password, email, enabled) VALUES (?, ?, ?, ?, ?)",
+                user.getFirstName(), user.getLastName(), user.getPassword(), user.getEmail(), user.getEnabled());
+        Integer visitorRoleId = jdbcTemplate.queryForObject("SELECT role_id FROM roles WHERE role_name = 'VISITOR'", Integer.class);
+        jdbcTemplate.update("INSERT INTO user_roles (email, role_id) VALUES (?, ?)", user.getEmail(), visitorRoleId);
     }
 
     @Override
@@ -49,7 +52,9 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public void addUser(User user) {
-        String sql = "INSERT INTO users(first_name, last_name, password, email) VALUES (?,?,?,?)";
-        jdbcTemplate.update(sql, user.getFirstName(), user.getLastName(), user.getPassword(), user.getEmail());
+        String sql = "INSERT INTO users(first_name, last_name, password, email, enabled) VALUES (?,?,?,?, ?)";
+        jdbcTemplate.update(sql, user.getFirstName(), user.getLastName(), user.getPassword(), user.getEmail(), user.getEnabled());
+        Integer visitorRoleId = jdbcTemplate.queryForObject("SELECT role_id FROM roles WHERE role_name = 'VISITOR'", Integer.class);
+        jdbcTemplate.update("INSERT INTO user_roles (email, role_id) VALUES (?, ?)", user.getEmail(), visitorRoleId);
     }
 }

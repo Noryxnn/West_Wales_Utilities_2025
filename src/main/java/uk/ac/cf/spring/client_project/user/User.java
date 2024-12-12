@@ -22,6 +22,8 @@ public class User {
     @Email(message = "Invalid email format")
     private String email;
 
+    private Boolean enabled;
+
 
     public User() {
         this.userId = 0;
@@ -29,5 +31,7 @@ public class User {
         this.lastName = "";
         this.password = "";
         this.email = "";
+        this.enabled = true;
+
     }
 }

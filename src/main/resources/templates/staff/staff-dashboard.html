@@ -12,6 +12,7 @@
 
 <!-- Location Selection Form -->
 <form action="/staff/scan" method="post">
+    <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
     <label for="locationId">Select Location:</label>
     <select name="locationId" id="locationId" onchange="toggleScanButton()">
         <option value="0" disabled selected>Select a location</option>
@@ -20,12 +21,9 @@
                 th:text="${location.name}">
         </option>
     </select>
-
-    <!-- Scan Button -->
-    <div style="margin-top: 10px">
-        <button type="submit" id="scanButton" disabled>Go to QR Scanner</button>
-    </div>
+    <button type="submit" id="scanButton" disabled>Go to QR Scanner</button>
 </form>
+
 
 <script src="/scripts/qr-scanner.js"></script>
 </body>

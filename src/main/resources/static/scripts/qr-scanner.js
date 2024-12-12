@@ -23,12 +23,15 @@ async function startQrScanner() {
         isProcessing = true;
 
         console.log(`Code scanned: ${decodedText}`);
+        const csrfToken = document.querySelector('input[name="_csrf"]').value;
+
 
         // Send encrypted data to the server
-        fetch('/scan', {
+        fetch('/api/scan', {
             method: 'POST',
             headers: {
-                'Content-Type': 'text/plain'
+                'Content-Type': 'text/plain',
+                'X-CSRF-TOKEN': csrfToken
             },
             body: decodedText
         })

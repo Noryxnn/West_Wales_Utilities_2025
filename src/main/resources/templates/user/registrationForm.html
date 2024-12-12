@@ -4,150 +4,221 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration Form</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://accounts.google.com/gsi/client" async defer></script>
+
     <style>
         body {
-            margin: 0;
-            padding: 0;
+            background-color: #f8f8f8;
             font-family: 'Roboto', sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
+            margin: 0;
+            padding-top: 0;
+            padding-right: 0;
+            padding-left: 0;
+            padding-bottom: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding-top: 20px;
         }
 
         .form-container {
-            max-width: 500px;
-            margin: 100px auto;
-            padding: 30px;
-            background-color: #fff;
+            width: 100%;
+            max-width: 400px;
+            background: #fff;
+            padding: 20px;
             border-radius: 8px;
-            box-shadow: 0px 4px 8px rgb(78, 78, 82);
-            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
         }
 
         h1 {
-            font-size: 2.5em;
-            color: #ff6600;
+            text-align: center;
+            color: #333;
             margin-bottom: 20px;
+            margin-top: 0;
         }
 
-        #googleSignInBtn {
-            background-color: #309af5;
-            color: #fff;
-            font-size: 1.2em;
-            padding: 12px 30px;
-            border-radius: 25px;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
             width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 1rem;
         }
 
-        #googleSignInBtn:hover {
-            background-color: #3b8fc7;
+        .password-container {
+            position: relative;
         }
 
-        #response {
-            margin-top: 20px;
-            font-size: 1.2em;
-            color: #ff6600;
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: #666;
         }
 
-        .divider {
-            margin: 30px 0;
-            font-size: 1em;
-            color: #999;
-        }
-
-        #loginButton {
-            margin-top: 20px;
-            padding: 12px 30px;
-            font-size: 1.2em;
-            background-color: #309af5;
+        input[type="submit"] {
+            width: 100%;
+            background-color: #007BFF;
             color: #fff;
             border: none;
-            border-radius: 25px;
+            border-radius: 5px;
+            padding: 10px 15px;
+            font-size: 1rem;
+            font-weight: bold;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s;
         }
 
-        #loginButton:hover {
-            background-color: #3b8fc7;
+        input[type="submit"]:hover {
+            background-color: #0056b3;
         }
 
-        @media (max-width: 600px) {
-            .form-container {
-                margin: 50px auto;
-                padding: 20px;
-            }
-
-            #googleSignInBtn {
-                padding: 10px 20px;
-                font-size: 1em;
-            }
-
-            #loginButton {
-                padding: 10px 20px;
-                font-size: 1em;
-            }
+        .error {
+            color: red;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
         }
-
     </style>
+
 </head>
 <body>
 <div class="form-container">
     <h1>Create an account</h1>
-    <div id="g_id_onload"
-         data-client_id="907822677520-21sch8i398ejsfkidnffmqtase9lnecq.apps.googleusercontent.com"
-         data-callback="handleCredentialResponse">
+    <form id="registrationForm" th:action="@{/register}" method="POST">
+        <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+        <label for="firstName">First Name</label>
+        <input type="text" id="firstName" name="firstName" placeholder="Enter your first name" required>
+
+        <label for="lastName">Last Name</label>
+        <input type="text" id="lastName" name="lastName" placeholder="Enter your last name" required>
+
+        <label for="password">Password</label>
+        <div class="password-container">
+            <input type="password" id="password" name="password" placeholder="Create a password" required>
+            <button type="button" class="toggle-password" onclick="togglePassword('password')">👁</button>
+        </div>
+
+        <label for="confirmPassword">Confirm Password</label>
+        <div class="password-container">
+            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
+            <button type="button" class="toggle-password" onclick="togglePassword('confirmPassword')">👁</button>
+        </div>
+        <div class="error" id="passwordError"></div>
+
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+
+        <input type="submit" value="Register">
+    </form>
+
+<!--
+    <div>
+        <div id="g_id_onload"
+             data-client_id="907822677520-21sch8i398ejsfkidnffmqtase9lnecq.apps.googleusercontent.com"
+             data-callback="handleCredentialResponse">
+        </div>
+        <div class="g_id_signin"
+             data-type="standard"
+             data-size="large"
+             data-theme="outline"
+             data-text="sign_in_with"
+             data-shape="rectangular"
+             data-logo_alignment="left">
+        </div>
+        <div id="response"></div>
     </div>
-    <div class="g_id_signin"
-         data-type="standard"
-         data-size="large"
-         data-theme="outline"
-         data-text="sign_in_with"
-         data-shape="rectangular"
-         data-logo_alignment="left">
-    </div>
-    <div id="response"></div>
+
 </div>
+-->
 
 <script>
+
+    // Google Login
+
+    /** const csrfToken = document.querySelector('input[name="_csrf"]').value;
+
     function handleCredentialResponse(response) {
+        if (!response.credential) {
+            document.getElementById('response').innerText = 'Google sign-in failed. Please try again.';
+            return;
+        }
+
         const idToken = response.credential;
 
         fetch('/auth/verify', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'X-CSRF-Token': csrfToken, // Include CSRF token in headers
             },
-            body: JSON.stringify({ idToken: idToken })
+            body: JSON.stringify({ idToken: idToken }),
         })
-            .then(response => response.json())
-            .then(responseData => {
-                if (responseData.status === 'success') {
-                    // Display success message
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === 'success') {
                     document.getElementById('response').innerText =
-                        `Welcome, ${responseData.firstName}! (${responseData.email})`;
-
-                    // Add a button to go to the login page
-                    const loginButton = document.createElement('button');
-                    loginButton.id = 'loginButton';
-                    loginButton.innerText = 'Go to Login Page';
-                    loginButton.onclick = () => {
-                        window.location.href = 'http://localhost:8080/login';
-                    };
-
-                    document.querySelector('.form-container').appendChild(loginButton);
+                        `Welcome, ${data.firstName}! (${data.email})`;
                 } else {
-                    // Display error message
-                    document.getElementById('response').innerText = responseData.message;
+                    document.getElementById('response').innerText = data.message || 'Sign-in failed.';
                 }
             })
-            .catch(error => {
-                console.error('Error verifying token:', error);
-                document.getElementById('response').innerText = 'Error verifying token: ' + error.message;
+            .catch(err => {
+                console.error('Error:', err);
+                document.getElementById('response').innerText = 'Error during sign-in. Please try again.';
             });
+    } **/
+
+    // Function to toggle password visibility
+    function togglePassword(fieldId) {
+        const passwordField = document.getElementById(fieldId);
+        const toggleButton = passwordField.nextElementSibling;
+
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+            toggleButton.textContent = "👁";
+        } else {
+            passwordField.type = "password";
+            toggleButton.textContent = "👁";
+        }
     }
+
+    // Password matching validation
+    const form = document.getElementById('registrationForm');
+    const password = document.getElementById('password');
+    const confirmPassword = document.getElementById('confirmPassword');
+    const passwordError = document.getElementById('passwordError');
+
+    form.addEventListener('submit', function (event) {
+        // Reset error message
+        passwordError.textContent = '';
+
+        // Check if passwords match
+        if (password.value !== confirmPassword.value) {
+            event.preventDefault(); // Prevent form submission
+            passwordError.textContent = 'Passwords do not match. Please try again.';
+        }
+    });
+
 </script>
 </body>
 </html>
+
