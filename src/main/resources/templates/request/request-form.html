@@ -2,10 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Request a Visit</title>
+    <link rel="stylesheet" href="/css/locations-css.css">
 
-    <!--    Placeholder for fragments.-->
-    <!--    <link th:replace="~{fragments/header :: bootstrap-css}"/>-->
+    <title>Request a Visit</title>
 
 </head>
 <body>
@@ -18,11 +17,11 @@
 
         <input th:field="*{requestId}" th:value="0" type="hidden"/>
 
-        <div class="mb-3">
-            <label class="form-label" th:for="*{userId}">User ID:</label>
-            <input class="form-control" placeholder="User ID" th:field="*{userId}" type="text"/>
-            <div class="alert alert-warning" th:errors="*{userId}" th:if="${#fields.hasErrors('userId')}">User ID Error</div>
-        </div>
+<!--        <div class="mb-3">-->
+<!--            <label class="form-label" th:for="*{userId}">User ID:</label>-->
+<!--            <input class="form-control" placeholder="User ID" th:field="*{userId}" type="text"/>-->
+<!--            <div class="alert alert-warning" th:errors="*{userId}" th:if="${#fields.hasErrors('userId')}">User ID Error</div>-->
+<!--        </div>-->
 
         <input th:field="*{requestDate}" th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd HH:mm:ss')}" type="hidden"/>
 
@@ -46,9 +45,4 @@
 
 
 </div>
-
-<!--Placeholder for fragments.-->
-<!--<div th:replace="~{fragments/footer :: footer-links}"></div>-->
-<!--<div th:replace="~{fragments/footer :: bootstrap-js}"></div>-->
-
 </body>

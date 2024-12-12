@@ -20,4 +20,10 @@ public class VisitServiceImpl implements VisitService {
     public void save(VisitDTO visit) {
         visitRepository.save(visit);
     }
+    public void update(VisitDTO visit) {
+        visitRepository.update(visit);
+    }
+    public VisitDTO getCurrentVisit(Long userId, Long locationId) {
+        return visitRepository.getCurrentVisit(userId, locationId);
+    }
 }

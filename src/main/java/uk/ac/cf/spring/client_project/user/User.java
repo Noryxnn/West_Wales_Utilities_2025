@@ -22,16 +22,16 @@ public class User {
     @Email(message = "Invalid email format")
     private String email;
 
-    @NotBlank(message = "Company name is required")
-    private String companyName;
+    private Boolean enabled;
 
-    // Default constructor for Spring's form binding
+
     public User() {
         this.userId = 0;
         this.firstName = "";
         this.lastName = "";
         this.password = "";
         this.email = "";
-        this.companyName = "";
+        this.enabled = true;
+
     }
 }

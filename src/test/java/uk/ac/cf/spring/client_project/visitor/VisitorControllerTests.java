@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import uk.ac.cf.spring.client_project.qrcode.QRCodeGenerator;
 
@@ -20,6 +21,7 @@ class VisitorControllerTests {
     private MockMvc mvc;
 
     @Test
+    @WithMockUser(username = "john@doe.com", roles = {"VISITOR"})
     void shouldGetDashboard() throws Exception {
         mvc.perform(get("/dashboard"))
                 .andDo(print())
@@ -28,24 +30,26 @@ class VisitorControllerTests {
     }
 
     @Test
+    @WithMockUser(username = "john@doe.com", roles = {"VISITOR"})
     void shouldGetCheckInWithQrCodeAttribute() throws Exception {
-        mvc.perform(get("/check-in"))
+        mvc.perform(get("/access"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(view().name("visitor/check-in"))
+                .andExpect(view().name("visitor/access"))
                 .andExpect(model().attributeExists("qrcode"));
     }
 
     @Test
+    @WithMockUser(username = "john@doe.com", roles = {"VISITOR"})
     void shouldGetCheckInWithErrorIfQrCodeGenerationFails() throws Exception {
 
         mockStatic(QRCodeGenerator.class).when(() -> QRCodeGenerator.getQRCode(anyInt(), anyInt()))
                 .thenThrow(new RuntimeException("QR generation failed"));
 
-        mvc.perform(get("/check-in"))
+        mvc.perform(get("/access"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(view().name("visitor/check-in"))
+                .andExpect(view().name("visitor/access"))
                 .andExpect(model().attributeExists("error"));
     }
 }

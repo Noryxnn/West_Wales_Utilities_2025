@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration Form</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+
     <style>
         body {
             background-color: #f8f8f8;
@@ -96,11 +98,13 @@
             margin-bottom: 10px;
         }
     </style>
+
 </head>
 <body>
 <div class="form-container">
     <h1>Create an account</h1>
-    <form id="registrationForm" action="/register" method="POST">
+    <form id="registrationForm" th:action="@{/register}" method="POST">
+        <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
         <label for="firstName">First Name</label>
         <input type="text" id="firstName" name="firstName" placeholder="Enter your first name" required>
 
@@ -120,9 +124,6 @@
         </div>
         <div class="error" id="passwordError"></div>
 
-        <label for="companyName">Company Name</label>
-        <input type="text" id="companyName" name="companyName" placeholder="Enter your company name" required>
-
         <label for="email">Email Address</label>
         <input type="email" id="email" name="email" placeholder="Enter your email address" required>
 
@@ -130,7 +131,63 @@
     </form>
 </div>
 
+<!--
+    <div>
+        <div id="g_id_onload"
+             data-client_id="907822677520-21sch8i398ejsfkidnffmqtase9lnecq.apps.googleusercontent.com"
+             data-callback="handleCredentialResponse">
+        </div>
+        <div class="g_id_signin"
+             data-type="standard"
+             data-size="large"
+             data-theme="outline"
+             data-text="sign_in_with"
+             data-shape="rectangular"
+             data-logo_alignment="left">
+        </div>
+        <div id="response"></div>
+    </div>
+
+</div>
+-->
+
 <script>
+
+    // Google Login
+
+    /** const csrfToken = document.querySelector('input[name="_csrf"]').value;
+
+    function handleCredentialResponse(response) {
+        if (!response.credential) {
+            document.getElementById('response').innerText = 'Google sign-in failed. Please try again.';
+            return;
+        }
+
+        const idToken = response.credential;
+
+        fetch('/auth/verify', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-Token': csrfToken, // Include CSRF token in headers
+            },
+            body: JSON.stringify({ idToken: idToken }),
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    document.getElementById('response').innerText =
+                        `Welcome, ${data.firstName}! (${data.email})`;
+                } else {
+                    document.getElementById('response').innerText = data.message || 'Sign-in failed.';
+                }
+            })
+            .catch(err => {
+                console.error('Error:', err);
+                document.getElementById('response').innerText = 'Error during sign-in. Please try again.';
+            });
+    } **/
+
     // Function to toggle password visibility
     function togglePassword(fieldId) {
         const passwordField = document.getElementById(fieldId);
@@ -161,6 +218,7 @@
             passwordError.textContent = 'Passwords do not match. Please try again.';
         }
     });
+
 </script>
 </body>
 </html>

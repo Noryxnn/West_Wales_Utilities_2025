@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class UserRepositoryImpl implements UserRepository {
@@ -23,9 +24,10 @@ public class UserRepositoryImpl implements UserRepository {
                 rs.getString("last_name"),
                 rs.getString("password"),
                 rs.getString("email"),
-                rs.getString("company_name")
+                rs.getBoolean("enabled")
         );
     }
+
 
     @Override
     public List<User> getAllUsers() {
@@ -39,8 +41,10 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public void save(User user) {
-        jdbcTemplate.update("INSERT INTO users (first_name, last_name, password, email, company_name) VALUES (?, ?, ?, ?, ?)",
-                user.getFirstName(), user.getLastName(), user.getPassword(), user.getEmail(), user.getCompanyName());
+        jdbcTemplate.update("INSERT INTO users (first_name, last_name, password, email, enabled) VALUES (?, ?, ?, ?, ?)",
+                user.getFirstName(), user.getLastName(), user.getPassword(), user.getEmail(), user.getEnabled());
+        Integer visitorRoleId = jdbcTemplate.queryForObject("SELECT role_id FROM roles WHERE role_name = 'VISITOR'", Integer.class);
+        jdbcTemplate.update("INSERT INTO user_roles (email, role_id) VALUES (?, ?)", user.getEmail(), visitorRoleId);
     }
 
     @Override
@@ -50,7 +54,14 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public void addUser(User user) {
-        String sql = "INSERT INTO users(first_name, last_name, password, email, company_name) VALUES (?,?,?,?,?)";
-        jdbcTemplate.update(sql, user.getFirstName(), user.getLastName(), user.getPassword(), user.getEmail(), user.getCompanyName());
+        String sql = "INSERT INTO users(first_name, last_name, password, email, enabled) VALUES (?,?,?,?, ?)";
+        jdbcTemplate.update(sql, user.getFirstName(), user.getLastName(), user.getPassword(), user.getEmail(), user.getEnabled());
+        Integer visitorRoleId = jdbcTemplate.queryForObject("SELECT role_id FROM roles WHERE role_name = 'VISITOR'", Integer.class);
+        jdbcTemplate.update("INSERT INTO user_roles (email, role_id) VALUES (?, ?)", user.getEmail(), visitorRoleId);
+    }
+
+    @Override
+    public Optional <User> findByEmail(String email) {
+        return Optional.of(jdbcTemplate.queryForObject("SELECT * FROM users WHERE email = ?", userRowMapper, email));
     }
 }

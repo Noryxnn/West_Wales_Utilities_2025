@@ -13,6 +13,7 @@ async function startQrScanner() {
     const html5QrCode = new Html5Qrcode("qr-reader");
     const qrReaderResults = document.getElementById("qr-reader-results");
     qrReaderResults.innerHTML = "";
+    qrReaderResults.style.display = "none";
 
     let isProcessing = false;
 
@@ -23,12 +24,15 @@ async function startQrScanner() {
         isProcessing = true;
 
         console.log(`Code scanned: ${decodedText}`);
+        const csrfToken = document.querySelector('input[name="_csrf"]').value;
+
 
         // Send encrypted data to the server
-        fetch('/scan', {
+        fetch('/api/scan', {
             method: 'POST',
             headers: {
-                'Content-Type': 'text/plain'
+                'Content-Type': 'text/plain',
+                'X-CSRF-TOKEN': csrfToken
             },
             body: decodedText
         })
@@ -37,8 +41,11 @@ async function startQrScanner() {
 
                 // Process server response
                 console.log('Server Response:', data);
-                if (data.includes('success')) {
-                    qrReaderResults.innerHTML = `<p style="color: green;">Check-in successful!</p>`;
+
+                if (data.includes('checkin')) {
+                    qrReaderResults.innerHTML = `<p style="color: green;">Check-in successful</p>`;
+                } else if (data.includes('checkout')) {
+                    qrReaderResults.innerHTML = `<p style="color: red;">Checkout successful</p>`;
                 } else if (data.includes('denied')) {
                     qrReaderResults.innerHTML = `<p style="color: red;">Access denied. The visitor is not authorized.</p>`;
                 } else if (data.includes('expired')) {
@@ -46,8 +53,9 @@ async function startQrScanner() {
                 } else {
                     qrReaderResults.innerHTML = `<p style="color: red;">Invalid QR code or an error occurred. Please try again.</p>`;
                 }
-                qrReaderResults.innerHTML += `<button class="btn-primary" id="scan-again-btn" onclick="startQrScanner()">Scan Again</button>`;
 
+                qrReaderResults.innerHTML += `<button class="btn-primary" id="scan-again-btn" onclick="startQrScanner()">Scan Again</button>`;
+                qrReaderResults.style.display = 'flex';
 
             })
             .catch(error => {
@@ -55,7 +63,7 @@ async function startQrScanner() {
                 qrReaderResults.innerHTML = `<p style="color: red;">Error sending data: ${error}</p>`;
             })
             .finally(() => {
-                html5QrCode.stop();
+                html5QrCode.pause();
                 isProcessing = false;
             });
     }
