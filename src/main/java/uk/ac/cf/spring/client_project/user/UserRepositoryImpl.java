@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class UserRepositoryImpl implements UserRepository {
@@ -26,6 +27,7 @@ public class UserRepositoryImpl implements UserRepository {
                 rs.getBoolean("enabled")
         );
     }
+
 
     @Override
     public List<User> getAllUsers() {
@@ -56,5 +58,10 @@ public class UserRepositoryImpl implements UserRepository {
         jdbcTemplate.update(sql, user.getFirstName(), user.getLastName(), user.getPassword(), user.getEmail(), user.getEnabled());
         Integer visitorRoleId = jdbcTemplate.queryForObject("SELECT role_id FROM roles WHERE role_name = 'VISITOR'", Integer.class);
         jdbcTemplate.update("INSERT INTO user_roles (email, role_id) VALUES (?, ?)", user.getEmail(), visitorRoleId);
+    }
+
+    @Override
+    public Optional <User> findByEmail(String email) {
+        return Optional.of(jdbcTemplate.queryForObject("SELECT * FROM users WHERE email = ?", userRowMapper, email));
     }
 }

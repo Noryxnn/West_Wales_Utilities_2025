@@ -1,13 +1,16 @@
 package uk.ac.cf.spring.client_project.request;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
+@Builder
 public class Request {
     private Long requestId;
     private Long userId;
