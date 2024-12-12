@@ -8,11 +8,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import jakarta.servlet.http.HttpSession;
 
 import static org.mockito.Mockito.*;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -27,6 +29,7 @@ class QRScanControllerTests {
     private HttpSession session;
 
     @Test
+    @WithMockUser(username="john@doe.com", roles = {"STAFF"})
     void testHandleQRCodeScanApprovedVisit () throws Exception {
         String qrData = "mockQRData";
         Long locationId = 1L;
@@ -34,10 +37,11 @@ class QRScanControllerTests {
         when(session.getAttribute("locationId")).thenReturn(locationId);
         when(qrScanService.scanQRCode(qrData, locationId)).thenReturn(ResponseEntity.ok("success"));
 
-        mockMvc.perform(post("/scan")
+        mockMvc.perform(post("/api/scan")
                         .content(qrData)
                         .contentType(MediaType.TEXT_PLAIN)
-                        .sessionAttr("locationId", locationId))
+                        .sessionAttr("locationId", locationId)
+                        .with(csrf()))
                 .andExpect(status().isOk())
                 .andExpect(content().string("success"));
 
@@ -45,6 +49,7 @@ class QRScanControllerTests {
     }
 
     @Test
+    @WithMockUser(username="john@doe.com", roles = {"STAFF"})
     void testHandleQRCodeScanDeniedVisit () throws Exception {
         String qrData = "mockQRData";
         Long locationId = 2L;
@@ -52,10 +57,11 @@ class QRScanControllerTests {
         when(session.getAttribute("locationId")).thenReturn(locationId);
         when(qrScanService.scanQRCode(qrData, locationId)).thenReturn(ResponseEntity.ok("denied"));
 
-        mockMvc.perform(post("/scan")
+        mockMvc.perform(post("/api/scan")
                         .content(qrData)
                         .contentType(MediaType.TEXT_PLAIN)
-                        .sessionAttr("locationId", locationId))
+                        .sessionAttr("locationId", locationId)
+                        .with(csrf()))
                 .andExpect(status().isOk())
                 .andExpect(content().string("denied"));
 
