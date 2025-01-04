@@ -4,8 +4,22 @@
     <meta charset="UTF-8">
     <title>Request a Visit</title>
     <link rel="stylesheet" href="/css/request-form.css">
+    <link rel="stylesheet" href="/css/navbarstyle.css">
 </head>
 <body>
+
+<header class="header">
+    <h1 class="logo">
+        <a href="/dashboard">
+            <img src="https://www.wwutilities.co.uk/images/mobile-logo.png" alt="Logo" />
+        </a>
+    </h1>
+    <nav>
+        <ul class="main-nav">
+            <li><a href="/login">Logout</a></li>
+        </ul>
+    </nav>
+</header>
 
 <div class="container">
 
@@ -14,12 +28,6 @@
     <form th:action="@{/requests/new}" th:method="post" th:object="${request}">
 
         <input th:field="*{requestId}" th:value="0" type="hidden"/>
-
-<!--        <div class="mb-3">-->
-<!--            <label class="form-label" th:for="*{userId}">User ID:</label>-->
-<!--            <input class="form-control" placeholder="User ID" th:field="*{userId}" type="text"/>-->
-<!--            <div class="alert alert-warning" th:errors="*{userId}" th:if="${#fields.hasErrors('userId')}">User ID Error</div>-->
-<!--        </div>-->
 
         <input th:field="*{requestDate}" th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd HH:mm:ss')}" type="hidden"/>
 
@@ -41,6 +49,6 @@
 
     </form>
 
-
 </div>
 </body>
+</html>

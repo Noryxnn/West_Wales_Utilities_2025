@@ -2,11 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/css/locations-css.css">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Locations</title>
+    <link rel="stylesheet" href="/css/locations-css.css">
+    <link rel="stylesheet" href="/css/navbarstyle.css">
 </head>
 <body>
+<header class="header">
+    <h1 class="logo">
+        <a href="/admin/dashboard">
+            <img src="https://www.wwutilities.co.uk/images/mobile-logo.png" alt="Logo" />
+        </a>
+    </h1>
+    <nav>
+        <ul class="main-nav">
+            <li><a href="/login">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+
 <h1>Locations</h1>
 
 <button><a th:href="@{/admin/locations/add}">Add Location</a></button>
@@ -22,6 +36,7 @@
         <td><a th:href="@{/admin/locations/{id} (id=${location.id})}" th:text="${location.name}"></a></td>
         <td><button><a th:href="@{/admin/locations/edit/{id} (id=${location.id})}">Edit</a></button></td>
         <td><button><a th:href="@{/admin/locations/delete/{id} (id=${location.id})}">Delete</a></button></td>
+    </tr>
     </tbody>
 </table>
 

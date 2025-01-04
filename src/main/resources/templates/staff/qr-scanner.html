@@ -7,8 +7,22 @@
     <script src="https://unpkg.com/html5-qrcode"></script>
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/qr-scanner.css">
+    <link rel="stylesheet" href="/css/navbarstyle.css">
 </head>
 <body>
+
+<header class="header">
+    <h1 class="logo">
+        <a href="/staff/dashboard">
+            <img src="https://www.wwutilities.co.uk/images/mobile-logo.png" alt="Logo" />
+        </a>
+    </h1>
+    <nav>
+        <ul class="main-nav">
+            <li><a href="/login">Logout</a></li>
+        </ul>
+    </nav>
+</header>
 
 <h2 th:text="${locationName}"></h2>
 
@@ -19,7 +33,6 @@
 </div>
 
 <a class="scan btn-primary" th:href="@{/staff/dashboard}">Cancel</a>
-
 
 <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
 <script src="/scripts/qr-scanner.js"></script>
