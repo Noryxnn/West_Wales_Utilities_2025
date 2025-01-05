@@ -16,6 +16,7 @@
             align-items: flex-start;
             min-height: 100vh;
             padding-top: 20px;
+            background-color: #f9f9f9;
         }
 
         .form-container {
@@ -53,27 +54,51 @@
             font-size: 1rem;
         }
 
-        input[type="submit"] {
+        input[type="submit"],
+        .google-button {
             width: 100%;
-            background-color: #007BFF;
-            color: #fff;
+            padding: 10px;
             border: none;
             border-radius: 5px;
-            padding: 10px 15px;
             font-size: 1rem;
             font-weight: bold;
             cursor: pointer;
             transition: background-color 0.3s;
         }
 
+        input[type="submit"] {
+            background-color: #007BFF;
+            color: #fff;
+        }
+
         input[type="submit"]:hover {
             background-color: #0056b3;
+        }
+
+        .google-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            margin-top: 15px;
+            color: #333;
+        }
+
+        .google-button:hover {
+            background-color: #f1f1f1;
+        }
+
+        .google-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
         }
 
         .error {
             color: red;
             font-size: 0.9rem;
-            margin-bottom: 10px;
+            margin-top: 10px;
             text-align: center;
         }
     </style>
@@ -81,8 +106,12 @@
 <body>
 <div class="form-container">
     <h1>Login</h1>
+
+    <!-- Email and Password Login -->
     <form th:action="@{/login}" method="POST">
+        <!-- CSRF Token -->
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
         <label for="email">Email</label>
         <input type="email" name="email" id="email" placeholder="Enter your email" required>
 
@@ -92,11 +121,17 @@
         <input type="submit" value="Login">
     </form>
 
-    <!-- Display error messages -->
+    <!-- Google OAuth2 Sign-In -->
+    <form th:action="@{/oauth2/authorization/google}" method="GET">
+        <button type="submit" class="google-button">
+            <img src="/images/google-logo.png" alt="Google Logo" class="google-icon"> Sign in with Google
+        </button>
+    </form>
+
+    <!-- Error Messages -->
     <div>
-        <p th:text="${error}" class="error"></p> <!-- Display error message if login fails -->
+        <p th:text="${error}" class="error"></p>
     </div>
 </div>
 </body>
 </html>
-

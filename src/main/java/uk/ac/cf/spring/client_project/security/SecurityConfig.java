@@ -10,10 +10,16 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserService;
+import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import javax.sql.DataSource;
+import java.util.Collection;
+import java.util.HashSet;
 
 @Configuration
 @EnableWebSecurity
@@ -26,14 +32,12 @@ public class SecurityConfig {
             "/error"
     };
 
-    @Autowired
-        private DataSource dataSource;
+    private final DataSource dataSource;
+    private final AuthenticationSuccessHandler customAuthenticationSuccessHandler;
 
-    private AuthenticationSuccessHandler authenticationSuccessHandler;
-
-    @Autowired
-    public void WebSecurityConfig(AuthenticationSuccessHandler authenticationSuccessHandler) {
-        this.authenticationSuccessHandler = authenticationSuccessHandler;
+    public SecurityConfig(DataSource dataSource, AuthenticationSuccessHandler customAuthenticationSuccessHandler) {
+        this.dataSource = dataSource;
+        this.customAuthenticationSuccessHandler = customAuthenticationSuccessHandler;
     }
 
     @Bean
@@ -48,12 +52,44 @@ public class SecurityConfig {
                         .requestMatchers("/dashboard", "requests/**", "check-in").hasRole("VISITOR")
                         .anyRequest().authenticated())
                 .formLogin(form -> form
-                        .loginPage("/login")
-                        .successHandler(authenticationSuccessHandler)
+                        .loginPage("/login") // Manual login page
+                        .successHandler(customAuthenticationSuccessHandler) // Use provided custom handler
                         .usernameParameter("email")
                         .permitAll())
-                .logout((l) -> l.permitAll().logoutSuccessUrl("/welcome"));
+                .logout(logout -> logout.permitAll().logoutSuccessUrl("/welcome"))
+                .oauth2Login(oauth2Login -> oauth2Login
+                        .loginPage("/oauth2-login") // Google login page
+                        .defaultSuccessUrl("/visitor/dashboard", true) // Default redirect for visitors
+                        .userInfoEndpoint(userInfo -> userInfo
+                                .oidcUserService(oidcUserService()))
+                );
+
         return http.build();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
+        return configuration.getAuthenticationManager();
+    }
+
+    @Bean
+    public OidcUserService oidcUserService() {
+        OidcUserService delegate = new OidcUserService();
+
+        return new OidcUserService() {
+            @Override
+            public DefaultOidcUser loadUser(org.springframework.security.oauth2.client.oidc.userinfo.OidcUserRequest userRequest) {
+                DefaultOidcUser oidcUser = (DefaultOidcUser) delegate.loadUser(userRequest);
+                Collection<GrantedAuthority> mappedAuthorities = new HashSet<>(oidcUser.getAuthorities());
+                mappedAuthorities.add(new SimpleGrantedAuthority("ROLE_VISITOR"));
+                return new DefaultOidcUser(mappedAuthorities, oidcUser.getIdToken(), oidcUser.getUserInfo());
+            }
+        };
     }
 
     @Autowired
@@ -64,15 +100,5 @@ public class SecurityConfig {
                 .usersByUsernameQuery("SELECT email AS username, password, enabled FROM users WHERE email = ?")
                 .authoritiesByUsernameQuery("SELECT username, authority FROM user_authorities WHERE username = ?");
     }
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-    @Bean
-    public AuthenticationManager authenticationManager(
-            AuthenticationConfiguration configuration) throws Exception {
-        return configuration.getAuthenticationManager();
-    }
-
 }
+
