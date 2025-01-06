@@ -11,4 +11,6 @@ public interface UserService {
     // New method for Google Sign-In
     User registerGoogleUser(String email, String firstName, String lastName);
     Optional<User> findUserByEmail(String email);
+    void assignRole(String email, String role);
+
 }

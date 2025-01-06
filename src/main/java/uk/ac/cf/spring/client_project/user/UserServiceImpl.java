@@ -29,24 +29,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User registerGoogleUser(String email, String firstName, String lastName) {
-        // Check if user already exists
-        Optional<User> existingUser = findUserByEmail(email);
-
-        if (existingUser.isPresent()) {
-            return existingUser.get();
-        }
-
-        // Create new user
-        User newUser = new User();
-        newUser.setEmail(email);
-        newUser.setFirstName(firstName != null ? firstName : "");
-        newUser.setLastName(lastName != null ? lastName : "");
-
-        // Set a placeholder password or generate a random one
-        newUser.setPassword("GOOGLE_SSO_" + System.currentTimeMillis());
-
-        userRepository.addUser(newUser);
-        return newUser;
+        return null;
     }
 
     @Override
@@ -54,5 +37,12 @@ public class UserServiceImpl implements UserService {
         return getAllUsers().stream()
                 .filter(user -> user.getEmail().equals(email))
                 .findFirst();
+    }
+
+    @Override
+    public void assignRole(String email, String role) {
+        String sql = "INSERT INTO user_roles (email, role_id) " +
+                "VALUES (?, (SELECT role_id FROM roles WHERE role_name = ?))";
+        userRepository.getJdbcTemplate().update(sql, email, role);
     }
 }

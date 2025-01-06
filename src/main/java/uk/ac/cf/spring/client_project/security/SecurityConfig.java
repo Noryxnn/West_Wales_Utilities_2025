@@ -10,16 +10,10 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserService;
-import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import javax.sql.DataSource;
-import java.util.Collection;
-import java.util.HashSet;
 
 @Configuration
 @EnableWebSecurity
@@ -56,13 +50,7 @@ public class SecurityConfig {
                         .successHandler(customAuthenticationSuccessHandler) // Use provided custom handler
                         .usernameParameter("email")
                         .permitAll())
-                .logout(logout -> logout.permitAll().logoutSuccessUrl("/welcome"))
-                .oauth2Login(oauth2Login -> oauth2Login
-                        .loginPage("/oauth2-login") // Google login page
-                        .defaultSuccessUrl("/visitor/dashboard", true) // Default redirect for visitors
-                        .userInfoEndpoint(userInfo -> userInfo
-                                .oidcUserService(oidcUserService()))
-                );
+                .logout(logout -> logout.permitAll().logoutSuccessUrl("/welcome"));
 
         return http.build();
     }
@@ -77,21 +65,6 @@ public class SecurityConfig {
         return configuration.getAuthenticationManager();
     }
 
-    @Bean
-    public OidcUserService oidcUserService() {
-        OidcUserService delegate = new OidcUserService();
-
-        return new OidcUserService() {
-            @Override
-            public DefaultOidcUser loadUser(org.springframework.security.oauth2.client.oidc.userinfo.OidcUserRequest userRequest) {
-                DefaultOidcUser oidcUser = (DefaultOidcUser) delegate.loadUser(userRequest);
-                Collection<GrantedAuthority> mappedAuthorities = new HashSet<>(oidcUser.getAuthorities());
-                mappedAuthorities.add(new SimpleGrantedAuthority("ROLE_VISITOR"));
-                return new DefaultOidcUser(mappedAuthorities, oidcUser.getIdToken(), oidcUser.getUserInfo());
-            }
-        };
-    }
-
     @Autowired
     public void configAuthentication(AuthenticationManagerBuilder authBuilder) throws Exception {
         authBuilder.jdbcAuthentication()
@@ -101,4 +74,3 @@ public class SecurityConfig {
                 .authoritiesByUsernameQuery("SELECT username, authority FROM user_authorities WHERE username = ?");
     }
 }
-
