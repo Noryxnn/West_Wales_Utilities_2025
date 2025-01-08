@@ -26,14 +26,12 @@ public class SecurityConfig {
             "/error"
     };
 
-    @Autowired
-        private DataSource dataSource;
+    private final DataSource dataSource;
+    private final AuthenticationSuccessHandler customAuthenticationSuccessHandler;
 
-    private AuthenticationSuccessHandler authenticationSuccessHandler;
-
-    @Autowired
-    public void WebSecurityConfig(AuthenticationSuccessHandler authenticationSuccessHandler) {
-        this.authenticationSuccessHandler = authenticationSuccessHandler;
+    public SecurityConfig(DataSource dataSource, AuthenticationSuccessHandler customAuthenticationSuccessHandler) {
+        this.dataSource = dataSource;
+        this.customAuthenticationSuccessHandler = customAuthenticationSuccessHandler;
     }
 
     @Bean
@@ -48,12 +46,23 @@ public class SecurityConfig {
                         .requestMatchers("/dashboard", "requests/**", "check-in").hasRole("VISITOR")
                         .anyRequest().authenticated())
                 .formLogin(form -> form
-                        .loginPage("/login")
-                        .successHandler(authenticationSuccessHandler)
+                        .loginPage("/login") // Manual login page
+                        .successHandler(customAuthenticationSuccessHandler) // Use provided custom handler
                         .usernameParameter("email")
                         .permitAll())
-                .logout((l) -> l.permitAll().logoutSuccessUrl("/welcome"));
+                .logout(logout -> logout.permitAll().logoutSuccessUrl("/welcome"));
+
         return http.build();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
+        return configuration.getAuthenticationManager();
     }
 
     @Autowired
@@ -64,15 +73,4 @@ public class SecurityConfig {
                 .usersByUsernameQuery("SELECT email AS username, password, enabled FROM users WHERE email = ?")
                 .authoritiesByUsernameQuery("SELECT username, authority FROM user_authorities WHERE username = ?");
     }
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-    @Bean
-    public AuthenticationManager authenticationManager(
-            AuthenticationConfiguration configuration) throws Exception {
-        return configuration.getAuthenticationManager();
-    }
-
 }

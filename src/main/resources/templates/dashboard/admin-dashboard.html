@@ -5,14 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Dashboard - Wales & West Utilities</title>
   <link rel="stylesheet" href="/css/admin-dashboard.css">
+  <link rel="stylesheet" href="/css/navbarstyle.css">
 </head>
 <body>
+
+<header class="header">
+  <h1 class="logo">
+    <a href="/admin/dashboard">
+      <img src="https://www.wwutilities.co.uk/images/mobile-logo.png" alt="Logo" />
+    </a>
+  </h1>
+  <nav>
+    <ul class="main-nav">
+      <li><a href="/login">Logout</a></li>
+    </ul>
+  </nav>
+</header>
+
 <div class="dashboard-container">
   <h1>Admin Dashboard</h1>
   <p>Welcome, Admin! Please choose an action below.</p>
   <a href="/admin/visits" class="button">Visit Tracking</a>
   <a href="/admin/locations" class="button">Manage Locations</a>
   <a href="/admin/requests" class="button">Manage Requests</a>
+  <a href="/admin/add-user" class="button">Add Admin/Staff</a>
+
 </div>
 </body>
 </html>

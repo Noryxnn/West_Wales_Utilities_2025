@@ -5,15 +5,28 @@
     <title>Access</title>
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/check-in.css">
+    <link rel="stylesheet" href="/css/navbarstyle.css">
     <script src="/scripts/qr-regeneration-timer.js"></script>
 </head>
 
 <body>
 
+<header class="header">
+    <h1 class="logo">
+        <a href="/dashboard">
+            <img src="https://www.wwutilities.co.uk/images/mobile-logo.png" alt="Logo" />
+        </a>
+    </h1>
+    <nav>
+        <ul class="main-nav">
+            <li><a href="login">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+
 <div class="qrcode-card">
     <img th:if="${qrcode}" th:src="'data:image/png;base64,' + ${qrcode}" alt="QR Code">
     <p th:if="${error}" th:text="${error}"></p>
-
 </div>
 
 <div>

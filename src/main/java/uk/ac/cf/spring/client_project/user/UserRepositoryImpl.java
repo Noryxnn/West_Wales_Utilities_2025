@@ -28,7 +28,6 @@ public class UserRepositoryImpl implements UserRepository {
         );
     }
 
-
     @Override
     public List<User> getAllUsers() {
         return jdbcTemplate.query("SELECT * FROM users", userRowMapper);
@@ -41,10 +40,10 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public void save(User user) {
-        jdbcTemplate.update("INSERT INTO users (first_name, last_name, password, email, enabled) VALUES (?, ?, ?, ?, ?)",
-                user.getFirstName(), user.getLastName(), user.getPassword(), user.getEmail(), user.getEnabled());
-        Integer visitorRoleId = jdbcTemplate.queryForObject("SELECT role_id FROM roles WHERE role_name = 'VISITOR'", Integer.class);
-        jdbcTemplate.update("INSERT INTO user_roles (email, role_id) VALUES (?, ?)", user.getEmail(), visitorRoleId);
+        jdbcTemplate.update(
+                "INSERT INTO users (first_name, last_name, password, email, enabled) VALUES (?, ?, ?, ?, ?)",
+                user.getFirstName(), user.getLastName(), user.getPassword(), user.getEmail(), user.getEnabled()
+        );
     }
 
     @Override
@@ -55,13 +54,20 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public void addUser(User user) {
         String sql = "INSERT INTO users(first_name, last_name, password, email, enabled) VALUES (?,?,?,?, ?)";
-        jdbcTemplate.update(sql, user.getFirstName(), user.getLastName(), user.getPassword(), user.getEmail(), user.getEnabled());
-        Integer visitorRoleId = jdbcTemplate.queryForObject("SELECT role_id FROM roles WHERE role_name = 'VISITOR'", Integer.class);
-        jdbcTemplate.update("INSERT INTO user_roles (email, role_id) VALUES (?, ?)", user.getEmail(), visitorRoleId);
+        jdbcTemplate.update(
+                sql, user.getFirstName(), user.getLastName(), user.getPassword(), user.getEmail(), user.getEnabled()
+        );
     }
 
     @Override
-    public Optional <User> findByEmail(String email) {
-        return Optional.of(jdbcTemplate.queryForObject("SELECT * FROM users WHERE email = ?", userRowMapper, email));
+    public Optional<User> findByEmail(String email) {
+        return Optional.of(
+                jdbcTemplate.queryForObject("SELECT * FROM users WHERE email = ?", userRowMapper, email)
+        );
+    }
+
+    @Override
+    public JdbcTemplate getJdbcTemplate() {
+        return jdbcTemplate;
     }
 }

@@ -29,7 +29,10 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String registerUser(@Valid @ModelAttribute User user, BindingResult bindingResult) {
+    public String registerUser(
+            @Valid @ModelAttribute User user,
+            BindingResult bindingResult,
+            @RequestParam(value = "role", defaultValue = "VISITOR") String role) { // Added 'role' parameter
         if (bindingResult.hasErrors()) {
             return "user/registrationForm";
         }
@@ -38,10 +41,13 @@ public class UserController {
 
         try {
             userService.registerUser(user);
+            userService.assignRole(user.getEmail(), role); // Assign specified role
             return "user/registrationSuccess";
         } catch (Exception e) {
             e.printStackTrace();
             return "error";
         }
     }
+
+
 }

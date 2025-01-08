@@ -1,0 +1,112 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+/* Header Adjustments */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Vertically centers the logo */
+    padding: 0 20px; /* Adjust horizontal padding */
+    background-color: #f4f4f4;
+    box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.75);
+    border-radius: 5px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 60px; /* Explicit height to fit the logo */
+    z-index: 1000; /* Ensures the header is above other content */
+}
+
+/* Logo Styles */
+.header .logo img {
+    height: 45px; /* Fixed height */
+    width: 60px; /* Maintain aspect ratio */
+    margin: 10px; /* Remove any margins */
+    padding: 2px; /* Remove padding */
+}
+
+/* Navigation Bar */
+.main-nav {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    align-items: center; /* Ensures alignment with logo */
+}
+
+.main-nav a {
+    padding: 10px 15px;
+    text-transform: uppercase;
+    text-align: center;
+    display: block;
+    color: #34495e;
+    font-size: 0.99em;
+    text-decoration: none;
+}
+
+.main-nav a:hover {
+    color: #718daa;
+}
+
+/* Dashboard Container */
+.dashboard-container {
+    margin: 100px auto 0 auto; /* Push content below the fixed header */
+    padding: 20px;
+    max-width: 600px;
+    background: #fff;
+    box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    text-align: center;
+}
+
+.dashboard-container h1 {
+    font-size: 24px;
+    color: #e67e22;
+}
+
+.dashboard-container p {
+    font-size: 16px;
+    color: #34495e;
+}
+
+.btn-primary {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px 5px;
+    background-color: #e67e22;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.btn-primary:hover {
+    background-color: #d35400;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: center;
+        height: auto; /* Allow flexibility for smaller screens */
+    }
+
+    .main-nav {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .header .logo img {
+        margin-bottom: 20px; /* Space below the logo */
+    }
+
+    .dashboard-container {
+        margin: 150px 20px 0 20px;
+    }
+}
